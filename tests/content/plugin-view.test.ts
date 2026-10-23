@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest"
-import { minVersionSatisfied, versionAnchor } from "@/lib/plugin-view"
+import {
+  changelogFileUrl,
+  minVersionSatisfied,
+  versionAnchor,
+} from "@/lib/plugin-view"
 
 describe("versionAnchor", () => {
   it("turns 1.3.0 into v1-3-0", () => {
@@ -8,6 +12,26 @@ describe("versionAnchor", () => {
 
   it("keeps prerelease labels", () => {
     expect(versionAnchor("2.0.0-beta.1")).toBe("v2-0-0-beta-1")
+  })
+})
+
+describe("changelogFileUrl", () => {
+  it("prefers a per-release changelog url over the plugin file", () => {
+    expect(
+      changelogFileUrl(
+        { changelogUrl: "https://example.com/CHANGELOG.md" },
+        { changelog: { url: "https://example.com/CHANGELOG.md#1-3-0" } }
+      )
+    ).toBe("https://example.com/CHANGELOG.md#1-3-0")
+  })
+
+  it("falls back to the plugin changelog file", () => {
+    expect(
+      changelogFileUrl(
+        { changelogUrl: "https://example.com/CHANGELOG.md" },
+        {}
+      )
+    ).toBe("https://example.com/CHANGELOG.md")
   })
 })
 

@@ -185,6 +185,10 @@
 		"changelog": {
 			"type": "object",
 			"properties": {
+				"url": {
+					"type": "string",
+					"format": "uri"
+				},
 				"added": {
 					"type": "array",
 					"items": {

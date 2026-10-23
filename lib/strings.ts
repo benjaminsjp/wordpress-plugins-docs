@@ -1,8 +1,15 @@
 export const strings = {
   site: {
     name: "Plugin- og CSS-dokumentasjon",
+    shortName: "Dokumentasjon",
+    mark: "D",
     description:
       "Intern dokumentasjon for byråets WordPress-plugins og Flatsome CSS-snippets.",
+  },
+  theme: {
+    dark: "Mørk modus",
+    light: "Lys modus",
+    toggle: "Bytt mellom lys og mørk modus",
   },
   nav: {
     home: "Hjem",
@@ -43,6 +50,7 @@ export const strings = {
     viewAllSnippets: "Se alle snippets",
     snippetCountInCategory: (count: number) =>
       count === 1 ? "1 snippet" : `${count} snippets`,
+    categoriesHint: "Kategorier med innhold er markert med grønt.",
   },
   plugins: {
     title: "Plugins",
@@ -58,7 +66,7 @@ export const strings = {
       public: "Offentlig repo",
       private: "Privat repo",
     },
-    downloadLatest: (version: string) => `Last ned v${version}`,
+    downloadLatest: "Last ned nyeste",
     viewOnGitHub: "Se på GitHub",
     privateDownloadNote:
       "Nedlasting krever at du er logget inn på GitHub med tilgang til organisasjonen. Uten tilgang viser GitHub 404.",
@@ -68,7 +76,18 @@ export const strings = {
     betaTitle: "Siste versjon er en beta",
     betaDescription:
       "Det finnes ingen stabil utgivelse ennå. Test grundig før du tar den i bruk i produksjon.",
+    seeDetails: "Se detaljer",
+    updatedOn: (date: string) => `Oppdatert ${date}`,
+    dependencyName: "Avhengighet",
+    yes: "Ja",
+    no: "Nei",
     requirements: "Krav",
+    requirementsIntro:
+      "Minimumsversjoner som må være på plass før du installerer.",
+    dependenciesIntro:
+      "Disse må være installert og aktivert for at plugin-en skal fungere.",
+    manualUpdate:
+      "Oppdaterer du plugin-en manuelt? Last ned zip-filen og velg Plugins → Legg til → Last opp i WordPress.",
     wordpress: "WordPress",
     php: "PHP",
     flatsome: "Flatsome",
@@ -94,6 +113,7 @@ export const strings = {
     relatedPlugins: "Plugins",
     relatedSnippets: "CSS-snippets",
     changelog: "Endringslogg",
+    fullChangelog: "Se hele endringsloggen",
     changelogAdded: "Lagt til",
     changelogChanged: "Endret",
     changelogFixed: "Rettet",
@@ -138,6 +158,7 @@ export const strings = {
     emptyTagTitle: "Ingen snippets med denne taggen",
     emptyTagDescription: "Ingen snippets bruker denne taggen ennå.",
     tags: "Tagger",
+    tagsHint: "Finn snippets på tvers av kategorier.",
     placementTitle: "Hvor skal CSS-en limes inn?",
     compatibility: "Kompatibilitet",
     notes: "Notater",

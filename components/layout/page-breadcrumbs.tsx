@@ -1,3 +1,4 @@
+import { Fragment } from "react"
 import Link from "next/link"
 import {
   Breadcrumb,
@@ -21,16 +22,18 @@ export function PageBreadcrumbs({ items }: { items: BreadcrumbEntry[] }) {
           const isLast = index === items.length - 1
 
           return (
-            <BreadcrumbItem key={`${item.label}-${index}`}>
+            <Fragment key={`${item.label}-${index}`}>
               {index > 0 ? <BreadcrumbSeparator /> : null}
-              {isLast || !item.href ? (
-                <BreadcrumbPage>{item.label}</BreadcrumbPage>
-              ) : (
-                <BreadcrumbLink render={<Link href={item.href} />}>
-                  {item.label}
-                </BreadcrumbLink>
-              )}
-            </BreadcrumbItem>
+              <BreadcrumbItem>
+                {isLast || !item.href ? (
+                  <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink render={<Link href={item.href} />}>
+                    {item.label}
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+            </Fragment>
           )
         })}
       </BreadcrumbList>

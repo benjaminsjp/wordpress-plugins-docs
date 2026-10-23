@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { PageBreadcrumbs } from "@/components/layout/page-breadcrumbs"
-import { PageHeader } from "@/components/layout/page-header"
+import { PageHero } from "@/components/layout/page-hero"
 import { PageShell } from "@/components/layout/page-shell"
 import { SnippetCard } from "@/components/snippets/snippet-card"
 import {
@@ -53,15 +52,9 @@ export default async function TagPage({
   const categories = taxonomy?.categories ?? []
 
   return (
-    <PageShell>
-      <PageBreadcrumbs
-        items={[
-          { label: strings.nav.home, href: "/" },
-          { label: strings.nav.snippets, href: "/css" },
-          { label: tag.label },
-        ]}
-      />
-      <PageHeader title={tag.label} description={tag.description} />
+    <>
+      <PageHero title={tag.label} description={tag.description} />
+      <PageShell>
       {tagged.length === 0 ? (
         <Empty className="border">
           <EmptyHeader>
@@ -90,6 +83,7 @@ export default async function TagPage({
           })}
         </div>
       )}
-    </PageShell>
+      </PageShell>
+    </>
   )
 }

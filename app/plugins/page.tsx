@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
-import { PageBreadcrumbs } from "@/components/layout/page-breadcrumbs"
-import { PageHeader } from "@/components/layout/page-header"
+import { PageHero } from "@/components/layout/page-hero"
 import { PageShell } from "@/components/layout/page-shell"
 import { PluginGrid } from "@/components/plugins/plugin-grid"
 import {
@@ -24,32 +23,28 @@ export default async function PluginsPage() {
   )
 
   return (
-    <PageShell>
-      <PageBreadcrumbs
-        items={[
-          { label: strings.nav.home, href: "/" },
-          { label: strings.nav.plugins },
-        ]}
-      />
-      <PageHeader
+    <>
+      <PageHero
         title={strings.plugins.title}
         description={strings.plugins.description}
       />
-      {plugins.length === 0 ? (
-        <Empty className="border">
-          <EmptyHeader>
-            <EmptyMedia variant="icon">
-              <BlocksIcon />
-            </EmptyMedia>
-            <EmptyTitle>{strings.plugins.emptyTitle}</EmptyTitle>
-            <EmptyDescription>
-              {strings.plugins.emptyDescription}
-            </EmptyDescription>
-          </EmptyHeader>
-        </Empty>
-      ) : (
-        <PluginGrid plugins={plugins} />
-      )}
-    </PageShell>
+      <PageShell>
+        {plugins.length === 0 ? (
+          <Empty className="border">
+            <EmptyHeader>
+              <EmptyMedia variant="icon">
+                <BlocksIcon />
+              </EmptyMedia>
+              <EmptyTitle>{strings.plugins.emptyTitle}</EmptyTitle>
+              <EmptyDescription>
+                {strings.plugins.emptyDescription}
+              </EmptyDescription>
+            </EmptyHeader>
+          </Empty>
+        ) : (
+          <PluginGrid plugins={plugins} />
+        )}
+      </PageShell>
+    </>
   )
 }

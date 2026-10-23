@@ -4,15 +4,20 @@ import { strings } from "@/lib/strings"
 
 export function DownloadButton({
   href,
-  version,
+  className,
 }: {
   href: string
-  version: string
+  className?: string
 }) {
   return (
-    <Button render={<a href={href} />} nativeButton={false}>
+    <Button
+      size="lg"
+      render={<a href={href} />}
+      nativeButton={false}
+      className={className}
+    >
       <DownloadIcon data-icon="inline-start" />
-      {strings.plugins.downloadLatest(version)}
+      {strings.plugins.downloadLatest}
     </Button>
   )
 }

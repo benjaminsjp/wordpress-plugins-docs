@@ -95,6 +95,10 @@
 					}
 				}
 			}
+		},
+		"changelogUrl": {
+			"type": "string",
+			"format": "uri"
 		}
 	},
 	"required": [

@@ -1,11 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import {
-  PageBreadcrumbs,
-  type BreadcrumbEntry,
-} from "@/components/layout/page-breadcrumbs"
-import { PageHeader } from "@/components/layout/page-header"
+import { PageHero } from "@/components/layout/page-hero"
 import { PageShell } from "@/components/layout/page-shell"
 import { CodeBlock } from "@/components/code/code-block"
 import { MdxProse } from "@/components/mdx/prose"
@@ -74,53 +70,42 @@ export default async function SnippetPage({
   )
   const Notes = snippet.notesFile ? await loadSnippetNotes(snippet.slug) : null
 
-  const crumbs: BreadcrumbEntry[] = [
-    { label: strings.nav.home, href: "/" },
-    { label: strings.nav.snippets, href: "/css" },
-  ]
-  if (category) {
-    crumbs.push({
-      label: category.label,
-      href: `/css/category/${category.slug}`,
-    })
-  }
-  if (subcategory && category) {
-    crumbs.push({
-      label: subcategory.label,
-      href: `/css/category/${category.slug}/${subcategory.slug}`,
-    })
-  }
-  crumbs.push({ label: snippet.name })
-
   return (
-    <PageShell>
-      <PageBreadcrumbs items={crumbs} />
-      <PageHeader title={snippet.name} description={snippet.summary}>
-        {category ? (
-          <Badge
-            variant="outline"
-            render={<Link href={`/css/category/${category.slug}`} />}
-          >
-            {category.label}
-          </Badge>
-        ) : null}
-        {subcategory && category ? (
-          <Badge
-            variant="outline"
-            render={
-              <Link
-                href={`/css/category/${category.slug}/${subcategory.slug}`}
-              />
-            }
-          >
-            {subcategory.label}
-          </Badge>
-        ) : null}
-        <TagBadges tags={tagLabels} />
-      </PageHeader>
-      <p className="text-sm text-muted-foreground">
-        {strings.snippets.updated} {formatDate(snippet.updated)}
-      </p>
+    <>
+      <PageHero
+        title={snippet.name}
+        description={snippet.summary}
+        eyebrow={
+          <>
+            {category ? (
+              <Badge
+                variant="outline"
+                render={<Link href={`/css/category/${category.slug}`} />}
+              >
+                {category.label}
+              </Badge>
+            ) : null}
+            {subcategory && category ? (
+              <Badge
+                variant="outline"
+                render={
+                  <Link
+                    href={`/css/category/${category.slug}/${subcategory.slug}`}
+                  />
+                }
+              >
+                {subcategory.label}
+              </Badge>
+            ) : null}
+            <TagBadges tags={tagLabels} />
+          </>
+        }
+      >
+        <p className="text-sm text-muted-foreground">
+          {strings.plugins.updatedOn(formatDate(snippet.updated))}
+        </p>
+      </PageHero>
+      <PageShell>
       <PlacementCallout
         location={snippet.placement.location}
         notes={snippet.placement.notes}
@@ -129,14 +114,14 @@ export default async function SnippetPage({
         <CompatibilityNotes compatibility={snippet.compatibility} />
       ) : null}
       <section className="flex min-w-0 flex-col gap-4">
-        <h2 className="font-heading text-xl font-medium">
+        <h2 className="font-heading text-2xl font-semibold tracking-tight">
           {strings.snippets.code}
         </h2>
         <CodeBlock code={snippet.css} language="css" />
       </section>
       {Notes ? (
         <section className="flex flex-col gap-4">
-          <h2 className="font-heading text-xl font-medium">
+          <h2 className="font-heading text-2xl font-semibold tracking-tight">
             {strings.snippets.notes}
           </h2>
           <MdxProse>
@@ -148,6 +133,7 @@ export default async function SnippetPage({
         snippets={related}
         categoryLabelBySlug={categoryLabelBySlug}
       />
-    </PageShell>
+      </PageShell>
+    </>
   )
 }

@@ -48,14 +48,15 @@ export function SearchTrigger({
       variant="outline"
       size={compact ? "sm" : "default"}
       className={cn(
-        compact ? undefined : "w-full max-w-xl justify-start",
+        "justify-start",
+        compact ? undefined : "w-full max-w-xl",
         className
       )}
       onClick={requestOpenSearch}
       aria-keyshortcuts="Control+K Meta+K"
     >
       <SearchIcon data-icon="inline-start" />
-      <span className={compact ? undefined : "min-w-0 flex-1 truncate text-left"}>
+      <span className="min-w-0 flex-1 truncate text-left">
         {compact ? strings.search.trigger : strings.search.placeholder}
       </span>
       <KbdGroup>

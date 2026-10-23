@@ -35,6 +35,7 @@ export function AppSidebar({ nav }: { nav: NavData }) {
     pathname,
     nav.snippetLocations
   )
+  const categories = nav.categories.filter((category) => category.count > 0)
 
   useEffect(() => {
     setOpenMobile(false)
@@ -48,8 +49,14 @@ export function AppSidebar({ nav }: { nav: NavData }) {
             <SidebarMenuButton
               render={<Link href="/" />}
               isActive={pathname === "/"}
+              className="h-auto py-2"
             >
-              {strings.site.name}
+              <span className="flex size-8 items-center justify-center bg-sidebar-primary font-heading font-semibold text-sidebar-primary-foreground">
+                {strings.site.mark}
+              </span>
+              <span className="font-heading font-semibold">
+                {strings.site.shortName}
+              </span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -64,6 +71,7 @@ export function AppSidebar({ nav }: { nav: NavData }) {
               >
                 {strings.nav.allPlugins}
               </SidebarMenuButton>
+              <CountBadge count={nav.pluginCount} />
             </SidebarMenuItem>
             {nav.plugins.map((plugin) => (
               <SidebarMenuItem key={plugin.slug}>
@@ -86,12 +94,16 @@ export function AppSidebar({ nav }: { nav: NavData }) {
               >
                 {strings.nav.allSnippets}
               </SidebarMenuButton>
+              <CountBadge count={nav.snippetCount} />
             </SidebarMenuItem>
-            {nav.categories.map((category) => {
+            {categories.map((category) => {
               const categoryActive =
                 pathname === category.href ||
                 pathname.startsWith(`${category.href}/`) ||
                 snippetLocation?.category === category.slug
+              const subcategories = category.subcategories.filter(
+                (subcategory) => subcategory.count > 0
+              )
 
               return (
                 <SidebarMenuItem key={category.slug}>
@@ -100,11 +112,11 @@ export function AppSidebar({ nav }: { nav: NavData }) {
                     isActive={categoryActive}
                   >
                     {category.label}
-                    <SidebarMenuBadge>{category.count}</SidebarMenuBadge>
                   </SidebarMenuButton>
-                  {category.subcategories.length > 0 ? (
+                  <CountBadge count={category.count} />
+                  {categoryActive && subcategories.length > 0 ? (
                     <SidebarMenuSub>
-                      {category.subcategories.map((subcategory) => {
+                      {subcategories.map((subcategory) => {
                         const subActive =
                           pathname === subcategory.href ||
                           (snippetLocation?.category === category.slug &&
@@ -115,12 +127,11 @@ export function AppSidebar({ nav }: { nav: NavData }) {
                             <SidebarMenuSubButton
                               render={<Link href={subcategory.href} />}
                               isActive={subActive}
+                              className="peer/menu-button"
                             >
                               {subcategory.label}
-                              <SidebarMenuBadge>
-                                {subcategory.count}
-                              </SidebarMenuBadge>
                             </SidebarMenuSubButton>
+                            <CountBadge count={subcategory.count} />
                           </SidebarMenuSubItem>
                         )
                       })}
@@ -155,6 +166,14 @@ function NavSection({
         </CollapsibleContent>
       </SidebarGroup>
     </Collapsible>
+  )
+}
+
+function CountBadge({ count }: { count: number }) {
+  return (
+    <SidebarMenuBadge className="top-1.5 bg-sidebar-accent text-sidebar-accent-foreground peer-data-active/menu-button:bg-sidebar-primary peer-data-active/menu-button:text-sidebar-primary-foreground">
+      {count}
+    </SidebarMenuBadge>
   )
 }
 

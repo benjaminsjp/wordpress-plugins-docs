@@ -14,14 +14,14 @@ export async function PluginDocs({ slug }: { slug: string }) {
     <div className="flex flex-col gap-8">
       {Overview ? (
         <section className="flex flex-col gap-4">
-          <h2 className="font-heading text-xl font-medium">{strings.plugins.overview}</h2>
+          <h2 className="font-heading text-2xl font-semibold tracking-tight">{strings.plugins.overview}</h2>
           <MdxProse>
             <Overview />
           </MdxProse>
         </section>
       ) : null}
       <section className="flex flex-col gap-4">
-        <h2 className="font-heading text-xl font-medium">
+        <h2 className="font-heading text-2xl font-semibold tracking-tight">
           {strings.plugins.installation}
         </h2>
         {Installation ? (
@@ -34,7 +34,7 @@ export async function PluginDocs({ slug }: { slug: string }) {
       </section>
       {Usage ? (
         <section className="flex flex-col gap-4">
-          <h2 className="font-heading text-xl font-medium">{strings.plugins.usage}</h2>
+          <h2 className="font-heading text-2xl font-semibold tracking-tight">{strings.plugins.usage}</h2>
           <MdxProse>
             <Usage />
           </MdxProse>

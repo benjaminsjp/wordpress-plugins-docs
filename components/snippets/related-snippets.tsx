@@ -15,7 +15,7 @@ export function RelatedSnippets({
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="font-heading text-xl font-medium">
+      <h2 className="font-heading text-2xl font-semibold tracking-tight">
         {strings.snippets.related}
       </h2>
       <div className="grid gap-4 md:grid-cols-2">

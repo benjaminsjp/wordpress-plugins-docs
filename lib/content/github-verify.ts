@@ -10,6 +10,9 @@ export type GitHubReleasePayload = {
   draft: boolean
   prerelease: boolean
   tag_name: string
+  name?: string | null
+  body?: string | null
+  published_at?: string | null
   assets: GitHubReleaseAsset[]
 }
 
@@ -41,7 +44,7 @@ export function normalizeSha256(value: string): string {
 }
 
 export function createGitHubClient(options: {
-  token: string
+  token?: string
   fetchImpl?: typeof fetch
 }): GitHubClient {
   const fetchImpl = options.fetchImpl ?? fetch
@@ -54,14 +57,16 @@ export function createGitHubClient(options: {
   async function request<T>(
     url: string
   ): Promise<GitHubLookupResult<T>> {
-    const response = await fetchImpl(url, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${options.token}`,
-        "X-GitHub-Api-Version": API_VERSION,
-        "User-Agent": USER_AGENT,
-      },
-    })
+    const headers: Record<string, string> = {
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": API_VERSION,
+      "User-Agent": USER_AGENT,
+    }
+    if (options.token) {
+      headers.Authorization = `Bearer ${options.token}`
+    }
+
+    const response = await fetchImpl(url, { headers })
 
     if (!response.ok) {
       return {

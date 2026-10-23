@@ -1,37 +1,40 @@
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { PluginBadges } from "@/components/plugins/plugin-badges"
 import { selectLatestRelease } from "@/lib/content/versions"
+import { formatDate } from "@/lib/format"
 import { strings } from "@/lib/strings"
 import type { PluginRecord } from "@/lib/content/load-plugins"
 
 export function PluginCard({ plugin }: { plugin: PluginRecord }) {
-  const version = selectLatestRelease(
-    plugin.releases,
-    plugin.versionScheme
-  )?.version
+  const latest = selectLatestRelease(plugin.releases, plugin.versionScheme)
 
   return (
     <Link href={`/plugins/${plugin.slug}`} className="block h-full">
-      <Card className="h-full transition-colors hover:bg-muted/40">
+      <Card className="h-full border-t-2 border-t-chart-3 transition-colors hover:bg-muted/40">
         <CardHeader>
+          <CardTitle>{plugin.name}</CardTitle>
           <div className="flex flex-wrap items-center gap-2">
-            <CardTitle>{plugin.name}</CardTitle>
-            {version ? (
-              <Badge variant="secondary">{strings.version(version)}</Badge>
-            ) : null}
-            <Badge variant="outline">{strings.status[plugin.status]}</Badge>
-            <Badge variant="outline">
-              {strings.plugins.visibility[plugin.repository.visibility]}
-            </Badge>
+            <PluginBadges plugin={plugin} version={latest?.version} />
           </div>
           <CardDescription>{plugin.summary}</CardDescription>
         </CardHeader>
+        <CardFooter className="mt-auto justify-between gap-3">
+          <span className="text-sm text-muted-foreground">
+            {latest
+              ? strings.plugins.updatedOn(formatDate(latest.releaseDate))
+              : null}
+          </span>
+          <span className="text-sm font-medium text-primary">
+            {strings.plugins.seeDetails}
+          </span>
+        </CardFooter>
       </Card>
     </Link>
   )

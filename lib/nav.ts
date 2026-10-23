@@ -1,11 +1,28 @@
-import { getPlugins, getSnippets, getTaxonomy } from "@/lib/content"
 import { selectLatestRelease } from "@/lib/content/versions"
+import { strings } from "@/lib/strings"
 import type { PluginRecord } from "@/lib/content/load-plugins"
 import type { SnippetRecord } from "@/lib/content/load-snippets"
+
+export type NavCrumb = {
+  label: string
+  href?: string
+}
 
 export type NavPlugin = {
   slug: string
   name: string
+  href: string
+}
+
+export type NavSnippet = {
+  slug: string
+  name: string
+  href: string
+}
+
+export type NavTag = {
+  slug: string
+  label: string
   href: string
 }
 
@@ -31,8 +48,12 @@ export type SnippetLocation = {
 
 export type NavData = {
   plugins: NavPlugin[]
+  snippets: NavSnippet[]
+  tags: NavTag[]
   categories: NavCategory[]
   snippetLocations: Record<string, SnippetLocation>
+  pluginCount: number
+  snippetCount: number
 }
 
 export type LatestReleaseItem = {
@@ -43,54 +64,100 @@ export type LatestReleaseItem = {
   href: string
 }
 
-export async function getNavData(): Promise<NavData> {
-  const [plugins, snippets, taxonomy] = await Promise.all([
-    getPlugins(),
-    getSnippets(),
-    getTaxonomy(),
-  ])
+export function breadcrumbTrail(pathname: string, nav: NavData): NavCrumb[] {
+  const home: NavCrumb = { label: strings.nav.home, href: "/" }
 
-  const snippetLocations: Record<string, SnippetLocation> = {}
-  for (const snippet of snippets) {
-    snippetLocations[snippet.slug] = {
-      category: snippet.category,
-      subcategory: snippet.subcategory,
-    }
+  if (pathname === "/") {
+    return [{ label: strings.nav.home }]
   }
 
-  const categories: NavCategory[] = (taxonomy?.categories ?? []).map(
-    (category) => {
-      const inCategory = snippets.filter(
-        (snippet) => snippet.category === category.slug
-      )
-      return {
-        slug: category.slug,
+  if (pathname === "/plugins") {
+    return [home, { label: strings.nav.plugins }]
+  }
+
+  const pluginMatch = /^\/plugins\/([^/]+)$/.exec(pathname)
+  if (pluginMatch) {
+    const plugin = nav.plugins.find((item) => item.slug === pluginMatch[1])
+    return [
+      home,
+      { label: strings.nav.plugins, href: "/plugins" },
+      { label: plugin?.name ?? pluginMatch[1] },
+    ]
+  }
+
+  if (pathname === "/css") {
+    return [home, { label: strings.nav.snippets }]
+  }
+
+  const subcategoryMatch = /^\/css\/category\/([^/]+)\/([^/]+)$/.exec(pathname)
+  if (subcategoryMatch) {
+    const category = nav.categories.find((item) => item.slug === subcategoryMatch[1])
+    const subcategory = category?.subcategories.find(
+      (item) => item.slug === subcategoryMatch[2]
+    )
+    return [
+      home,
+      { label: strings.nav.snippets, href: "/css" },
+      {
+        label: category?.label ?? subcategoryMatch[1],
+        href: `/css/category/${subcategoryMatch[1]}`,
+      },
+      { label: subcategory?.label ?? subcategoryMatch[2] },
+    ]
+  }
+
+  const categoryMatch = /^\/css\/category\/([^/]+)$/.exec(pathname)
+  if (categoryMatch) {
+    const category = nav.categories.find((item) => item.slug === categoryMatch[1])
+    return [
+      home,
+      { label: strings.nav.snippets, href: "/css" },
+      { label: category?.label ?? categoryMatch[1] },
+    ]
+  }
+
+  const tagMatch = /^\/css\/tag\/([^/]+)$/.exec(pathname)
+  if (tagMatch) {
+    const tag = nav.tags.find((item) => item.slug === tagMatch[1])
+    return [
+      home,
+      { label: strings.nav.snippets, href: "/css" },
+      { label: tag?.label ?? tagMatch[1] },
+    ]
+  }
+
+  const snippetMatch = /^\/css\/([^/]+)$/.exec(pathname)
+  if (snippetMatch && snippetMatch[1] !== "category" && snippetMatch[1] !== "tag") {
+    const slug = snippetMatch[1]
+    const snippet = nav.snippets.find((item) => item.slug === slug)
+    const location = nav.snippetLocations[slug]
+    const category = location
+      ? nav.categories.find((item) => item.slug === location.category)
+      : undefined
+    const subcategory = location?.subcategory
+      ? category?.subcategories.find((item) => item.slug === location.subcategory)
+      : undefined
+    const crumbs: NavCrumb[] = [
+      home,
+      { label: strings.nav.snippets, href: "/css" },
+    ]
+    if (category) {
+      crumbs.push({
         label: category.label,
-        href: `/css/category/${category.slug}`,
-        count: inCategory.length,
-        subcategories: category.subcategories.map((subcategory) => ({
-          slug: subcategory.slug,
-          label: subcategory.label,
-          href: `/css/category/${category.slug}/${subcategory.slug}`,
-          count: inCategory.filter(
-            (snippet) => snippet.subcategory === subcategory.slug
-          ).length,
-        })),
-      }
+        href: category.href,
+      })
     }
-  )
-
-  return {
-    plugins: [...plugins]
-      .sort((left, right) => left.name.localeCompare(right.name, "nb"))
-      .map((plugin) => ({
-        slug: plugin.slug,
-        name: plugin.name,
-        href: `/plugins/${plugin.slug}`,
-      })),
-    categories,
-    snippetLocations,
+    if (subcategory) {
+      crumbs.push({
+        label: subcategory.label,
+        href: subcategory.href,
+      })
+    }
+    crumbs.push({ label: snippet?.name ?? slug })
+    return crumbs
   }
+
+  return [home]
 }
 
 export function listLatestReleases(

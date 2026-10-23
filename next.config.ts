@@ -1,5 +1,6 @@
 import type { NextConfig } from "next"
 import createMDX from "@next/mdx"
+import { getLatestZipRedirects } from "./lib/content/latest-zip"
 
 const noindexHeader = {
   key: "X-Robots-Tag",
@@ -19,6 +20,9 @@ const nextConfig: NextConfig = {
         headers: [noindexHeader],
       },
     ]
+  },
+  async redirects() {
+    return getLatestZipRedirects()
   },
 }
 

@@ -57,7 +57,9 @@ describe("seed content", () => {
       "blogg-post-plugin-for-flatsome",
       "kafra-datablad",
     ])
-    expect(result.snippets).toHaveLength(6)
+    expect(result.snippets.map((snippet) => snippet.slug)).toEqual([
+      "button-improvements",
+    ])
   })
 })
 

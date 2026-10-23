@@ -2,6 +2,8 @@
 
 Intern, statisk dokumentasjon for byråets WordPress-plugins og Flatsome CSS-snippets. Siden er `noindex` og tillater ingen roboter. Nedlastinger peker på ZIP-er som ligger som GitHub Release-assets i plugin-repositoriene — dette repositoriet inneholder ingen ZIP-filer.
 
+Stabil nedlastingslenke per plugin: `/plugins/<slug>/latest.zip`. Den omdirigerer (307) ved build til siste stabile GitHub-asset. GitHubs egen `releases/latest/download/` kan ikke brukes, fordi ZIP-navnet inneholder versjonen. Lenken oppdateres ved neste deploy etter at en ny release-JSON er lagt inn. Versjonstabellen peker fortsatt på hver enkelt release.
+
 ## Krav
 
 - Node 22 (se `.nvmrc`)
@@ -23,6 +25,7 @@ npm run typecheck
 npm test
 npm run build
 npm run verify-github
+npm run new-release -- <slug> <version>
 npm run check-immutability
 ```
 
@@ -76,18 +79,27 @@ content/plugins/mitt-plugin/
     "owner": "bli-synlig-plugins",
     "repo": "mitt-plugin",
     "visibility": "private"
-  }
+  },
+  "changelogUrl": "https://github.com/bli-synlig-plugins/mitt-plugin/blob/main/CHANGELOG.md"
 }
 ```
 
-Slug = mappenavn (kebab-case). Standard GitHub-tag er `v{version}`, standard ZIP-navn er `{slug}-{version}.zip`.
+Slug = mappenavn (kebab-case). Standard GitHub-tag er `v{version}`, standard ZIP-navn er `{slug}-{version}.zip`. Valgfri `changelogUrl` peker på hele CHANGELOG.md i plugin-repositoriet og vises som «Se hele endringsloggen» under hver versjon. En enkelt versjon kan overstyre med `changelog.url` (for eksempel med `#anker`).
 
 Kjør `npm run validate` før du åpner PR.
 
 ### Ny versjon
 
 1. Publiser GitHub Release i plugin-repositoriet (se sjekklisten under).
-2. Legg til **en ny fil** `content/plugins/<slug>/releases/<version>.json`. Ikke rediger `tag`, `asset` eller `sha256` på en eksisterende versjonsfil, og ikke slett den — marker den `yanked` i stedet.
+2. Scaffold release-JSON fra GitHub (nektes å overskrive en eksisterende fil):
+
+```bash
+npm run new-release -- <slug> <version>
+```
+
+Skriptet henter dato, digest og release-notes, og kopierer krav og avhengigheter fra forrige versjon. Fyll inn/rediger changelog før du åpner PR. For private repos: sett `GITHUB_TOKEN` midlertidig i terminalen (ikke i en fil).
+
+Du kan også legge til **en ny fil** `content/plugins/<slug>/releases/<version>.json` for hånd. Ikke rediger `tag`, `asset` eller `sha256` på en eksisterende versjonsfil, og ikke slett den — marker den `yanked` i stedet.
 
 ```json
 {
@@ -99,6 +111,7 @@ Kjør `npm run validate` før du åpner PR.
     "php": { "min": "8.1" }
   },
   "changelog": {
+    "url": "https://github.com/bli-synlig-plugins/mitt-plugin/blob/main/CHANGELOG.md#100",
     "added": ["Ny funksjon."]
   }
 }

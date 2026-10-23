@@ -9,17 +9,35 @@ const CHANGELOG_SECTIONS = [
   ["security", "changelogSecurity"],
 ] as const
 
-export function Changelog({ release }: { release: ReleaseRecord }) {
-  const changelog = release.changelog
-  if (!changelog) {
-    return null
+export function hasChangelogContent(
+  release: ReleaseRecord,
+  fileUrl?: string
+): boolean {
+  if (fileUrl) {
+    return true
   }
 
+  const changelog = release.changelog
+  if (!changelog) {
+    return false
+  }
+
+  return CHANGELOG_SECTIONS.some(([key]) => (changelog[key] ?? []).length > 0)
+}
+
+export function Changelog({
+  release,
+  fileUrl,
+}: {
+  release: ReleaseRecord
+  fileUrl?: string
+}) {
+  const changelog = release.changelog
   const sections = CHANGELOG_SECTIONS.filter(
-    ([key]) => (changelog[key] ?? []).length > 0
+    ([key]) => (changelog?.[key] ?? []).length > 0
   )
 
-  if (sections.length === 0) {
+  if (sections.length === 0 && !fileUrl) {
     return null
   }
 
@@ -29,12 +47,22 @@ export function Changelog({ release }: { release: ReleaseRecord }) {
         <div key={key} className="flex flex-col gap-2">
           <p className="font-medium">{strings.plugins[labelKey]}</p>
           <ul className="flex list-disc flex-col gap-1 pl-5">
-            {changelog[key]?.map((item) => (
+            {changelog?.[key]?.map((item) => (
               <li key={item}>{item}</li>
             ))}
           </ul>
         </div>
       ))}
+      {fileUrl ? (
+        <a
+          href={fileUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="w-fit underline-offset-3 hover:underline"
+        >
+          {strings.plugins.fullChangelog}
+        </a>
+      ) : null}
     </div>
   )
 }

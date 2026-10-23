@@ -1,15 +1,16 @@
 import type { Metadata } from "next"
-import { Geist_Mono, Raleway } from "next/font/google"
+import { Geist, Geist_Mono } from "next/font/google"
 import { AppSidebar } from "@/components/layout/app-sidebar"
 import { SiteHeader } from "@/components/layout/site-header"
+import { ThemeProvider } from "@/components/theme/theme-provider"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { getNavData } from "@/lib/nav"
+import { getNavData } from "@/lib/get-nav-data"
 import { strings } from "@/lib/strings"
 import { cn } from "@/lib/utils"
 import "./globals.css"
 
-const raleway = Raleway({
+const geistSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
 })
@@ -37,9 +38,10 @@ export default async function RootLayout({
   return (
     <html
       lang="nb"
+      suppressHydrationWarning
       className={cn(
         "h-full antialiased font-sans",
-        raleway.variable,
+        geistSans.variable,
         geistMono.variable
       )}
     >
@@ -50,17 +52,19 @@ export default async function RootLayout({
         >
           {strings.nav.skipToContent}
         </a>
-        <TooltipProvider>
-          <SidebarProvider>
-            <AppSidebar nav={nav} />
-            <SidebarInset className="min-w-0">
-              <SiteHeader />
-              <main id="innhold" className="min-w-0 flex-1">
-                {children}
-              </main>
-            </SidebarInset>
-          </SidebarProvider>
-        </TooltipProvider>
+        <ThemeProvider>
+          <TooltipProvider>
+            <SidebarProvider>
+              <AppSidebar nav={nav} />
+              <SidebarInset className="min-w-0">
+                <SiteHeader nav={nav} />
+                <main id="innhold" className="min-w-0 flex-1">
+                  {children}
+                </main>
+              </SidebarInset>
+            </SidebarProvider>
+          </TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

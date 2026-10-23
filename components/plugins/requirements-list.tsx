@@ -1,3 +1,9 @@
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import type { ReleaseRecord } from "@/lib/content/load-plugins"
 import { strings } from "@/lib/strings"
 
@@ -20,18 +26,22 @@ export function RequirementsList({ release }: { release: ReleaseRecord }) {
   ].filter((item) => item !== null)
 
   return (
-    <dl className="grid gap-3 sm:grid-cols-3">
+    <div className="grid gap-3 sm:grid-cols-3">
       {items.map((item) => (
-        <div key={item.label} className="flex flex-col gap-1">
-          <dt className="text-sm text-muted-foreground">{item.label}</dt>
-          <dd>
-            {strings.plugins.minLabel(item.requirement.min)}
-            {item.requirement.tested
-              ? ` · ${strings.plugins.testedLabel(item.requirement.tested)}`
-              : null}
-          </dd>
-        </div>
+        <Card key={item.label} className="border-t-2 border-t-chart-3">
+          <CardHeader>
+            <CardDescription>{item.label}</CardDescription>
+            <CardTitle className="text-2xl font-semibold">
+              {strings.plugins.minLabel(item.requirement.min)}
+            </CardTitle>
+            {item.requirement.tested ? (
+              <CardDescription>
+                {strings.plugins.testedLabel(item.requirement.tested)}
+              </CardDescription>
+            ) : null}
+          </CardHeader>
+        </Card>
       ))}
-    </dl>
+    </div>
   )
 }

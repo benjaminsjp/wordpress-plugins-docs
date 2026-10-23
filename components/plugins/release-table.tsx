@@ -10,10 +10,14 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { CopyButton } from "@/components/code/copy-button"
-import { Changelog } from "@/components/plugins/changelog"
+import { Changelog, hasChangelogContent } from "@/components/plugins/changelog"
 import type { PluginRecord } from "@/lib/content/load-plugins"
 import { formatDate } from "@/lib/format"
-import { sortReleasesNewestFirst, versionAnchor } from "@/lib/plugin-view"
+import {
+  changelogFileUrl,
+  sortReleasesNewestFirst,
+  versionAnchor,
+} from "@/lib/plugin-view"
 import { strings } from "@/lib/strings"
 
 export function ReleaseTable({ plugin }: { plugin: PluginRecord }) {
@@ -36,6 +40,7 @@ export function ReleaseTable({ plugin }: { plugin: PluginRecord }) {
       <TableBody>
         {releases.map((release) => {
           const anchor = versionAnchor(release.version)
+          const fileUrl = changelogFileUrl(plugin, release)
           return (
             <Fragment key={release.version}>
               <TableRow id={anchor}>
@@ -98,14 +103,14 @@ export function ReleaseTable({ plugin }: { plugin: PluginRecord }) {
                   )}
                 </TableCell>
               </TableRow>
-              {release.changelog ? (
+              {hasChangelogContent(release, fileUrl) ? (
                 <TableRow>
                   <TableCell colSpan={8}>
                     <Accordion>
                       <AccordionItem value={release.version}>
                         <AccordionTrigger>{strings.plugins.changelog}</AccordionTrigger>
                         <AccordionContent>
-                          <Changelog release={release} />
+                          <Changelog release={release} fileUrl={fileUrl} />
                         </AccordionContent>
                       </AccordionItem>
                     </Accordion>

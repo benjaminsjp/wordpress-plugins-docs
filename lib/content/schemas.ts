@@ -48,6 +48,7 @@ export const pluginJsonSchema = z.object({
   maintainer: nonEmptyString.optional(),
   replacedBy: nonEmptyString.optional(),
   related: relatedSchema.optional(),
+  changelogUrl: z.url().optional(),
 })
 
 export const internalDependencySchema = z.object({
@@ -74,6 +75,7 @@ export const dependencySchema = z.union([
 ])
 
 export const changelogSchema = z.object({
+  url: z.url().optional(),
   added: z.array(nonEmptyString).optional(),
   changed: z.array(nonEmptyString).optional(),
   fixed: z.array(nonEmptyString).optional(),

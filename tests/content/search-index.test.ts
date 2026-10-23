@@ -23,14 +23,14 @@ describe("extractCssSelectors", () => {
     ])
   })
 
-  it("includes .nav-dropdown from the header dropdown snippet", async () => {
+  it("includes .button from the button improvements snippet", async () => {
     const content = await loadAndValidate()
     const snippet = content.snippets.find(
-      (item) => item.slug === "header-dropdown-shadow"
+      (item) => item.slug === "button-improvements"
     )
 
     expect(snippet).toBeDefined()
-    expect(extractCssSelectors(snippet?.css ?? "")).toContain(".nav-dropdown")
+    expect(extractCssSelectors(snippet?.css ?? "")).toContain(".button")
   })
 })
 
@@ -51,14 +51,14 @@ describe("buildSearchIndex", () => {
     )
 
     const snippet = index.find(
-      (record) => record.slug === "header-dropdown-shadow"
+      (record) => record.slug === "button-improvements"
     )
     expect(snippet).toMatchObject({
       type: "snippet",
-      url: "/css/header-dropdown-shadow",
-      category: "header",
+      url: "/css/button-improvements",
+      category: "buttons",
     })
-    expect(snippet?.keywords).toContain(".nav-dropdown")
+    expect(snippet?.keywords).toContain(".button")
 
     const category = index.find(
       (record) => record.type === "category" && record.slug === "header"

@@ -17,7 +17,7 @@ export function SnippetCard({
 }) {
   return (
     <Link href={`/css/${snippet.slug}`} className="block h-full">
-      <Card className="h-full transition-colors hover:bg-muted/40">
+      <Card className="h-full border-t-2 border-t-chart-3 transition-colors hover:bg-muted/40">
         <CardHeader>
           <div className="flex flex-wrap items-center gap-2">
             <CardTitle>{snippet.name}</CardTitle>

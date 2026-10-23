@@ -15,6 +15,13 @@ export function sortReleasesNewestFirst(
   )
 }
 
+export function changelogFileUrl(
+  plugin: { changelogUrl?: string },
+  release: { changelog?: { url?: string } | null }
+): string | undefined {
+  return release.changelog?.url ?? plugin.changelogUrl
+}
+
 export function minVersionSatisfied(
   latestVersion: string | undefined,
   minVersion: string | undefined,

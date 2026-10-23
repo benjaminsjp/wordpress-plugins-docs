@@ -14,6 +14,7 @@
     "test": "vitest run",
     "validate": "tsx scripts/validate-content.ts",
     "verify-github": "tsx scripts/verify-github-releases.ts",
+    "new-release": "tsx scripts/new-release.ts",
     "check-immutability": "tsx scripts/check-release-immutability.ts",
     "schemas": "tsx scripts/generate-json-schemas.ts"
   },
@@ -28,6 +29,7 @@
     "cn": "^0.4.0",
     "lucide-react": "^1.61.0",
     "next": "16.2.4",
+    "next-themes": "^0.4.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "remark-gfm": "^4.0.1",

@@ -14,6 +14,30 @@ import { selectLatestRelease } from "@/lib/content/versions"
 import { minVersionSatisfied } from "@/lib/plugin-view"
 import { strings } from "@/lib/strings"
 
+function SatisfactionBadge({ satisfied }: { satisfied: boolean | null }) {
+  if (satisfied === true) {
+    return (
+      <Badge variant="default">
+        <span className="size-1.5 bg-primary-foreground" aria-hidden />
+        {strings.plugins.satisfies}
+      </Badge>
+    )
+  }
+
+  if (satisfied === false) {
+    return (
+      <Badge variant="destructive">
+        <span className="size-1.5 bg-destructive" aria-hidden />
+        {strings.plugins.unsatisfied}
+      </Badge>
+    )
+  }
+
+  return (
+    <Badge variant="outline">{strings.plugins.unknownSatisfaction}</Badge>
+  )
+}
+
 export function DependencyTable({
   release,
   plugins,
@@ -31,7 +55,7 @@ export function DependencyTable({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>{strings.plugins.dependencies}</TableHead>
+          <TableHead>{strings.plugins.dependencyName}</TableHead>
           <TableHead>{strings.plugins.required}</TableHead>
           <TableHead>{strings.plugins.min}</TableHead>
           <TableHead>{strings.plugins.satisfies}</TableHead>
@@ -69,19 +93,13 @@ export function DependencyTable({
                   </div>
                 </TableCell>
                 <TableCell>
-                  <Badge variant="outline">
-                    {dependency.type === "required"
-                      ? strings.plugins.required
-                      : strings.plugins.optional}
-                  </Badge>
+                  {dependency.type === "required"
+                    ? strings.plugins.yes
+                    : strings.plugins.no}
                 </TableCell>
                 <TableCell>{dependency.minVersion ?? "—"}</TableCell>
                 <TableCell>
-                  {satisfied === null
-                    ? strings.plugins.unknownSatisfaction
-                    : satisfied
-                      ? strings.plugins.satisfies
-                      : strings.plugins.unsatisfied}
+                  <SatisfactionBadge satisfied={satisfied} />
                 </TableCell>
               </TableRow>
             )
@@ -109,14 +127,14 @@ export function DependencyTable({
                 </div>
               </TableCell>
               <TableCell>
-                <Badge variant="outline">
-                  {dependency.type === "required"
-                    ? strings.plugins.required
-                    : strings.plugins.optional}
-                </Badge>
+                {dependency.type === "required"
+                  ? strings.plugins.yes
+                  : strings.plugins.no}
               </TableCell>
               <TableCell>{dependency.minVersion ?? "—"}</TableCell>
-              <TableCell>{strings.plugins.unknownSatisfaction}</TableCell>
+              <TableCell>
+                <SatisfactionBadge satisfied={null} />
+              </TableCell>
             </TableRow>
           )
         })}

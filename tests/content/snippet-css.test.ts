@@ -9,14 +9,14 @@ describe("snippet CSS source", () => {
   it("keeps the exact snippet.css bytes for copy", async () => {
     const { snippets } = await loadSnippets(getContentPaths())
     const snippet = snippets.find(
-      (item) => item.slug === "header-dropdown-shadow"
+      (item) => item.slug === "button-improvements"
     )
     expect(snippet).toBeDefined()
     const raw = await readFile(
       path.join(
         CONTENT_ROOT,
         "snippets",
-        "header-dropdown-shadow",
+        "button-improvements",
         "snippet.css"
       ),
       "utf8"

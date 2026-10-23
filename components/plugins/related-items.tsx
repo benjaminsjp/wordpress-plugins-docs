@@ -25,11 +25,13 @@ export function RelatedItems({
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="font-heading text-xl font-medium">{strings.plugins.related}</h2>
+      <h2 className="font-heading text-2xl font-semibold tracking-tight">
+        {strings.plugins.related}
+      </h2>
       <div className="grid gap-6 md:grid-cols-2">
       {relatedPlugins.length > 0 ? (
         <div className="flex flex-col gap-3">
-          <h3 className="font-heading text-lg font-medium">
+          <h3 className="font-heading text-base font-medium">
             {strings.plugins.relatedPlugins}
           </h3>
           <ul className="flex flex-col gap-2">
@@ -48,7 +50,7 @@ export function RelatedItems({
       ) : null}
       {relatedSnippets.length > 0 ? (
         <div className="flex flex-col gap-3">
-          <h3 className="font-heading text-lg font-medium">
+          <h3 className="font-heading text-base font-medium">
             {strings.plugins.relatedSnippets}
           </h3>
           <ul className="flex flex-col gap-2">

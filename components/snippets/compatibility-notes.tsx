@@ -8,7 +8,7 @@ export function CompatibilityNotes({
 }) {
   return (
     <section className="flex flex-col gap-2">
-      <h2 className="font-heading text-xl font-medium">
+      <h2 className="font-heading text-2xl font-semibold tracking-tight">
         {strings.snippets.compatibility}
       </h2>
       {compatibility.flatsome ? (

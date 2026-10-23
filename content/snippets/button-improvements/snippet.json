@@ -1,0 +1,11 @@
+{
+	"$schema": "../../../schemas/snippet.schema.json",
+	"name": "Forbedrer knapper",
+	"summary": "Jevnere layout, størrelser og ikonjustering på Flatsome-knapper.",
+	"category": "buttons",
+	"tags": ["spacing", "border"],
+	"placement": {
+		"location": "flatsome-custom-css-all"
+	},
+	"updated": "2026-10-23"
+}
