@@ -7,7 +7,8 @@
 	"repository": {
 		"owner": "bli-synlig-plugins",
 		"repo": "Blogg-post-plugin-for-flatsome",
-		"visibility": "public"
+		"visibility": "public",
+		"assetPattern": "{slug}-v{version}.zip"
 	},
 	"tags": ["flatsome", "blog", "polylang"],
 	"maintainer": "Bli Synlig"

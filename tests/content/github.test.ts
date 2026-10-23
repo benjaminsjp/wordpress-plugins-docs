@@ -73,6 +73,22 @@ describe("resolveReleaseDownload", () => {
     )
   })
 
+  it("uses the blogg ZIP name with a v in the asset", () => {
+    const resolved = resolveReleaseDownload({
+      owner: "bli-synlig-plugins",
+      repo: "Blogg-post-plugin-for-flatsome",
+      slug: "blogg-post-plugin-for-flatsome",
+      version: "1.0.5",
+      assetPattern: "{slug}-v{version}.zip",
+    })
+
+    expect(resolved.tag).toBe("v1.0.5")
+    expect(resolved.asset).toBe("blogg-post-plugin-for-flatsome-v1.0.5.zip")
+    expect(resolved.downloadUrl).toBe(
+      "https://github.com/bli-synlig-plugins/Blogg-post-plugin-for-flatsome/releases/download/v1.0.5/blogg-post-plugin-for-flatsome-v1.0.5.zip"
+    )
+  })
+
   it("uses the kafra ZIP name with a v in the asset", () => {
     const resolved = resolveReleaseDownload({
       owner: "bli-synlig-plugins",
