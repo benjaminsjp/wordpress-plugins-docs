@@ -1,0 +1,18 @@
+{
+	"$schema": "../../../schemas/snippet.schema.json",
+	"name": "Skygge på nedtrekksmeny",
+	"summary": "Gir nedtrekksmenyer i headeren en myk skygge og en tynn kant.",
+	"category": "header",
+	"subcategory": "dropdown-menus",
+	"tags": ["shadow", "border"],
+	"placement": {
+		"location": "flatsome-custom-css-all",
+		"notes": "Lim inn i feltet for alle skjermstørrelser."
+	},
+	"compatibility": {
+		"flatsome": { "min": "3.17.0", "tested": "3.20.1" },
+		"notes": "Forutsetter standard dropdown-stil i Theme Options."
+	},
+	"related": ["header-dropdown-arrow", "navbar-link-underline"],
+	"updated": "2026-08-10"
+}

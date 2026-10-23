@@ -1,0 +1,20 @@
+{
+	"categories": [
+		{
+			"slug": "header",
+			"label": "Header",
+			"subcategories": [
+				{
+					"slug": "navbar",
+					"label": "Navigasjon",
+					"subcategories": [
+						{
+							"slug": "too-deep",
+							"label": "For dyp"
+						}
+					]
+				}
+			]
+		}
+	]
+}

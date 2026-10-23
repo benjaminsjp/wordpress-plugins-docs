@@ -1,0 +1,21 @@
+.header-nav > li > a {
+	position: relative;
+}
+
+.header-nav > li > a::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0.35em;
+	left: 0;
+	height: 2px;
+	background: var(--primary-color, currentColor);
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.2s ease;
+}
+
+.header-nav > li > a:hover::after,
+.header-nav > li.active > a::after {
+	transform: scaleX(1);
+}

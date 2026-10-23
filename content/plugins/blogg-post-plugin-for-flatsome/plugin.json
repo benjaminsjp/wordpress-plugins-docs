@@ -1,0 +1,14 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "Blogg filter (ACF + Polylang)",
+	"summary": "Flatsome-elementer for å filtrere innlegg med ACF-taksonomier, inkludert synkronisering via Polylang.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "Blogg-post-plugin-for-flatsome",
+		"visibility": "public"
+	},
+	"tags": ["flatsome", "blog", "polylang"],
+	"maintainer": "Bli Synlig"
+}

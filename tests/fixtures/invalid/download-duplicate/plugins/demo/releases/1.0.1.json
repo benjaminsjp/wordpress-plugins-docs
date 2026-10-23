@@ -1,0 +1,17 @@
+{
+	"releaseDate": "2026-01-01",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.0"
+		},
+		"php": {
+			"min": "8.1"
+		}
+	},
+	"download": {
+		"tag": "v1",
+		"asset": "plugin.zip",
+		"sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+	}
+}

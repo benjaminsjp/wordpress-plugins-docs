@@ -1,0 +1,12 @@
+{
+	"name": "demo-snippet",
+	"summary": "Test snippet",
+	"category": "misc",
+	"tags": [
+		"does-not-exist"
+	],
+	"placement": {
+		"location": "flatsome-custom-css-all"
+	},
+	"updated": "2026-01-01"
+}

@@ -1,0 +1,37 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-04-01",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.4" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"dependencies": [
+		{
+			"external": {
+				"name": "Polylang",
+				"slug": "polylang",
+				"url": "https://wordpress.org/plugins/polylang/"
+			},
+			"type": "required",
+			"reason": "Språk og oversettelse av innlegg og ACF-taksonomier."
+		},
+		{
+			"external": {
+				"name": "Advanced Custom Fields",
+				"slug": "advanced-custom-fields",
+				"url": "https://wordpress.org/plugins/advanced-custom-fields/"
+			},
+			"type": "required",
+			"reason": "Taksonomier og filterfeltene i ACF Filter Builder."
+		}
+	],
+	"changelog": {
+		"added": [
+			"Flatsome-elementene Blogg Filter og Blogg Filter Resultater.",
+			"ACF Filter Builder under ACF Filter i wp-admin.",
+			"Polylang-synk av ACF-taksonomier."
+		]
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"name": "Not_Valid",
+	"summary": "Test plugin",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "ORG",
+		"repo": "Not_Valid",
+		"visibility": "public"
+	}
+}

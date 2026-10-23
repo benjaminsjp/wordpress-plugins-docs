@@ -1,0 +1,11 @@
+{
+	"name": "library",
+	"summary": "Test plugin",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "ORG",
+		"repo": "library",
+		"visibility": "public"
+	}
+}

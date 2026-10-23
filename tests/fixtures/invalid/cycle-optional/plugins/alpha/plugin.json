@@ -1,0 +1,11 @@
+{
+	"name": "alpha",
+	"summary": "Test plugin",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "ORG",
+		"repo": "alpha",
+		"visibility": "public"
+	}
+}

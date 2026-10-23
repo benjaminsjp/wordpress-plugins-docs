@@ -1,0 +1,115 @@
+import type { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { PageBreadcrumbs } from "@/components/layout/page-breadcrumbs"
+import { PageHeader } from "@/components/layout/page-header"
+import { PageShell } from "@/components/layout/page-shell"
+import { SnippetCard } from "@/components/snippets/snippet-card"
+import { Badge } from "@/components/ui/badge"
+import {
+  Empty,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty"
+import { getSnippets, getTaxonomy } from "@/lib/content"
+import { strings } from "@/lib/strings"
+import { CodeIcon } from "lucide-react"
+import Link from "next/link"
+
+export const dynamicParams = false
+
+export async function generateStaticParams() {
+  const taxonomy = await getTaxonomy()
+  return (taxonomy?.categories ?? []).map((category) => ({
+    category: category.slug,
+  }))
+}
+
+type CategoryPageProps = {
+  params: Promise<{ category: string }>
+}
+
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  const { category: categorySlug } = await params
+  const taxonomy = await getTaxonomy()
+  const category = taxonomy?.categories.find((item) => item.slug === categorySlug)
+  return { title: category?.label ?? strings.notFound.title }
+}
+
+export default async function CategoryPage({
+  params,
+}: CategoryPageProps) {
+  const { category: categorySlug } = await params
+  const [snippets, taxonomy] = await Promise.all([
+    getSnippets(),
+    getTaxonomy(),
+  ])
+  const category = taxonomy?.categories.find((item) => item.slug === categorySlug)
+
+  if (!category) {
+    notFound()
+  }
+
+  const inCategory = snippets.filter(
+    (snippet) => snippet.category === category.slug
+  )
+
+  return (
+    <PageShell>
+      <PageBreadcrumbs
+        items={[
+          { label: strings.nav.home, href: "/" },
+          { label: strings.nav.snippets, href: "/css" },
+          { label: category.label },
+        ]}
+      />
+      <PageHeader
+        title={category.label}
+        description={category.description}
+      />
+      {category.subcategories.length > 0 ? (
+        <div className="flex flex-wrap gap-2">
+          {category.subcategories.map((subcategory) => (
+            <Badge
+              key={subcategory.slug}
+              variant="outline"
+              render={
+                <Link
+                  href={`/css/category/${category.slug}/${subcategory.slug}`}
+                />
+              }
+            >
+              {subcategory.label}
+            </Badge>
+          ))}
+        </div>
+      ) : null}
+      {inCategory.length === 0 ? (
+        <Empty className="border">
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <CodeIcon />
+            </EmptyMedia>
+            <EmptyTitle>{strings.snippets.emptyCategoryTitle}</EmptyTitle>
+            <EmptyDescription>
+              {strings.snippets.emptyCategoryDescription}
+            </EmptyDescription>
+          </EmptyHeader>
+        </Empty>
+      ) : (
+        <div className="grid gap-4 md:grid-cols-2">
+          {inCategory.map((snippet) => (
+            <SnippetCard
+              key={snippet.slug}
+              snippet={snippet}
+              categoryLabel={category.label}
+            />
+          ))}
+        </div>
+      )}
+    </PageShell>
+  )
+}

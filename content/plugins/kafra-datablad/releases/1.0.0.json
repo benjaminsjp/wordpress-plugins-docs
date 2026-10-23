@@ -1,0 +1,12 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-10-23",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.4" },
+		"php": { "min": "8.1" }
+	},
+	"changelog": {
+		"added": ["Første stabile versjon."]
+	}
+}

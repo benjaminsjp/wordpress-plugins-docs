@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../schemas/snippet.schema.json",
+	"name": "Plassering av produktmerker",
+	"summary": "Flytter merker på produktkort slik at de ikke dekker tittelen.",
+	"category": "shop",
+	"subcategory": "product-cards",
+	"tags": ["woocommerce", "spacing"],
+	"placement": {
+		"location": "flatsome-custom-css-all"
+	},
+	"compatibility": {
+		"flatsome": { "min": "3.18.0", "tested": "3.20.1" }
+	},
+	"updated": "2026-09-04"
+}

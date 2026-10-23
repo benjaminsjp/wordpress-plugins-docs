@@ -1,0 +1,12 @@
+{
+	"tags": [
+		{
+			"slug": "spacing",
+			"label": "Avstand"
+		},
+		{
+			"slug": "shadow",
+			"label": "Skygge"
+		}
+	]
+}

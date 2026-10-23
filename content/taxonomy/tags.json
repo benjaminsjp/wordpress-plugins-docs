@@ -1,0 +1,21 @@
+{
+	"$schema": "../../schemas/tags.schema.json",
+	"tags": [
+		{ "slug": "responsive", "label": "Responsiv" },
+		{ "slug": "mobile", "label": "Mobil" },
+		{ "slug": "tablet", "label": "Nettbrett" },
+		{ "slug": "desktop", "label": "Desktop" },
+		{ "slug": "shadow", "label": "Skygge" },
+		{ "slug": "border", "label": "Kantlinje" },
+		{ "slug": "links", "label": "Lenker" },
+		{ "slug": "hover", "label": "Hover" },
+		{ "slug": "animation", "label": "Animasjon" },
+		{ "slug": "colors", "label": "Farger" },
+		{ "slug": "spacing", "label": "Avstand" },
+		{ "slug": "sticky", "label": "Sticky" },
+		{ "slug": "accessibility", "label": "Tilgjengelighet" },
+		{ "slug": "woocommerce", "label": "WooCommerce" },
+		{ "slug": "ux-builder", "label": "UX Builder" },
+		{ "slug": "dark-background", "label": "Mørk bakgrunn" }
+	]
+}

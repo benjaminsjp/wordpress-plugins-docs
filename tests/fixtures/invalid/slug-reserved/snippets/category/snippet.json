@@ -1,0 +1,12 @@
+{
+	"name": "category",
+	"summary": "Test snippet",
+	"category": "misc",
+	"tags": [
+		"spacing"
+	],
+	"placement": {
+		"location": "flatsome-custom-css-all"
+	},
+	"updated": "2026-01-01"
+}

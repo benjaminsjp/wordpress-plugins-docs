@@ -1,0 +1,11 @@
+{
+	"$schema": "../../../schemas/snippet.schema.json",
+	"name": "Fyll på knappe-hover",
+	"summary": "Fyller primærknapper på mørk bakgrunn ved hover.",
+	"category": "buttons",
+	"tags": ["hover", "colors", "dark-background", "ux-builder"],
+	"placement": {
+		"location": "flatsome-custom-css-all"
+	},
+	"updated": "2026-07-02"
+}

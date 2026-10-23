@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'schedule' }}
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run validate
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - name: Check release immutability
+        if: github.event_name == 'pull_request'
+        env:
+          GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: npm run check-immutability
+      - name: Check release immutability
+        if: github.event_name == 'push'
+        env:
+          GITHUB_BASE_SHA: ${{ github.event.before }}
+        run: npm run check-immutability
+      - name: Verify GitHub releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.PLUGIN_GITHUB_TOKEN || github.token }}
+        run: npm run verify-github
+      - run: npm run build
+
+  weekly-verify:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Verify GitHub releases
+        env:
+          GITHUB_TOKEN: ${{ secrets.PLUGIN_GITHUB_TOKEN || github.token }}
+        run: npm run verify-github
+      - name: Open an issue when verification fails
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "GitHub-release-verifisering feilet" \
+            --body "Den ukentlige sjekken mot GitHub Releases feilet. Se ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}." \
+            || true

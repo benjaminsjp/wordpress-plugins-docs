@@ -1,0 +1,13 @@
+.header-nav .nav-dropdown::before {
+	content: "";
+	position: absolute;
+	top: -6px;
+	left: 1.5rem;
+	border: 6px solid transparent;
+	border-bottom-color: currentColor;
+	transition: transform 0.15s ease;
+}
+
+.header-nav li:hover .nav-dropdown::before {
+	transform: translateY(-1px);
+}

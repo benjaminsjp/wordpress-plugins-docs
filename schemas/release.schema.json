@@ -1,0 +1,231 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"$schema": {
+			"type": "string"
+		},
+		"releaseDate": {
+			"type": "string",
+			"format": "date",
+			"pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+		},
+		"channel": {
+			"type": "string",
+			"enum": [
+				"stable",
+				"beta"
+			]
+		},
+		"yanked": {
+			"type": "object",
+			"properties": {
+				"reason": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": [
+				"reason"
+			]
+		},
+		"requirements": {
+			"type": "object",
+			"properties": {
+				"wordpress": {
+					"type": "object",
+					"properties": {
+						"min": {
+							"type": "string",
+							"minLength": 1
+						},
+						"tested": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": [
+						"min"
+					]
+				},
+				"php": {
+					"type": "object",
+					"properties": {
+						"min": {
+							"type": "string",
+							"minLength": 1
+						},
+						"tested": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": [
+						"min"
+					]
+				},
+				"flatsome": {
+					"type": "object",
+					"properties": {
+						"min": {
+							"type": "string",
+							"minLength": 1
+						},
+						"tested": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": [
+						"min"
+					]
+				}
+			},
+			"required": [
+				"wordpress",
+				"php"
+			]
+		},
+		"dependencies": {
+			"default": [],
+			"type": "array",
+			"items": {
+				"anyOf": [
+					{
+						"type": "object",
+						"properties": {
+							"plugin": {
+								"type": "string",
+								"minLength": 1
+							},
+							"type": {
+								"type": "string",
+								"enum": [
+									"required",
+									"optional"
+								]
+							},
+							"minVersion": {
+								"type": "string",
+								"minLength": 1
+							},
+							"reason": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"required": [
+							"plugin",
+							"type"
+						]
+					},
+					{
+						"type": "object",
+						"properties": {
+							"external": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string",
+										"minLength": 1
+									},
+									"slug": {
+										"type": "string",
+										"minLength": 1
+									},
+									"url": {
+										"type": "string",
+										"format": "uri"
+									}
+								},
+								"required": [
+									"name"
+								]
+							},
+							"type": {
+								"type": "string",
+								"enum": [
+									"required",
+									"optional"
+								]
+							},
+							"minVersion": {
+								"type": "string",
+								"minLength": 1
+							},
+							"reason": {
+								"type": "string",
+								"minLength": 1
+							}
+						},
+						"required": [
+							"external",
+							"type"
+						]
+					}
+				]
+			}
+		},
+		"download": {
+			"type": "object",
+			"properties": {
+				"tag": {
+					"type": "string",
+					"minLength": 1
+				},
+				"asset": {
+					"type": "string",
+					"minLength": 1
+				},
+				"sha256": {
+					"type": "string"
+				}
+			}
+		},
+		"changelog": {
+			"type": "object",
+			"properties": {
+				"added": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"changed": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"fixed": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"removed": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"security": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				}
+			}
+		}
+	},
+	"required": [
+		"releaseDate",
+		"channel",
+		"requirements"
+	]
+}

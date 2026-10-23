@@ -1,0 +1,12 @@
+.mobile-nav {
+	padding-block: 0.75rem;
+}
+
+.header-wrapper.stuck .mobile-nav {
+	padding-top: 1.25rem;
+}
+
+.mobile-nav a:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}

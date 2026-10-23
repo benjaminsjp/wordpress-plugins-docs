@@ -1,0 +1,13 @@
+{
+	"name": "demo-snippet",
+	"summary": "Test snippet",
+	"category": "header",
+	"tags": [
+		"spacing"
+	],
+	"placement": {
+		"location": "flatsome-custom-css-all"
+	},
+	"updated": "2026-01-01",
+	"subcategory": "does-not-exist"
+}

@@ -1,0 +1,104 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"$schema": {
+			"type": "string"
+		},
+		"name": {
+			"type": "string",
+			"minLength": 1
+		},
+		"summary": {
+			"type": "string",
+			"minLength": 1
+		},
+		"category": {
+			"type": "string",
+			"minLength": 1
+		},
+		"subcategory": {
+			"type": "string",
+			"minLength": 1
+		},
+		"tags": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"placement": {
+			"type": "object",
+			"properties": {
+				"location": {
+					"type": "string",
+					"enum": [
+						"flatsome-custom-css-all",
+						"flatsome-custom-css-tablet",
+						"flatsome-custom-css-mobile",
+						"child-theme-stylesheet",
+						"wordpress-additional-css",
+						"other"
+					]
+				},
+				"notes": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": [
+				"location"
+			]
+		},
+		"compatibility": {
+			"type": "object",
+			"properties": {
+				"flatsome": {
+					"type": "object",
+					"properties": {
+						"min": {
+							"type": "string",
+							"minLength": 1
+						},
+						"tested": {
+							"type": "string",
+							"minLength": 1
+						}
+					},
+					"required": [
+						"min"
+					]
+				},
+				"notes": {
+					"type": "string",
+					"minLength": 1
+				}
+			}
+		},
+		"related": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"updated": {
+			"type": "string",
+			"format": "date",
+			"pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+		},
+		"author": {
+			"type": "string",
+			"minLength": 1
+		}
+	},
+	"required": [
+		"name",
+		"summary",
+		"category",
+		"tags",
+		"placement",
+		"updated"
+	]
+}

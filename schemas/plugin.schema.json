@@ -1,0 +1,107 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"properties": {
+		"$schema": {
+			"type": "string"
+		},
+		"name": {
+			"type": "string",
+			"minLength": 1
+		},
+		"summary": {
+			"type": "string",
+			"minLength": 1
+		},
+		"versionScheme": {
+			"type": "string",
+			"enum": [
+				"semver",
+				"dotted",
+				"calver"
+			]
+		},
+		"status": {
+			"type": "string",
+			"enum": [
+				"active",
+				"deprecated",
+				"archived"
+			]
+		},
+		"repository": {
+			"type": "object",
+			"properties": {
+				"owner": {
+					"type": "string",
+					"minLength": 1
+				},
+				"repo": {
+					"type": "string",
+					"minLength": 1
+				},
+				"visibility": {
+					"type": "string",
+					"enum": [
+						"public",
+						"private"
+					]
+				},
+				"tagPattern": {
+					"type": "string",
+					"minLength": 1
+				},
+				"assetPattern": {
+					"type": "string",
+					"minLength": 1
+				}
+			},
+			"required": [
+				"owner",
+				"repo",
+				"visibility"
+			]
+		},
+		"tags": {
+			"type": "array",
+			"items": {
+				"type": "string",
+				"minLength": 1
+			}
+		},
+		"maintainer": {
+			"type": "string",
+			"minLength": 1
+		},
+		"replacedBy": {
+			"type": "string",
+			"minLength": 1
+		},
+		"related": {
+			"type": "object",
+			"properties": {
+				"plugins": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				},
+				"snippets": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"minLength": 1
+					}
+				}
+			}
+		}
+	},
+	"required": [
+		"name",
+		"summary",
+		"versionScheme",
+		"status",
+		"repository"
+	]
+}

@@ -1,0 +1,12 @@
+{
+	"categories": [
+		{
+			"slug": "header",
+			"label": "Header"
+		},
+		{
+			"slug": "header",
+			"label": "Topp"
+		}
+	]
+}

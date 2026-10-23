@@ -1,0 +1,12 @@
+{
+	"name": "demo",
+	"summary": "Test plugin",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "ORG",
+		"repo": "demo",
+		"visibility": "public",
+		"tagPattern": "release"
+	}
+}

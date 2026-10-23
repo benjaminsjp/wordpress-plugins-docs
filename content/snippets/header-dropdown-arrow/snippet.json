@@ -1,0 +1,12 @@
+{
+	"$schema": "../../../schemas/snippet.schema.json",
+	"name": "Pil på nedtrekksmeny",
+	"summary": "Legger til en liten pil over nedtrekksmenyen ved hover.",
+	"category": "header",
+	"subcategory": "dropdown-menus",
+	"tags": ["animation", "hover"],
+	"placement": {
+		"location": "flatsome-custom-css-all"
+	},
+	"updated": "2026-08-12"
+}

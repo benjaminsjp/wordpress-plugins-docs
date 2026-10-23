@@ -1,0 +1,21 @@
+{
+	"releaseDate": "2026-01-01",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.0"
+		},
+		"php": {
+			"min": "8.1"
+		}
+	},
+	"download": {
+		"sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+	},
+	"dependencies": [
+		{
+			"plugin": "beta",
+			"type": "required"
+		}
+	]
+}

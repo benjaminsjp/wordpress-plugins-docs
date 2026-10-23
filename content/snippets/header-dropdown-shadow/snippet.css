@@ -1,0 +1,6 @@
+/* Skygge på nedtrekksmeny */
+.header-nav .nav-dropdown,
+.header-wrapper.stuck .header-main .header-nav-main.nav > li.has-dropdown:hover > .nav-dropdown.nav-dropdown-default {
+	border: 1px solid rgba(0, 0, 0, 0.06);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}

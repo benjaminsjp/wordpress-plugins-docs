@@ -1,0 +1,5 @@
+.dark .button.primary:hover,
+.banner .button.primary:hover {
+	background-color: currentColor;
+	color: #fff;
+}

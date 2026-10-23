@@ -1,0 +1,65 @@
+{
+	"$schema": "../../schemas/snippet-categories.schema.json",
+	"categories": [
+		{
+			"slug": "header",
+			"label": "Header",
+			"description": "Navigasjon, menyer og elementer i toppen av siden.",
+			"subcategories": [
+				{ "slug": "navbar", "label": "Navigasjon" },
+				{ "slug": "dropdown-menus", "label": "Nedtrekksmenyer" },
+				{ "slug": "mobile-menu", "label": "Mobilmeny" },
+				{ "slug": "sticky-header", "label": "Sticky header" },
+				{ "slug": "header-elements", "label": "Header-elementer" }
+			]
+		},
+		{
+			"slug": "footer",
+			"label": "Footer",
+			"description": "Bunnområdet på siden."
+		},
+		{
+			"slug": "buttons",
+			"label": "Knapper",
+			"description": "Knapper og handlingslenker."
+		},
+		{
+			"slug": "blog",
+			"label": "Blogg",
+			"description": "Innleggslister, metadata og enkeltinnlegg.",
+			"subcategories": [
+				{ "slug": "blog-cards", "label": "Bloggkort" },
+				{ "slug": "post-meta", "label": "Innleggsmeta" },
+				{ "slug": "pagination", "label": "Paginering" },
+				{ "slug": "single-post", "label": "Enkeltinnlegg" }
+			]
+		},
+		{
+			"slug": "shop",
+			"label": "Butikk",
+			"description": "WooCommerce-sider og produktvisning i Flatsome.",
+			"subcategories": [
+				{ "slug": "product-cards", "label": "Produktkort" },
+				{ "slug": "product-page", "label": "Produktside" },
+				{ "slug": "cart-checkout", "label": "Handlekurv og kasse" }
+			]
+		},
+		{
+			"slug": "layout-elements",
+			"label": "Layout-elementer",
+			"description": "UX Builder-seksjoner, rader, bannere, slider og trekkspill."
+		},
+		{
+			"slug": "forms",
+			"label": "Skjemaer"
+		},
+		{
+			"slug": "typography",
+			"label": "Typografi"
+		},
+		{
+			"slug": "misc",
+			"label": "Div"
+		}
+	]
+}
