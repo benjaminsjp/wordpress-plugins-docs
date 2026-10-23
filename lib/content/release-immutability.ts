@@ -108,10 +108,17 @@ export function compareReleaseIdentities(options: {
   base: ReleaseIdentity[]
   head: ReleaseIdentity[]
   renamed?: Array<{ from: string; to: string }>
+  modifiedReleaseFiles?: string[]
 }): Issue[] {
   const issues: Issue[] = []
   const baseByFile = new Map(options.base.map((item) => [item.file, item]))
   const headByFile = new Map(options.head.map((item) => [item.file, item]))
+  const modified =
+    options.modifiedReleaseFiles === undefined
+      ? null
+      : new Set(
+          options.modifiedReleaseFiles.map((file) => file.replaceAll("\\", "/"))
+        )
 
   for (const renamed of options.renamed ?? []) {
     issues.push({
@@ -138,6 +145,7 @@ export function compareReleaseIdentities(options: {
 
     const head = headByFile.get(file)
     if (!head) continue
+    if (modified && !modified.has(file)) continue
 
     const changes: string[] = []
     if (base.tag !== head.tag) {

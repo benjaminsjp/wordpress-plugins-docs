@@ -55,6 +55,21 @@ function listContentFiles(sha: string): Map<string, string> {
   return files
 }
 
+function listModifiedReleaseFiles(baseSha: string, headSha: string): string[] {
+  const output = gitOrNull([
+    "diff",
+    "--name-only",
+    "--diff-filter=M",
+    `${baseSha}...${headSha}`,
+  ])
+  if (!output) return []
+
+  return output
+    .split(/\r?\n/)
+    .map((file) => file.replaceAll("\\", "/"))
+    .filter(isReleaseContentPath)
+}
+
 function listRenames(baseSha: string, headSha: string): Array<{ from: string; to: string }> {
   const output = gitOrNull([
     "diff",
@@ -100,6 +115,7 @@ function main() {
     base: identitiesFromContentFiles(listContentFiles(baseSha)),
     head: identitiesFromContentFiles(listContentFiles(headSha)),
     renamed: listRenames(baseSha, headSha),
+    modifiedReleaseFiles: listModifiedReleaseFiles(baseSha, headSha),
   })
 
   if (issues.length === 0) {

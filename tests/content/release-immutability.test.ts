@@ -94,6 +94,15 @@ describe("compareReleaseIdentities", () => {
     })
     expect(issues).toEqual([])
   })
+
+  it("allows a plugin assetPattern correction when the release file is unchanged", () => {
+    const issues = compareReleaseIdentities({
+      base: [base],
+      head: [{ ...base, asset: "demo-v1.0.0.zip" }],
+      modifiedReleaseFiles: [],
+    })
+    expect(issues).toEqual([])
+  })
 })
 
 describe("identitiesFromContentFiles", () => {
