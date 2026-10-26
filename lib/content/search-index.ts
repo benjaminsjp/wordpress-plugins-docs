@@ -63,7 +63,7 @@ export function buildSearchIndex(content: SearchIndexContent): SearchRecord[] {
       tags: plugin.tags ?? [],
       keywords: uniqueSorted([
         ...pluginKeywords(plugin),
-        authorLabel,
+        ...(authorLabel ? [authorLabel] : []),
         plugin.author,
       ]),
     })
