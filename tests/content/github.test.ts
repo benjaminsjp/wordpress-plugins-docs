@@ -95,7 +95,7 @@ describe("resolveReleaseDownload", () => {
       repo: "kafra-datablad",
       slug: "kafra-datablad",
       version: "1.0.0",
-      assetPattern: "{slug}-v{version}.zip",
+      download: { asset: "kafra-datablad-v1.0.0.zip" },
     })
 
     expect(resolved.tag).toBe("v1.0.0")

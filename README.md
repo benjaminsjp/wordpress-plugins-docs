@@ -35,7 +35,7 @@ npm run check-immutability
 
 CI sjekker at dokumenterte plugin-versjoner faktisk finnes som GitHub Releases, også i **private** repositorier. Derfor trengs et **read-only** token som hemmelighet i *dette* docs-repositoriet:
 
-1. Lag et [fine-grained personal access token](https://github.com/settings/personal-access-tokens) (eller en GitHub App-installasjonstoken) med **Read** på Contents og Metadata for plugin-repositoriene i `bli-synlig-plugins` (inkludert private, f.eks. `kafra-datablad`).
+1. Lag et [fine-grained personal access token](https://github.com/settings/personal-access-tokens) (eller en GitHub App-installasjonstoken) med **Read** på Contents og Metadata for plugin-repositoriene i `bli-synlig-plugins` (inkludert eventuelle private repositorier).
 2. I docs-repositoriet: **Settings → Secrets and variables → Actions → New repository secret**.
 3. Navn: `PLUGIN_GITHUB_TOKEN` (ikke `GITHUB_TOKEN` — det navnet er reservert av GitHub Actions).
 4. Lim inn tokenet der, og ingen andre steder.

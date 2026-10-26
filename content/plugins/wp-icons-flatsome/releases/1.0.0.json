@@ -1,0 +1,29 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-10-26",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.6" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"dependencies": [
+		{
+			"external": {
+				"name": "WP Icons",
+				"slug": "wp-lucide-icons"
+			},
+			"type": "required",
+			"reason": "Ikonbiblioteket som velges i UX Builder."
+		}
+	],
+	"download": {
+		"sha256": "894398694456436340acb0a597993850cd5e9a35b94eb282df04346289af6781"
+	},
+	"changelog": {
+		"added": [
+			"WP Icons-velger i Flatsome UX Builder (Icon Box og Button).",
+			"Krever WP Icons (wp-lucide-icons) og Flatsome."
+		]
+	}
+}

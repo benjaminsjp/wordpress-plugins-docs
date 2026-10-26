@@ -1,0 +1,26 @@
+Gå til **WooCommerce → Kafra Auto Skjema** (`manage_woocommerce`).
+
+### Skjemaer
+
+1. Velg et Gravity Forms-skjema og legg det til i listen.
+2. Under **Visning** kan du styre overskrift, beskrivelse, automatisk visning på produktsider, plassering og ekstra Gravity Forms-attributter (standard `ajax="true"`).
+3. Under **Feltmapping** kobler du produktdata til felt-ID-er. Huk av **Skrivebeskyttelse** der verdien ikke skal endres.
+
+Automatisk visning bruker WooCommerce-hooks. Standard er etter produktsammendrag; du kan også velge før sammendrag, etter produktfaner eller nederst på produktsiden.
+
+### Shortcode
+
+| Shortcode | Beskrivelse |
+|-----------|-------------|
+| `[kafra_produkt_skjema form_id="123"]` | Viser det konfigurerte skjemaet. Uten `form_id` brukes det første i listen. |
+
+Skjemaet kan også plasseres som vanlig Gravity Forms-shortcode/blokk. Mappingen gjelder når skjemaet vises i produktkontekst.
+
+### Datakilder
+
+| Kilde | Nøkkel |
+|-------|--------|
+| Produktnavn, SKU, produkt-ID, URL, kort beskrivelse, kategorier, etiketter | Ingen |
+| WooCommerce-attributt | f.eks. `pa_mal` |
+| ACF-felt | feltnavn |
+| Custom meta | metanøkkel |

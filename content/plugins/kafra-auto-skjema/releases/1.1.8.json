@@ -1,0 +1,38 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-10-26",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.4" },
+		"php": { "min": "8.1" }
+	},
+	"dependencies": [
+		{
+			"external": {
+				"name": "WooCommerce",
+				"slug": "woocommerce",
+				"url": "https://woocommerce.com/"
+			},
+			"type": "required",
+			"reason": "Leser produktdata og viser skjemaet på produktsider."
+		},
+		{
+			"external": {
+				"name": "Gravity Forms",
+				"slug": "gravityforms",
+				"url": "https://www.gravityforms.com/"
+			},
+			"type": "required",
+			"reason": "Skjemaene som fylles ut og vises."
+		}
+	],
+	"download": {
+		"sha256": "9a4c97c85a43ffb99470f2b097862699af6b83b405f7dae8cfdd13cd4c8f8e97"
+	},
+	"changelog": {
+		"added": [
+			"Kartlegging av Gravity Forms-felter mot WooCommerce-produktdata.",
+			"Automatisk visning på produktsider og shortcode [kafra_produkt_skjema]."
+		]
+	}
+}

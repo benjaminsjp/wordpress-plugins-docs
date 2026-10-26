@@ -1,0 +1,18 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "Kafra Auto Skjema",
+	"summary": "Fyller Gravity Forms-felter automatisk fra WooCommerce-produktet brukeren ser på.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "kafra-auto-skjema",
+		"visibility": "public"
+	},
+	"tags": ["kafra"],
+	"maintainer": "Bli Synlig",
+	"related": {
+		"plugins": ["kafra-datablad", "kafra-produktkatalog"],
+		"snippets": ["gravity-forms-styling"]
+	}
+}

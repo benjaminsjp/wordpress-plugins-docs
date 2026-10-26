@@ -1,0 +1,29 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-10-26",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.4" },
+		"php": { "min": "8.1" }
+	},
+	"dependencies": [
+		{
+			"external": {
+				"name": "WooCommerce",
+				"slug": "woocommerce",
+				"url": "https://woocommerce.com/"
+			},
+			"type": "required",
+			"reason": "Filtrerer den vanlige WooCommerce-produktkatalogen."
+		}
+	],
+	"download": {
+		"sha256": "d580704956e961aaec29795b2ce60992e7eb8e244fea479f474311664a021a95"
+	},
+	"changelog": {
+		"added": [
+			"AJAX produktfilter-widget med søk, kategorier og attributter.",
+			"Innstillinger for produktkort og attributtregler."
+		]
+	}
+}

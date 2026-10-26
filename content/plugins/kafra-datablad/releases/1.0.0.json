@@ -6,6 +6,9 @@
 		"wordpress": { "min": "6.4" },
 		"php": { "min": "8.1" }
 	},
+	"download": {
+		"asset": "kafra-datablad-v1.0.0.zip"
+	},
 	"changelog": {
 		"added": ["Første stabile versjon."]
 	}

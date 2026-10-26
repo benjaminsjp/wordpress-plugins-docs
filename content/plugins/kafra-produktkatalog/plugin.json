@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "Kafra Produktkatalog",
+	"summary": "AJAX-filtermeny og produktkort for WooCommerce sin vanlige produktkatalog.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "kafra-produktkatalog",
+		"visibility": "public"
+	},
+	"tags": ["kafra"],
+	"maintainer": "Bli Synlig",
+	"related": {
+		"plugins": ["kafra-datablad", "kafra-auto-skjema"]
+	}
+}

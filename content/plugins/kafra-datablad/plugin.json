@@ -1,14 +1,17 @@
 {
 	"$schema": "../../../schemas/plugin.schema.json",
 	"name": "Kafra Datablad",
-	"summary": "Intern plugin for datablad på Kafra. Repositoriet er privat i organisasjonen bli-synlig-plugins.",
+	"summary": "PDF-datablad for WooCommerce-produkter, med arkiv og shortcodes.",
 	"versionScheme": "dotted",
 	"status": "active",
 	"repository": {
 		"owner": "bli-synlig-plugins",
 		"repo": "kafra-datablad",
-		"visibility": "private",
-		"assetPattern": "{slug}-v{version}.zip"
+		"visibility": "public"
 	},
-	"maintainer": "Bli Synlig"
+	"tags": ["kafra"],
+	"maintainer": "Bli Synlig",
+	"related": {
+		"plugins": ["kafra-auto-skjema", "kafra-produktkatalog"]
+	}
 }

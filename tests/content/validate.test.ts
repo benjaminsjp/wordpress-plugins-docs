@@ -57,8 +57,11 @@ describe("seed content", () => {
       "blogg-post-plugin-for-flatsome",
       "flatsome-better-animations",
       "flatsome-ekstra-farger",
+      "kafra-auto-skjema",
       "kafra-datablad",
+      "kafra-produktkatalog",
       "videogalleri",
+      "wp-icons-flatsome",
     ])
     expect(result.snippets.map((snippet) => snippet.slug)).toEqual([
       "button-improvements",

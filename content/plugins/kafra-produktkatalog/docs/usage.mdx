@@ -1,0 +1,16 @@
+### Innstillinger
+
+Gå til **WooCommerce → Produktfilter** (`manage_woocommerce`).
+
+- **Filtre i widgeten:** hvilke kategorier og attributter som vises i filtermenyen. Standard er produktkategori og `pa_bruksomrade`.
+- **Visning på produktkort:** hvilke attributter som vises på kortene.
+- **Attributtregler:** nest underattributter når en foreldreverdi matcher (for eksempel vis «Spesialmål» når **Mål** er Spesialmål). Reglene kan gjelde kort, filter, eller begge.
+- **Oppførsel:** søkefelt, AJAX uten full sideinnlasting, skjul tomme filtre, og placeholder for søk.
+
+### Widget
+
+Gå til **Utseende → Widgeter** og legg **Kafra produktfilter** i f.eks. **Shop Sidebar** (eller annen sidebar som brukes på butikk- og kategorisider). Widgeten vises bare på butikk og produkt-taksonomisider.
+
+### Arkivmal
+
+Pluginen kan bruke `templates/archive-product.php` for å tvinge vanlig WooCommerce/Flatsome-kataloglayout. Det hopper over Flatsome **Shop Page Content**, som ellers kan skjule produkter til man søker eller filtrerer.

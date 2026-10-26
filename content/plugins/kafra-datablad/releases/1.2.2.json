@@ -1,0 +1,29 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-10-26",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.4" },
+		"php": { "min": "8.1" }
+	},
+	"dependencies": [
+		{
+			"external": {
+				"name": "WooCommerce",
+				"slug": "woocommerce",
+				"url": "https://woocommerce.com/"
+			},
+			"type": "required",
+			"reason": "Kobler datablad til produkter og viser dem på produktsider."
+		}
+	],
+	"download": {
+		"sha256": "2e5181f4076be311a91ac3589759205531939c073b76f03683d3c2039bc07144"
+	},
+	"changelog": {
+		"added": [
+			"README med installasjon, shortcodes og krav.",
+			"Versjonsnummer synkronisert med release."
+		]
+	}
+}
