@@ -5,6 +5,7 @@ import {
   AlertTitle,
 } from "@/components/ui/alert"
 import type { PlacementLocation } from "@/lib/content/schemas"
+import { headingId } from "@/lib/plugin-view"
 import { strings } from "@/lib/strings"
 
 export function PlacementCallout({
@@ -17,7 +18,7 @@ export function PlacementCallout({
   const placement = strings.snippets.placement[location]
 
   return (
-    <Alert>
+    <Alert id={headingId(strings.snippets.placementTitle)} className="scroll-mt-24">
       <MapPinIcon />
       <AlertTitle>{strings.snippets.placementTitle}</AlertTitle>
       <AlertDescription>

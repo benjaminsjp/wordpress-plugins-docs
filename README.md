@@ -49,24 +49,30 @@ npm run verify-github
 
 `.env*`-filer er gitignore-t. Ikke commit tokenet.
 
-## Slik legger du til en plugin, versjon eller snippet
+## Slik legger du til innhold
 
-Alt innhold ligger under `content/`. Du trenger ikke å endre applikasjonskode.
+Kun filer under `content/`. Ikke endre `app/`, `lib/` eller komponenter. Tekniske ID-er (slug, tag, filnavn) er engelsk kebab-case. Synlig tekst (`name`, `summary`, MDX) er norsk (`nb`).
 
-### Plugin
+Kopier en eksisterende plugin eller snippet som mal. Kjør `npm run validate` før PR. Sidene bruker `dynamicParams = false` — start `next dev` på nytt etter en ny slug, ellers blir det 404.
 
-Opprett `content/plugins/<slug>/`:
+### Ny plugin
+
+1. Publiser GitHub Release i plugin-repositoriet (sjekkliste under).
+2. Opprett `content/plugins/<slug>/` (slug = mappenavn = kebab-case):
 
 ```
 content/plugins/mitt-plugin/
   plugin.json
   docs/overview.mdx          (påkrevd)
-  docs/installation.mdx      (valgfri)
+  docs/installation.mdx      (valgfri — uten den vises standardsteg)
   docs/usage.mdx             (valgfri)
   releases/1.0.0.json
 ```
 
-`plugin.json`-eksempel:
+3. Standard GitHub-tag er `v{version}`, standard ZIP `{slug}-{version}.zip`. Overstyr `assetPattern` i `plugin.json` bare hvis fila heter noe annet (f.eks. `{slug}-v{version}.zip`).
+4. SHA-256 kopieres fra GitHubs `digest` på release-assetet (`sha256:…`). **Ikke finn den opp.** Mangler den, utelat feltet (`sha256-missing` er warning, ikke feil).
+5. Plugin-`tags` er fritekst. `related.plugins` / `related.snippets` må peke på slugs som finnes.
+6. Valgfri `changelogUrl` vises som «Se hele endringsloggen». En versjon kan overstyre med `changelog.url`.
 
 ```json
 {
@@ -78,65 +84,59 @@ content/plugins/mitt-plugin/
   "repository": {
     "owner": "bli-synlig-plugins",
     "repo": "mitt-plugin",
-    "visibility": "private"
+    "visibility": "public"
   },
-  "changelogUrl": "https://github.com/bli-synlig-plugins/mitt-plugin/blob/main/CHANGELOG.md"
+  "maintainer": "Bli Synlig"
 }
 ```
 
-Slug = mappenavn (kebab-case). Standard GitHub-tag er `v{version}`, standard ZIP-navn er `{slug}-{version}.zip`. Valgfri `changelogUrl` peker på hele CHANGELOG.md i plugin-repositoriet og vises som «Se hele endringsloggen» under hver versjon. En enkelt versjon kan overstyre med `changelog.url` (for eksempel med `#anker`).
+### Ny versjon av en eksisterende plugin
 
-Kjør `npm run validate` før du åpner PR.
-
-### Ny versjon
-
-1. Publiser GitHub Release i plugin-repositoriet (se sjekklisten under).
-2. Scaffold release-JSON fra GitHub (nektes å overskrive en eksisterende fil):
+1. Publiser GitHub Release (sjekkliste under).
+2. Scaffold — overskriver aldri en eksisterende fil:
 
 ```bash
 npm run new-release -- <slug> <version>
 ```
 
-Skriptet henter dato, digest og release-notes, og kopierer krav og avhengigheter fra forrige versjon. Fyll inn/rediger changelog før du åpner PR. For private repos: sett `GITHUB_TOKEN` midlertidig i terminalen (ikke i en fil).
+Skriptet henter dato, SHA-256 og release-notes, og kopierer krav og avhengigheter fra forrige versjon. Fyll inn changelog før PR. Private repos: `$env:GITHUB_TOKEN = "…"` midlertidig i terminalen (ikke i en fil).
 
-Du kan også legge til **en ny fil** `content/plugins/<slug>/releases/<version>.json` for hånd. Ikke rediger `tag`, `asset` eller `sha256` på en eksisterende versjonsfil, og ikke slett den — marker den `yanked` i stedet.
+Alternativt: ny fil `releases/<version>.json` for hånd. **Ikke** rediger `tag`, `asset` eller `sha256` på en eksisterende versjon, og **ikke** slett den — sett `yanked: { "reason": "…" }` i stedet.
 
-```json
-{
-  "$schema": "../../../../schemas/release.schema.json",
-  "releaseDate": "2026-10-23",
-  "channel": "stable",
-  "requirements": {
-    "wordpress": { "min": "6.4" },
-    "php": { "min": "8.1" }
-  },
-  "changelog": {
-    "url": "https://github.com/bli-synlig-plugins/mitt-plugin/blob/main/CHANGELOG.md#100",
-    "added": ["Ny funksjon."]
-  }
-}
-```
-
-### CSS-snippet
+### Ny CSS-snippet
 
 ```
 content/snippets/<slug>/
   snippet.json
-  snippet.css
+  snippet.css                (påkrevd, ikke tom)
   notes.mdx                  (valgfri)
 ```
 
-Kategori og tagger må finnes i `content/taxonomy/`.
+`category` (og `subcategory` hvis satt) og alle `tags` **må** finnes i `content/taxonomy/`. Ikke opprett tagger «på sparket». `placement.location` er én av: `flatsome-custom-css-all`, `flatsome-custom-css-tablet`, `flatsome-custom-css-mobile`, `child-theme-stylesheet`, `wordpress-additional-css`, `other`.
+
+Valgfri `tokens` gir fargefelt på snippet-siden. Hvert token har `id` (kebab-case), `label` (norsk) og `replace` (eksakt streng i `snippet.css`, f.eks. `var(--fs-color-primary)`). Feltene bytter inn CSS-variabel eller hex før kopiering.
+
+```json
+{
+  "$schema": "../../../schemas/snippet.schema.json",
+  "name": "Forbedrer knapper",
+  "summary": "Jevnere layout på Flatsome-knapper.",
+  "category": "buttons",
+  "tags": ["spacing", "border"],
+  "placement": { "location": "flatsome-custom-css-all" },
+  "updated": "2026-10-23"
+}
+```
 
 ## Sjekkliste for plugin-repositorier
 
 Når du gir ut en versjon i selve plugin-repositoriet:
 
-- [ ] Tag følger mønsteret i `plugin.json` (standard `v1.2.3`, uten andre avvik).
-- [ ] ZIP-en heter `{slug}-{version}.zip` (eller det overstyrte `asset`-navnet) og har plugin-mappen øverst.
-- [ ] ZIP-en er lastet opp som **Release asset**, ikke bare som GitHubs automatiske kildearkiv.
+- [ ] Tag følger mønsteret i `plugin.json` (standard `v1.2.3`).
+- [ ] ZIP-en heter `{slug}-{version}.zip` (eller `assetPattern` / `download.asset`) og har plugin-mappen øverst.
+- [ ] ZIP-en er **Release asset**, ikke bare GitHubs automatiske kildearkiv.
 - [ ] Ikke slett publiserte releases. Marker dem yanked her i docs-repositoriet.
-- [ ] Slå på [immutable releases](https://docs.github.com/en/repositories/releasing-projects-on-github/immutable-releases) på plugin-repositoriet hvis planen tillater det.
+- [ ] Slå på [immutable releases](https://docs.github.com/en/repositories/releasing-projects-on-github/immutable-releases) hvis planen tillater det.
 
 ## CI og deploy
 

@@ -13,7 +13,10 @@ export function SiteHeader({ nav }: { nav: NavData }) {
       <div className="min-w-0 flex-1 overflow-hidden">
         <HeaderTrail nav={nav} />
       </div>
-      <SearchTrigger compact className="min-w-56 shrink-0 sm:min-w-64" />
+      <SearchTrigger
+        compact
+        className="shrink-0 max-sm:size-8 max-sm:p-0 sm:min-w-56 md:min-w-64"
+      />
       <ModeToggle />
       <SearchCommand />
     </header>

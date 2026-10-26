@@ -1,0 +1,24 @@
+{
+	"$schema": "../../../schemas/snippet.schema.json",
+	"name": "Nedtrekksmenyer",
+	"summary": "Større dropdown-pil, avrundet undermeny med skygge og hover på lenker.",
+	"category": "header",
+	"subcategory": "dropdown-menus",
+	"tags": ["shadow", "border", "hover", "spacing", "links"],
+	"tokens": [
+		{
+			"id": "border-color",
+			"label": "Kantlinjefarge",
+			"replace": "#e4e9f2"
+		},
+		{
+			"id": "hover-background",
+			"label": "Hover-bakgrunn",
+			"replace": "#f7f7f7"
+		}
+	],
+	"placement": {
+		"location": "flatsome-custom-css-all"
+	},
+	"updated": "2026-10-26"
+}

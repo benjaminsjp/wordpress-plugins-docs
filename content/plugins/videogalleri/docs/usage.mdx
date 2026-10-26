@@ -1,0 +1,23 @@
+### Admin
+
+Gå til **Videogalleri** i wp-admin. Der oppretter og redigerer du videoer (tittel, miniatyrbilde og rekkefølge).
+
+- **Video:** lim inn YouTube- eller Vimeo-URL. Varighet og thumbnail hentes automatisk ved lagring.
+- **Knytt til prosjekt:** koble video til side, innlegg eller annet innhold.
+- **Rekkefølge:** egen side for drag-and-drop-sortering.
+- **Innstillinger:** farger for avspillingsknapp, videoundersider og «Se prosjekt»-knappen.
+
+Videoundersider bruker slug `/video/{navn}/`.
+
+### Shortcodes
+
+| Shortcode | Beskrivelse |
+|-----------|-------------|
+| `[videogalleri]` | Horisontal slider med publiserte videoer |
+| `[videogalleri prosjekt_id="123"]` | Samme, filtrert på koblet innhold |
+| `[videogalleri_video]` | Embed for video koblet til gjeldende side eller innlegg |
+| `[videogalleri_video video_id="456" tittel="ja" info="ja" lenke="ja"]` | Embed med valgfrie attributter |
+
+### UX Builder
+
+Elementet **Videogalleri** ligger under **Content** (krever Flatsome UX Builder). Du kan filtrere på prosjekt-ID.

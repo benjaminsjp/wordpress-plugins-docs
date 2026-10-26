@@ -1,0 +1,20 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-10-26",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.4" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"download": {
+		"sha256": "68348b1ed7e9477394414f2006358011bd7cd89cc03782497e4c6b9a86393746"
+	},
+	"changelog": {
+		"added": [
+			"Admin-side under Utseende → Ekstra farger for egne farger og knappestiler.",
+			"Fargene vises i Customizer og som prøver i UX Builder.",
+			"Knappestiler i Color-listen på knappeelementer, inkludert outline, link og underline."
+		]
+	}
+}

@@ -3,7 +3,47 @@ import Link from "next/link"
 import { Children, isValidElement, type ReactNode } from "react"
 import { CodeBlock } from "@/components/code/code-block"
 import { Callout } from "@/components/mdx/callout"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { languageFromClassName } from "@/lib/highlight"
+import { headingId } from "@/lib/plugin-view"
+
+function nodeText(node: ReactNode): string {
+  if (node == null || typeof node === "boolean") {
+    return ""
+  }
+  if (typeof node === "string" || typeof node === "number") {
+    return String(node)
+  }
+  if (Array.isArray(node)) {
+    return node.map(nodeText).join("")
+  }
+  if (isValidElement<{ children?: ReactNode }>(node)) {
+    return nodeText(node.props.children)
+  }
+  return ""
+}
+
+function MdxHeading({
+  as: Tag,
+  children,
+}: {
+  as: "h2" | "h3"
+  children?: ReactNode
+}) {
+  const id = headingId(nodeText(children))
+  return (
+    <Tag id={id || undefined} className="scroll-mt-24">
+      {children}
+    </Tag>
+  )
+}
 
 function MdxLink({
   href,
@@ -39,6 +79,14 @@ async function MdxPre({ children }: { children?: ReactNode }) {
 const components: MDXComponents = {
   a: MdxLink,
   pre: MdxPre,
+  h2: ({ children }) => <MdxHeading as="h2">{children}</MdxHeading>,
+  h3: ({ children }) => <MdxHeading as="h3">{children}</MdxHeading>,
+  table: Table,
+  thead: TableHeader,
+  tbody: TableBody,
+  tr: TableRow,
+  th: TableHead,
+  td: TableCell,
   Callout,
 }
 

@@ -74,6 +74,7 @@ export function crossValidate(
     issues.push(...collectSnippetTaxonomyIssues(snippets, taxonomy))
   }
 
+  issues.push(...collectSnippetTokenIssues(snippets))
   issues.push(...collectPluginReferenceIssues(plugins, snippets))
   issues.push(...collectReleaseIssues(plugins))
   issues.push(...collectGraphIssues(plugins))
@@ -271,6 +272,56 @@ function collectSnippetTaxonomyIssues(
         file: taxonomy.files.tags,
         message: `Tag "${tag.slug}" is not used by any snippet.`,
       })
+    }
+  }
+
+  return issues
+}
+
+function collectSnippetTokenIssues(snippets: SnippetRecord[]): Issue[] {
+  const issues: Issue[] = []
+
+  for (const snippet of snippets) {
+    const tokens = snippet.tokens ?? []
+    const seenIds = new Set<string>()
+
+    for (const [index, token] of tokens.entries()) {
+      if (seenIds.has(token.id)) {
+        issues.push({
+          code: ISSUE_CODES.SNIPPET_TOKEN_DUPLICATE,
+          severity: "error",
+          file: snippet.file,
+          path: `tokens.${index}.id`,
+          message: `Duplicate token id "${token.id}".`,
+        })
+      }
+      seenIds.add(token.id)
+
+      if (!snippet.css.includes(token.replace)) {
+        issues.push({
+          code: ISSUE_CODES.SNIPPET_TOKEN_MISSING,
+          severity: "error",
+          file: snippet.file,
+          path: `tokens.${index}.replace`,
+          message: `Token "${token.id}" replace string was not found in snippet.css.`,
+        })
+      }
+
+      const overlap = tokens.find(
+        (other, otherIndex) =>
+          otherIndex > index &&
+          (other.replace.includes(token.replace) ||
+            token.replace.includes(other.replace))
+      )
+      if (overlap) {
+        issues.push({
+          code: ISSUE_CODES.SNIPPET_TOKEN_OVERLAP,
+          severity: "error",
+          file: snippet.file,
+          path: `tokens.${index}.replace`,
+          message: `Token "${token.id}" replace string overlaps token "${overlap.id}".`,
+        })
+      }
     }
   }
 

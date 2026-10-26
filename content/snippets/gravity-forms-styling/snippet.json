@@ -1,0 +1,23 @@
+{
+	"$schema": "../../../schemas/snippet.schema.json",
+	"name": "Gravity Forms-felter",
+	"summary": "Jevnere felt, knapper og etiketter i Gravity Forms, med Flatsome-farger.",
+	"category": "forms",
+	"tags": ["spacing", "border", "hover", "colors"],
+	"tokens": [
+		{
+			"id": "primary",
+			"label": "Primærfarge",
+			"replace": "var(--fs-color-primary)"
+		},
+		{
+			"id": "secondary",
+			"label": "Sekundærfarge",
+			"replace": "var(--fs-color-secondary)"
+		}
+	],
+	"placement": {
+		"location": "flatsome-custom-css-all"
+	},
+	"updated": "2026-10-26"
+}

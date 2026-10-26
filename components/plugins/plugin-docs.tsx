@@ -1,5 +1,6 @@
-import { DefaultInstallation } from "@/components/plugins/default-installation"
+import { SectionHeading } from "@/components/layout/section-heading"
 import { MdxProse } from "@/components/mdx/prose"
+import { DefaultInstallation } from "@/components/plugins/default-installation"
 import { loadPluginDoc } from "@/lib/content/load-mdx"
 import { strings } from "@/lib/strings"
 
@@ -14,16 +15,14 @@ export async function PluginDocs({ slug }: { slug: string }) {
     <div className="flex flex-col gap-8">
       {Overview ? (
         <section className="flex flex-col gap-4">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">{strings.plugins.overview}</h2>
+          <SectionHeading>{strings.plugins.overview}</SectionHeading>
           <MdxProse>
             <Overview />
           </MdxProse>
         </section>
       ) : null}
       <section className="flex flex-col gap-4">
-        <h2 className="font-heading text-2xl font-semibold tracking-tight">
-          {strings.plugins.installation}
-        </h2>
+        <SectionHeading>{strings.plugins.installation}</SectionHeading>
         {Installation ? (
           <MdxProse>
             <Installation />
@@ -34,7 +33,7 @@ export async function PluginDocs({ slug }: { slug: string }) {
       </section>
       {Usage ? (
         <section className="flex flex-col gap-4">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">{strings.plugins.usage}</h2>
+          <SectionHeading>{strings.plugins.usage}</SectionHeading>
           <MdxProse>
             <Usage />
           </MdxProse>

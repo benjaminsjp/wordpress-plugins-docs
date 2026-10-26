@@ -100,10 +100,28 @@ describe("getLatestZipRedirects", () => {
         "https://github.com/bli-synlig-plugins/Blogg-post-plugin-for-flatsome/releases/download/v1.0.5/blogg-post-plugin-for-flatsome-v1.0.5.zip",
       permanent: false,
     })
+    expect(bySource.get("/plugins/flatsome-better-animations/latest.zip")).toEqual({
+      source: "/plugins/flatsome-better-animations/latest.zip",
+      destination:
+        "https://github.com/bli-synlig-plugins/flatsome-better-animations/releases/download/v1.0.2/flatsome-better-animations-1.0.2.zip",
+      permanent: false,
+    })
+    expect(bySource.get("/plugins/flatsome-ekstra-farger/latest.zip")).toEqual({
+      source: "/plugins/flatsome-ekstra-farger/latest.zip",
+      destination:
+        "https://github.com/bli-synlig-plugins/flatsome-ekstra-farger/releases/download/v1.0.0/flatsome-ekstra-farger-1.0.0.zip",
+      permanent: false,
+    })
     expect(bySource.get("/plugins/kafra-datablad/latest.zip")).toEqual({
       source: "/plugins/kafra-datablad/latest.zip",
       destination:
         "https://github.com/bli-synlig-plugins/kafra-datablad/releases/download/v1.0.0/kafra-datablad-v1.0.0.zip",
+      permanent: false,
+    })
+    expect(bySource.get("/plugins/videogalleri/latest.zip")).toEqual({
+      source: "/plugins/videogalleri/latest.zip",
+      destination:
+        "https://github.com/bli-synlig-plugins/videogalleri/releases/download/v1.1.1/videogalleri-1.1.1.zip",
       permanent: false,
     })
   })

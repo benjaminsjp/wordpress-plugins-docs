@@ -1,0 +1,144 @@
+/* === Gravity Forms-felter === */
+.gform_wrapper {
+	margin: 0px;
+	.gform_heading {
+		margin: 0px;
+	}
+
+	.gform_validation_errors > h2 {
+		font-size: 1rem !important;
+		line-height: 1.5 !important;
+	}
+
+	form {
+		margin: 0;
+	}
+	.gform-footer {
+		padding-bottom: 0 !important;
+	}
+
+	/* Styling for input felter */
+	input:not(
+		[type="radio"],
+		[type="submit"],
+		[type="checkbox"]
+	),
+	textarea,
+	select.gfield_select,
+	.gfield--type-fileupload > label {
+		/* Størrelse og spacing */
+		min-height: 50px !important;
+		padding: 12px 16px !important;
+
+		/* Typografi */
+		font-size: 1rem;
+
+		/* Farger og bakgrunn */
+		background-color: #ffffff;
+		border: 1px solid #c9c9d1;
+
+		/* Utseende */
+		border-radius: 6px !important;
+		box-shadow: none !important;
+
+		&:focus {
+			outline: 1px solid var(--fs-color-primary);
+			border-color: var(--fs-color-primary);
+			outline-offset: 0px;
+		}
+	}
+	.gfield .ginput_complex {
+		input {
+			margin-bottom: .25rem;
+		}
+		label {
+			margin: 0 0 1rem;
+		}
+	}
+
+	/* === Styling for radio og checkbox input felter === */
+	.ginput_container_radio, .ginput_container_checkbox {
+		margin: 0;
+
+		.gchoice:has(input[type="radio"]),
+		.gchoice:has(input[type="checkbox"]) {
+			/* Layout */
+			display: flex;
+			align-items: center;
+			gap: .5rem;
+
+			input, label {
+				/* Spacing */
+				margin: 0;
+
+				/* Typografi */
+				font-weight: 400 !important;
+
+				/* Farger */
+				accent-color: var(--fs-color-secondary);
+			}
+		}
+	}
+
+	&:has(.gfield--type-submit[data-field-position="inline"]) .gform-footer {
+		display: none;
+	}
+
+	/* === Styling for innsendingsknappen === */
+	input.gform_button.button[type="submit"],
+	button[type="submit"]:is(.gform_button, .gform-button) {
+		/* Farger */
+		background-color: var(--fs-color-primary) !important;
+		color: #fff !important;
+		border-color: var(--fs-color-primary) !important;
+
+		/* Størrelse og spacing */
+		min-height: 50px !important;
+		padding: 0 2rem !important;
+		margin: 0;
+
+		/* Typografi */
+		font-size: 1rem !important;
+		font-weight: 600 !important;
+		text-transform: none;
+
+		/* === Hover stiler === */
+		&:hover {
+			/* Transformasjon */
+			scale: 1;
+
+			/* Farger */
+			background-color: var(--fs-color-primary) !important;
+			color: #fff !important;
+			border-color: var(--fs-color-primary) !important;
+		}
+	}
+
+	/* === Labels === */
+	.gform-field-label:where(:not([class*=gform-field-label--type-])),
+	.gform-field-label--type-sub {
+		/* Typografi */
+		font-size: 1rem !important;
+		font-weight: 600 !important;
+		color: #000;
+		text-transform: none;
+
+		/* Spacing */
+		margin-top: 0 !important;
+		margin-bottom: 0.25rem !important;
+
+		/* Kantlinjer */
+		border: none;
+	}
+
+	/* === Sublabel === */
+	.gform-field-label--type-sub {
+		/* Typografi */
+		font-size: 0.95rem !important;
+		font-weight: 400 !important;
+		color: #666 !important;
+
+		/* Spacing */
+		padding-top: 0 !important;
+	}
+}

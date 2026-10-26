@@ -1,0 +1,14 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "Videogalleri",
+	"summary": "Videogalleri med horisontal slider, YouTube/Vimeo og egne undersider per video.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "videogalleri",
+		"visibility": "public"
+	},
+	"tags": ["flatsome"],
+	"maintainer": "Bli Synlig"
+}

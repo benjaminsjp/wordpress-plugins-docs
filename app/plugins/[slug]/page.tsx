@@ -1,8 +1,9 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { ExternalLinkIcon } from "lucide-react"
+import { DocsWithToc } from "@/components/layout/docs-with-toc"
 import { PageHero } from "@/components/layout/page-hero"
-import { PageShell } from "@/components/layout/page-shell"
+import { SectionHeading } from "@/components/layout/section-heading"
 import { PluginAlerts } from "@/components/plugins/plugin-alerts"
 import { PluginBadges } from "@/components/plugins/plugin-badges"
 import { PluginDocs } from "@/components/plugins/plugin-docs"
@@ -23,6 +24,9 @@ import {
 import { getPlugin, getPluginGraph, getPlugins, getSnippets } from "@/lib/content"
 import { repositoryUrl } from "@/lib/content/github"
 import { latestZipPath } from "@/lib/content/latest-zip"
+import { extractMdxHeadings } from "@/lib/content/mdx-headings"
+import { readPluginDocSource } from "@/lib/content/load-mdx"
+import { buildPluginToc } from "@/lib/toc"
 import { selectLatestRelease } from "@/lib/content/versions"
 import { formatDate } from "@/lib/format"
 import { strings } from "@/lib/strings"
@@ -53,12 +57,15 @@ export default async function PluginPage({
   params,
 }: PluginPageProps) {
   const { slug } = await params
-  const [plugin, plugins, snippets, graph] = await Promise.all([
-    getPlugin(slug),
-    getPlugins(),
-    getSnippets(),
-    getPluginGraph(),
-  ])
+  const [plugin, plugins, snippets, graph, overviewSource, usageSource] =
+    await Promise.all([
+      getPlugin(slug),
+      getPlugins(),
+      getSnippets(),
+      getPluginGraph(),
+      readPluginDocSource(slug, "overview"),
+      readPluginDocSource(slug, "usage"),
+    ])
 
   if (!plugin) {
     notFound()
@@ -69,6 +76,15 @@ export default async function PluginPage({
     ? plugins.find((item) => item.slug === plugin.replacedBy)
     : undefined
   const dependents = graph.dependents.get(plugin.slug) ?? []
+  const toc = buildPluginToc({
+    hasLatest: Boolean(latest),
+    hasOverview: overviewSource !== null,
+    hasUsage: usageSource !== null,
+    hasRelated:
+      (plugin.related?.plugins?.length ?? 0) > 0 ||
+      (plugin.related?.snippets?.length ?? 0) > 0,
+    usageHeadings: usageSource ? extractMdxHeadings(usageSource) : [],
+  })
 
   return (
     <>
@@ -110,67 +126,59 @@ export default async function PluginPage({
           ) : null}
         </div>
       </PageHero>
-      <PageShell>
-        <PluginAlerts
-          plugin={plugin}
-          latest={latest}
-          replacedByName={replacedBy?.name}
-        />
-        {latest ? (
-          <>
-            <section className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1">
-                <h2 className="font-heading text-2xl font-semibold tracking-tight">
-                  {strings.plugins.requirements}
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  {strings.plugins.requirementsIntro}
-                </p>
-              </div>
-              <RequirementsList release={latest} />
-            </section>
-            <section className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1">
-                <h2 className="font-heading text-2xl font-semibold tracking-tight">
-                  {strings.plugins.dependencies}
-                </h2>
-                <p className="text-sm text-muted-foreground">
-                  {strings.plugins.dependenciesIntro}
-                </p>
-              </div>
-              <DependencyTable release={latest} plugins={plugins} />
-              <Alert>
-                <AlertDescription>{strings.plugins.manualUpdate}</AlertDescription>
-              </Alert>
-            </section>
-          </>
-        ) : null}
-        <section className="flex flex-col gap-4">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">
-            {strings.plugins.usedBy}
-          </h2>
-          <DependentsList slugs={dependents} plugins={plugins} />
-        </section>
-        <PluginDocs slug={plugin.slug} />
-        <section className="flex flex-col gap-4">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">
-            {strings.plugins.versions}
-          </h2>
-          {plugin.releases.length === 0 ? (
-            <Empty className="border">
-              <EmptyHeader>
-                <EmptyTitle>{strings.plugins.noReleasesTitle}</EmptyTitle>
-                <EmptyDescription>
-                  {strings.plugins.noReleasesDescription}
-                </EmptyDescription>
-              </EmptyHeader>
-            </Empty>
-          ) : (
-            <ReleaseTable plugin={plugin} />
-          )}
-        </section>
-        <RelatedItems plugin={plugin} plugins={plugins} snippets={snippets} />
-      </PageShell>
+      <DocsWithToc items={toc}>
+          <PluginAlerts
+            plugin={plugin}
+            latest={latest}
+            replacedByName={replacedBy?.name}
+          />
+          {latest ? (
+            <>
+              <section className="flex flex-col gap-4">
+                <div className="flex flex-col gap-1">
+                  <SectionHeading>{strings.plugins.requirements}</SectionHeading>
+                  <p className="text-sm text-muted-foreground">
+                    {strings.plugins.requirementsIntro}
+                  </p>
+                </div>
+                <RequirementsList release={latest} />
+              </section>
+              <section className="flex flex-col gap-4">
+                <div className="flex flex-col gap-1">
+                  <SectionHeading>{strings.plugins.dependencies}</SectionHeading>
+                  <p className="text-sm text-muted-foreground">
+                    {strings.plugins.dependenciesIntro}
+                  </p>
+                </div>
+                <DependencyTable release={latest} plugins={plugins} />
+                <Alert>
+                  <AlertDescription>{strings.plugins.manualUpdate}</AlertDescription>
+                </Alert>
+              </section>
+            </>
+          ) : null}
+          <section className="flex flex-col gap-4">
+            <SectionHeading>{strings.plugins.usedBy}</SectionHeading>
+            <DependentsList slugs={dependents} plugins={plugins} />
+          </section>
+          <PluginDocs slug={plugin.slug} />
+          <section className="flex flex-col gap-4">
+            <SectionHeading>{strings.plugins.versions}</SectionHeading>
+            {plugin.releases.length === 0 ? (
+              <Empty className="border">
+                <EmptyHeader>
+                  <EmptyTitle>{strings.plugins.noReleasesTitle}</EmptyTitle>
+                  <EmptyDescription>
+                    {strings.plugins.noReleasesDescription}
+                  </EmptyDescription>
+                </EmptyHeader>
+              </Empty>
+            ) : (
+              <ReleaseTable plugin={plugin} />
+            )}
+          </section>
+          <RelatedItems plugin={plugin} plugins={plugins} snippets={snippets} />
+      </DocsWithToc>
     </>
   )
 }

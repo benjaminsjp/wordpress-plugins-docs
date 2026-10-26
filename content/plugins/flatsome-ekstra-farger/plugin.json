@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "Flatsome ekstra farger",
+	"summary": "Egne farger og knappestiler for Flatsome Customizer og UX Builder.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "flatsome-ekstra-farger",
+		"visibility": "public"
+	},
+	"tags": ["flatsome"],
+	"maintainer": "Bli Synlig",
+	"related": {
+		"snippets": ["button-improvements"]
+	}
+}

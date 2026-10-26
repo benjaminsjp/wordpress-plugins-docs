@@ -6,6 +6,19 @@ export function versionAnchor(version: string): string {
   return `v${version.replace(/[^0-9A-Za-z]+/g, "-").replace(/-+$/g, "")}`
 }
 
+export function headingId(text: string): string {
+  return text
+    .trim()
+    .replace(/[æÆ]/g, "ae")
+    .replace(/[øØ]/g, "o")
+    .replace(/[åÅ]/g, "a")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+}
+
 export function sortReleasesNewestFirst(
   releases: ReleaseRecord[],
   scheme: VersionScheme

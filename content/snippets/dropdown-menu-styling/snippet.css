@@ -1,0 +1,35 @@
+/* === Styler dropdown parent-lenker === */
+.menu-item.has-dropdown {
+	/* Justerer størrelse og border på dropdown 'pilen' */
+	&::before {
+		border-width: 9px !important;
+		top: 53px;
+	}
+	&::after {
+		top: 55px;
+		margin-left: -10px !important;
+	}
+}
+
+/* === Styler dropdown menyen === */
+.menu-item.has-dropdown ul.sub-menu {
+	border-color: #e4e9f2;
+	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+	border-width: 1px;
+	border-radius: 5px;
+	padding: 8px;
+	li.menu-item a {
+		margin: 0px;
+		margin-bottom: .25rem;
+		padding: 10px;
+		border-radius: 5px;
+		border: none;
+		transition: background-color .15s ease;
+		&:hover {
+			background-color: #f7f7f7;
+		}
+	}
+	li.menu-item:last-child > a {
+		margin-bottom: 0px;
+	}
+}

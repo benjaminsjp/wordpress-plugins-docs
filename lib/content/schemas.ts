@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { SLUG_PATTERN } from "./paths"
 
 const nonEmptyString = z.string().trim().min(1)
 
@@ -109,6 +110,12 @@ export const placementSchema = z.object({
   notes: nonEmptyString.optional(),
 })
 
+export const snippetTokenSchema = z.object({
+  id: z.string().regex(SLUG_PATTERN),
+  label: nonEmptyString,
+  replace: nonEmptyString,
+})
+
 export const snippetJsonSchema = z.object({
   $schema: z.string().optional(),
   name: nonEmptyString,
@@ -116,6 +123,7 @@ export const snippetJsonSchema = z.object({
   category: nonEmptyString,
   subcategory: nonEmptyString.optional(),
   tags: z.array(nonEmptyString),
+  tokens: z.array(snippetTokenSchema).optional(),
   placement: placementSchema,
   compatibility: z
     .object({
@@ -169,6 +177,7 @@ export type PlacementLocation = z.infer<typeof placementLocationSchema>
 export type PluginJson = z.infer<typeof pluginJsonSchema>
 export type ReleaseJson = z.infer<typeof releaseJsonSchema>
 export type SnippetJson = z.infer<typeof snippetJsonSchema>
+export type SnippetToken = z.infer<typeof snippetTokenSchema>
 export type InternalDependency = z.infer<typeof internalDependencySchema>
 export type ExternalDependency = z.infer<typeof externalDependencySchema>
 export type Dependency = z.infer<typeof dependencySchema>

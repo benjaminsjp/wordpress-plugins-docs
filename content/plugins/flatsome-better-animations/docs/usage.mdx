@@ -1,0 +1,24 @@
+Gå til **Innstillinger → Better Animations**.
+
+### Flatsome data-animate
+
+Overstyrer Flatsomes trege standard-tider og waypoint-offset for `[data-animate]`. Du kan justere transform-varighet, opacity-varighet, forflytningsdistanse og waypoint-offset (%).
+
+### Reveal-klasser
+
+Aktiverer CSS og JS for egne scroll-animasjoner. Stagger mellom barn i `.reveal-stagger` og synlighetsterskel (%) kan justeres.
+
+| Klasse | Effekt |
+|--------|--------|
+| `.reveal` | Fade + opp (standard) |
+| `.reveal.reveal--down` | Fade + ned |
+| `.reveal.reveal--left` | Fra venstre |
+| `.reveal.reveal--right` | Fra høyre |
+| `.reveal.reveal--fade` | Kun fade |
+| `.reveal.reveal--zoom` | Zoom inn |
+| `.reveal.reveal--zoom-out` | Zoom ut |
+| `.reveal.reveal--tilt` | 3D-tilt |
+
+Pakk elementer i `.reveal-stagger` for stagger. Bruk `data-reveal-delay="300"` (ms) for forsinkelse.
+
+Respekterer `prefers-reduced-motion`. Uten JavaScript vises innhold umiddelbart.

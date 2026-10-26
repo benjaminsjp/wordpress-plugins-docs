@@ -55,10 +55,15 @@ describe("seed content", () => {
     )
     expect(result.plugins.map((plugin) => plugin.slug)).toEqual([
       "blogg-post-plugin-for-flatsome",
+      "flatsome-better-animations",
+      "flatsome-ekstra-farger",
       "kafra-datablad",
+      "videogalleri",
     ])
     expect(result.snippets.map((snippet) => snippet.slug)).toEqual([
       "button-improvements",
+      "dropdown-menu-styling",
+      "gravity-forms-styling",
     ])
   })
 })

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 import {
   changelogFileUrl,
+  headingId,
   minVersionSatisfied,
   versionAnchor,
 } from "@/lib/plugin-view"
@@ -12,6 +13,21 @@ describe("versionAnchor", () => {
 
   it("keeps prerelease labels", () => {
     expect(versionAnchor("2.0.0-beta.1")).toBe("v2-0-0-beta-1")
+  })
+})
+
+describe("headingId", () => {
+  it("slugifies Norwegian section titles", () => {
+    expect(headingId("Krav")).toBe("krav")
+    expect(headingId("Om pluginen")).toBe("om-pluginen")
+    expect(headingId("Filter i wp-admin")).toBe("filter-i-wp-admin")
+    expect(headingId("Hvor skal CSS-en limes inn?")).toBe(
+      "hvor-skal-css-en-limes-inn"
+    )
+  })
+
+  it("maps æ ø å to ascii", () => {
+    expect(headingId("Blåbærsøl")).toBe("blabaersol")
   })
 })
 

@@ -165,6 +165,11 @@ export const strings = {
     related: "Relaterte snippets",
     updated: "Oppdatert",
     code: "Kode",
+    tokenFields: "Tilpass farger",
+    tokenHint:
+      "Lim inn en CSS-variabel eller hex-farge. Kopier-knappen bruker verdiene her.",
+    tokenReset: "Tilbakestill",
+    tokenColor: (label: string) => `Velg farge for ${label}`,
     placement: {
       "flatsome-custom-css-all": {
         label: "Flatsome tilpasset CSS, alle skjermer",
@@ -206,6 +211,9 @@ export const strings = {
         steps: ["Følg notatet under for hvor koden skal limes inn."],
       },
     },
+  },
+  toc: {
+    title: "På denne siden",
   },
   notFound: {
     title: "Siden finnes ikke",

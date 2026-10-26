@@ -53,13 +53,19 @@ export function SearchTrigger({
         className
       )}
       onClick={requestOpenSearch}
+      aria-label={strings.search.trigger}
       aria-keyshortcuts="Control+K Meta+K"
     >
       <SearchIcon data-icon="inline-start" />
-      <span className="min-w-0 flex-1 truncate text-left">
+      <span
+        className={cn(
+          "min-w-0 flex-1 truncate text-left",
+          compact && "max-sm:hidden"
+        )}
+      >
         {compact ? strings.search.trigger : strings.search.placeholder}
       </span>
-      <KbdGroup>
+      <KbdGroup className={compact ? "max-sm:hidden" : undefined}>
         <Kbd>{modifier}</Kbd>
         <Kbd>K</Kbd>
       </KbdGroup>

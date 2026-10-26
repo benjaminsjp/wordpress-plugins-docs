@@ -14,7 +14,7 @@ export function PageHero({
 }) {
   return (
     <div className="border-b bg-muted">
-      <div className="mx-auto flex w-full max-w-[1000px] min-w-0 flex-col gap-4 px-6 py-8">
+      <div className="mx-auto flex w-full max-w-[1100px] min-w-0 flex-col gap-4 px-6 py-8">
         <PageHeader title={title} description={description} eyebrow={eyebrow}>
           {children}
         </PageHeader>

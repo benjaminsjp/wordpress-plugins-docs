@@ -1,0 +1,14 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "Flatsome Better Animations",
+	"summary": "Raskere Flatsome-animasjoner og et eget scroll-basert .reveal-system.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "flatsome-better-animations",
+		"visibility": "public"
+	},
+	"tags": ["flatsome"],
+	"maintainer": "Bli Synlig"
+}

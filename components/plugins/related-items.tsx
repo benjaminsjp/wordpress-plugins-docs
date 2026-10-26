@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { SectionHeading } from "@/components/layout/section-heading"
 import type { PluginRecord } from "@/lib/content/load-plugins"
 import type { SnippetRecord } from "@/lib/content/load-snippets"
 import { strings } from "@/lib/strings"
@@ -25,9 +26,7 @@ export function RelatedItems({
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="font-heading text-2xl font-semibold tracking-tight">
-        {strings.plugins.related}
-      </h2>
+      <SectionHeading>{strings.plugins.related}</SectionHeading>
       <div className="grid gap-6 md:grid-cols-2">
       {relatedPlugins.length > 0 ? (
         <div className="flex flex-col gap-3">

@@ -1,0 +1,20 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-10-26",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.4" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"download": {
+		"sha256": "f3717b400e4961b7e461bc37b03e351288315275dc3dc9d260e559256ffd524e"
+	},
+	"changelog": {
+		"added": [
+			"Raskere override av Flatsome data-animate-animasjoner.",
+			".reveal scroll-system med stagger og tilpasbare innstillinger.",
+			"Respekterer prefers-reduced-motion og viser innhold uten JavaScript."
+		]
+	}
+}

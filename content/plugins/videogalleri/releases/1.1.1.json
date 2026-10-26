@@ -1,0 +1,20 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-10-26",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.4" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"download": {
+		"sha256": "a800fbd19a7f13e7e18e5a0b59cf59621d1cfd88ec1809fe7680085a5c80c49f"
+	},
+	"changelog": {
+		"added": [
+			"CPT videogalleri med YouTube/Vimeo og egne videoundersider.",
+			"Horisontal slider, shortcodes og UX Builder-element.",
+			"Prosjektkobling, rekkefølge og innstillinger for farger og knapper."
+		]
+	}
+}

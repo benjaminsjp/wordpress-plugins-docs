@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/layout/section-heading"
 import { strings } from "@/lib/strings"
 import type { SnippetRecord } from "@/lib/content/load-snippets"
 
@@ -8,9 +9,7 @@ export function CompatibilityNotes({
 }) {
   return (
     <section className="flex flex-col gap-2">
-      <h2 className="font-heading text-2xl font-semibold tracking-tight">
-        {strings.snippets.compatibility}
-      </h2>
+      <SectionHeading>{strings.snippets.compatibility}</SectionHeading>
       {compatibility.flatsome ? (
         <p>
           {strings.plugins.flatsome}:{" "}

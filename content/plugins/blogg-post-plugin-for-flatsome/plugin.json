@@ -10,6 +10,6 @@
 		"visibility": "public",
 		"assetPattern": "{slug}-v{version}.zip"
 	},
-	"tags": ["flatsome", "blog", "polylang"],
+	"tags": ["blog", "polylang", "testify"],
 	"maintainer": "Bli Synlig"
 }

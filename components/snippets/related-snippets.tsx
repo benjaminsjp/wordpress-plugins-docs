@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/layout/section-heading"
 import { SnippetCard } from "@/components/snippets/snippet-card"
 import type { SnippetRecord } from "@/lib/content/load-snippets"
 import { strings } from "@/lib/strings"
@@ -15,9 +16,7 @@ export function RelatedSnippets({
 
   return (
     <section className="flex flex-col gap-4">
-      <h2 className="font-heading text-2xl font-semibold tracking-tight">
-        {strings.snippets.related}
-      </h2>
+      <SectionHeading>{strings.snippets.related}</SectionHeading>
       <div className="grid gap-4 md:grid-cols-2">
         {snippets.map((snippet) => (
           <SnippetCard
