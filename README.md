@@ -29,18 +29,26 @@ npm run new-release -- <slug> <version>
 npm run check-immutability
 ```
 
-## GitHub-token (kun CI)
+## GitHub-tilgang (kun CI)
 
-**Ikke lim inn tokenet i repositoriet, i Vercel, eller i chat.** Bygget på Vercel trenger ingen hemmeligheter.
+**Ikke lim inn nøkler eller token i repositoriet, i Vercel, eller i chat.** Bygget på Vercel trenger ingen hemmeligheter.
 
-CI sjekker at dokumenterte plugin-versjoner faktisk finnes som GitHub Releases, også i **private** repositorier. Derfor trengs et **read-only** token som hemmelighet i *dette* docs-repositoriet:
+CI sjekker at dokumenterte plugin-versjoner finnes som GitHub Releases, også i **private** repositorier. Workflowen bruker en **GitHub App** installert på org **`bli-synlig-plugins`** (Read på **Contents** og **Metadata**), og lager et kortvarig installation token i Actions.
 
-1. Lag et [fine-grained personal access token](https://github.com/settings/personal-access-tokens) (eller en GitHub App-installasjonstoken) med **Read** på Contents og Metadata for plugin-repositoriene i `bli-synlig-plugins` (inkludert eventuelle private repositorier).
-2. I docs-repositoriet: **Settings → Secrets and variables → Actions → New repository secret**.
-3. Navn: `PLUGIN_GITHUB_TOKEN` (ikke `GITHUB_TOKEN` — det navnet er reservert av GitHub Actions).
-4. Lim inn tokenet der, og ingen andre steder.
+### Secrets i docs-repoet
 
-Lokalt er tokenet valgfritt. Uten det hopper `npm run verify-github` over sjekken. For å kjøre den selv:
+**Settings → Secrets and variables → Actions → New repository secret** (i `wordpress-plugins-docs`):
+
+| Secret | Innhold |
+|--------|---------|
+| `PLUGIN_GITHUB_BLI_SYNLIG_APP_ID` | App-ID (tall) fra app-siden |
+| `PLUGIN_GITHUB_BLI_SYNLIG_PRIVATE_KEY` | Hele `.pem`-filen (private key) |
+
+**App ID:** Org **bli-synlig-plugins** → **Settings** → **Developer settings** → **GitHub Apps** → velg appen → **App ID** øverst på siden.
+
+Valgfri fallback: `PLUGIN_GITHUB_TOKEN` (fine-grained PAT) brukes hvis app-token ikke kan opprettes.
+
+Lokalt er token valgfritt. Uten `GITHUB_TOKEN` hopper `npm run verify-github` over sjekken. For å kjøre den selv:
 
 ```powershell
 $env:GITHUB_TOKEN = "…"   # midlertidig i terminalen, ikke i en committet fil

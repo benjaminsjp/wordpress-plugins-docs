@@ -122,6 +122,7 @@ function makePlugin(slug: string): PluginRecord {
     versionScheme: "semver",
     status: "active",
     repository: { owner: "ORG", repo: slug, visibility: "public" },
+    author: "benjamin",
     slug,
     file: `plugins/${slug}/plugin.json`,
     docs: { overview: "overview.mdx", installation: null, usage: null },

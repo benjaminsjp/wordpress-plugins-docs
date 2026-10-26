@@ -24,6 +24,7 @@ function plugin(options: {
       repo: options.slug,
       visibility: "public",
     },
+    author: "benjamin",
     slug: options.slug,
     file: `plugins/${options.slug}/plugin.json`,
     docs: { overview: "overview.mdx", installation: null, usage: null },

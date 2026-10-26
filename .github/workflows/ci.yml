@@ -43,9 +43,17 @@ jobs:
         env:
           GITHUB_BASE_SHA: ${{ github.event.before }}
         run: npm run check-immutability
+      - name: Create GitHub App token
+        id: plugin-github-app-token
+        continue-on-error: true
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.PLUGIN_GITHUB_BLI_SYNLIG_APP_ID }}
+          private-key: ${{ secrets.PLUGIN_GITHUB_BLI_SYNLIG_PRIVATE_KEY }}
+          owner: bli-synlig-plugins
       - name: Verify GitHub releases
         env:
-          GITHUB_TOKEN: ${{ secrets.PLUGIN_GITHUB_TOKEN || github.token }}
+          GITHUB_TOKEN: ${{ steps.plugin-github-app-token.outputs.token || secrets.PLUGIN_GITHUB_TOKEN || github.token }}
         run: npm run verify-github
       - run: npm run build
 
@@ -63,9 +71,17 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - name: Create GitHub App token
+        id: plugin-github-app-token
+        continue-on-error: true
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.PLUGIN_GITHUB_BLI_SYNLIG_APP_ID }}
+          private-key: ${{ secrets.PLUGIN_GITHUB_BLI_SYNLIG_PRIVATE_KEY }}
+          owner: bli-synlig-plugins
       - name: Verify GitHub releases
         env:
-          GITHUB_TOKEN: ${{ secrets.PLUGIN_GITHUB_TOKEN || github.token }}
+          GITHUB_TOKEN: ${{ steps.plugin-github-app-token.outputs.token || secrets.PLUGIN_GITHUB_TOKEN || github.token }}
         run: npm run verify-github
       - name: Open an issue when verification fails
         if: failure()

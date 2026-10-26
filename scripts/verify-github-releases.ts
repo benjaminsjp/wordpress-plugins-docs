@@ -8,7 +8,7 @@ async function main() {
   if (!token) {
     if (process.env.CI) {
       console.error(
-        "GITHUB_TOKEN is required in CI. Add the PLUGIN_GITHUB_TOKEN Actions secret and map it to GITHUB_TOKEN for this step."
+        "GITHUB_TOKEN is required in CI. Configure PLUGIN_GITHUB_BLI_SYNLIG_APP_ID and PLUGIN_GITHUB_BLI_SYNLIG_PRIVATE_KEY (GitHub App), or PLUGIN_GITHUB_TOKEN as fallback."
       )
       process.exitCode = 1
       return

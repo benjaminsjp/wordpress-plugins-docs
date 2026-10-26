@@ -43,6 +43,7 @@ function plugin(options: {
       repo: options.slug,
       visibility: options.visibility,
     },
+    author: "benjamin",
     slug: options.slug,
     file: `plugins/${options.slug}/plugin.json`,
     docs: { overview: "overview.mdx", installation: null, usage: null },
