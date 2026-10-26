@@ -17,6 +17,7 @@ const pluginJson = JSON.stringify({
     repo: "demo",
     visibility: "public",
   },
+  author: "benjamin",
 })
 
 const releaseJson = JSON.stringify({

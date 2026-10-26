@@ -9,7 +9,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
-import { getPlugins } from "@/lib/content"
+import { getPlugins, getTaxonomy } from "@/lib/content"
 import { strings } from "@/lib/strings"
 import { BlocksIcon } from "lucide-react"
 
@@ -17,10 +17,25 @@ export const metadata: Metadata = {
   title: strings.plugins.title,
 }
 
+function authorLabelMap(
+  authors: Array<{ slug: string; label: string }> | undefined
+): Record<string, string> {
+  const map: Record<string, string> = {}
+  for (const author of authors ?? []) {
+    map[author.slug] = author.label
+  }
+  return map
+}
+
 export default async function PluginsPage() {
-  const plugins = [...(await getPlugins())].sort((left, right) =>
+  const [pluginsRaw, taxonomy] = await Promise.all([
+    getPlugins(),
+    getTaxonomy(),
+  ])
+  const plugins = [...pluginsRaw].sort((left, right) =>
     left.name.localeCompare(right.name, "nb")
   )
+  const authorLabels = authorLabelMap(taxonomy?.authors)
 
   return (
     <>
@@ -42,7 +57,7 @@ export default async function PluginsPage() {
             </EmptyHeader>
           </Empty>
         ) : (
-          <PluginGrid plugins={plugins} />
+          <PluginGrid plugins={plugins} authorLabels={authorLabels} />
         )}
       </PageShell>
     </>

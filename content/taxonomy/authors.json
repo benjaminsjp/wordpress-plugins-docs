@@ -1,0 +1,7 @@
+{
+	"$schema": "../../schemas/authors.schema.json",
+	"authors": [
+		{ "slug": "benjamin", "label": "Benjamin Pedersen" },
+		{ "slug": "kim", "label": "Kim" }
+	]
+}

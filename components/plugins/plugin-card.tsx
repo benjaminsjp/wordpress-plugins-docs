@@ -12,7 +12,13 @@ import { formatDate } from "@/lib/format"
 import { strings } from "@/lib/strings"
 import type { PluginRecord } from "@/lib/content/load-plugins"
 
-export function PluginCard({ plugin }: { plugin: PluginRecord }) {
+export function PluginCard({
+  plugin,
+  authorLabel,
+}: {
+  plugin: PluginRecord
+  authorLabel?: string
+}) {
   const latest = selectLatestRelease(plugin.releases, plugin.versionScheme)
 
   return (
@@ -24,6 +30,11 @@ export function PluginCard({ plugin }: { plugin: PluginRecord }) {
             <PluginBadges plugin={plugin} version={latest?.version} />
           </div>
           <CardDescription>{plugin.summary}</CardDescription>
+          {authorLabel ? (
+            <p className="text-sm text-muted-foreground">
+              {strings.plugins.authorLabel}: {authorLabel}
+            </p>
+          ) : null}
         </CardHeader>
         <CardFooter className="mt-auto justify-between gap-3">
           <span className="text-sm text-muted-foreground">

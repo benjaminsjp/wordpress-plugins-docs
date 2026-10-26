@@ -27,6 +27,7 @@ function json(value: unknown): string {
 function taxonomy(options?: {
   categories?: unknown[]
   tags?: unknown[]
+  authors?: unknown[]
 }): Files {
   return {
     "taxonomy/snippet-categories.json": json({
@@ -45,6 +46,11 @@ function taxonomy(options?: {
     }),
     "taxonomy/tags.json": json({
       tags: options?.tags ?? [{ slug: "spacing", label: "Avstand" }],
+    }),
+    "taxonomy/authors.json": json({
+      authors: options?.authors ?? [
+        { slug: "benjamin", label: "Benjamin Pedersen" },
+      ],
     }),
   }
 }
@@ -66,6 +72,7 @@ function pluginFiles(options: {
         repo: options.slug,
         visibility: "public",
       },
+      author: "benjamin",
       ...options.plugin,
     }),
   }
@@ -431,6 +438,13 @@ const fixtures: Record<string, Files> = {
   "plugin-no-releases": {
     ...taxonomy(),
     ...pluginFiles({ slug: "demo", releases: [] }),
+  },
+  "plugin-author-unknown": {
+    ...taxonomy(),
+    ...pluginFiles({
+      slug: "demo",
+      plugin: { author: "does-not-exist" },
+    }),
   },
 }
 

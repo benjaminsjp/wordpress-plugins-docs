@@ -46,6 +46,7 @@ export const pluginJsonSchema = z.object({
   status: pluginStatusSchema,
   repository: repositorySchema,
   tags: z.array(nonEmptyString).optional(),
+  author: nonEmptyString,
   maintainer: nonEmptyString.optional(),
   replacedBy: nonEmptyString.optional(),
   related: relatedSchema.optional(),
@@ -168,6 +169,17 @@ export const tagsFileSchema = z.object({
   ),
 })
 
+export const authorsFileSchema = z.object({
+  $schema: z.string().optional(),
+  authors: z.array(
+    z.object({
+      slug: nonEmptyString,
+      label: nonEmptyString,
+      description: nonEmptyString.optional(),
+    })
+  ),
+})
+
 export type VersionScheme = z.infer<typeof versionSchemeSchema>
 export type PluginStatus = z.infer<typeof pluginStatusSchema>
 export type Visibility = z.infer<typeof visibilitySchema>
@@ -184,6 +196,7 @@ export type Dependency = z.infer<typeof dependencySchema>
 export type TaxonomyNode = z.infer<typeof taxonomyNodeSchema>
 export type SnippetCategoriesFile = z.infer<typeof snippetCategoriesFileSchema>
 export type TagsFile = z.infer<typeof tagsFileSchema>
+export type AuthorsFile = z.infer<typeof authorsFileSchema>
 
 export function isInternalDependency(
   dependency: Dependency

@@ -45,6 +45,7 @@ const fixtureCases: Array<{ dir: string; code: string }> = [
   { dir: "overview-missing", code: ISSUE_CODES.OVERVIEW_MISSING },
   { dir: "snippet-css-empty", code: ISSUE_CODES.SNIPPET_CSS_EMPTY },
   { dir: "plugin-no-releases", code: ISSUE_CODES.PLUGIN_NO_RELEASES },
+  { dir: "plugin-author-unknown", code: ISSUE_CODES.PLUGIN_AUTHOR_UNKNOWN },
 ]
 
 describe("seed content", () => {

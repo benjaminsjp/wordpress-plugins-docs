@@ -72,7 +72,8 @@ content/plugins/mitt-plugin/
 3. Standard GitHub-tag er `v{version}`, standard ZIP `{slug}-{version}.zip`. Overstyr `assetPattern` i `plugin.json` bare hvis fila heter noe annet (f.eks. `{slug}-v{version}.zip`).
 4. SHA-256 kopieres fra GitHubs `digest` på release-assetet (`sha256:…`). **Ikke finn den opp.** Mangler den, utelat feltet (`sha256-missing` er warning, ikke feil).
 5. Plugin-`tags` er fritekst. `related.plugins` / `related.snippets` må peke på slugs som finnes.
-6. Valgfri `changelogUrl` vises som «Se hele endringsloggen». En versjon kan overstyre med `changelog.url`.
+6. `author` (påkrevd) er slug til personen som la inn dokumentasjonen. Sluggen må finnes i [`content/taxonomy/authors.json`](content/taxonomy/authors.json). Ny medarbeider: legg til `{ "slug": "…", "label": "…" }` der først, deretter `"author": "…"` i `plugin.json`. Valgfri `maintainer` er org/team (f.eks. «Bli Synlig») — ikke samme som forfatter.
+7. Valgfri `changelogUrl` vises som «Se hele endringsloggen». En versjon kan overstyre med `changelog.url`.
 
 ```json
 {
@@ -86,6 +87,7 @@ content/plugins/mitt-plugin/
     "repo": "mitt-plugin",
     "visibility": "public"
   },
+  "author": "benjamin",
   "maintainer": "Bli Synlig"
 }
 ```

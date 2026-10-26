@@ -8,6 +8,7 @@
 		"repo": "demo",
 		"visibility": "public"
 	},
+	"author": "benjamin",
 	"related": {
 		"plugins": [
 			"does-not-exist"

@@ -15,6 +15,7 @@ export type ContentPaths = {
   taxonomy: string
   categories: string
   tags: string
+  authors: string
 }
 
 export function getContentPaths(root: string = CONTENT_ROOT): ContentPaths {
@@ -25,6 +26,7 @@ export function getContentPaths(root: string = CONTENT_ROOT): ContentPaths {
     taxonomy: path.join(root, "taxonomy"),
     categories: path.join(root, "taxonomy", "snippet-categories.json"),
     tags: path.join(root, "taxonomy", "tags.json"),
+    authors: path.join(root, "taxonomy", "authors.json"),
   }
 }
 

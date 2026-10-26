@@ -26,10 +26,17 @@ const STATUSES: Array<"all" | PluginStatus> = [
 const ACTIVE_FILTER =
   "aria-pressed:border-chart-3 data-[state=on]:border-chart-3"
 
-export function PluginGrid({ plugins }: { plugins: PluginRecord[] }) {
+export function PluginGrid({
+  plugins,
+  authorLabels,
+}: {
+  plugins: PluginRecord[]
+  authorLabels: Record<string, string>
+}) {
   const [query, setQuery] = useState("")
   const [status, setStatus] = useState<"all" | PluginStatus>("all")
   const [tag, setTag] = useState("all")
+  const [author, setAuthor] = useState("all")
 
   const tags = useMemo(() => {
     const values = new Set<string>()
@@ -41,12 +48,28 @@ export function PluginGrid({ plugins }: { plugins: PluginRecord[] }) {
     return [...values].sort((left, right) => left.localeCompare(right, "nb"))
   }, [plugins])
 
+  const authors = useMemo(() => {
+    const values = new Set<string>()
+    for (const plugin of plugins) {
+      values.add(plugin.author)
+    }
+    return [...values].sort((left, right) =>
+      (authorLabels[left] ?? left).localeCompare(
+        authorLabels[right] ?? right,
+        "nb"
+      )
+    )
+  }, [plugins, authorLabels])
+
   const filtered = plugins.filter((plugin) => {
-    const haystack = `${plugin.name} ${plugin.summary} ${plugin.slug}`.toLowerCase()
+    const authorName = authorLabels[plugin.author] ?? plugin.author
+    const haystack =
+      `${plugin.name} ${plugin.summary} ${plugin.slug} ${authorName}`.toLowerCase()
     const matchesQuery = haystack.includes(query.trim().toLowerCase())
     const matchesStatus = status === "all" || plugin.status === status
     const matchesTag = tag === "all" || (plugin.tags ?? []).includes(tag)
-    return matchesQuery && matchesStatus && matchesTag
+    const matchesAuthor = author === "all" || plugin.author === author
+    return matchesQuery && matchesStatus && matchesTag && matchesAuthor
   })
 
   return (
@@ -108,6 +131,27 @@ export function PluginGrid({ plugins }: { plugins: PluginRecord[] }) {
             ))}
           </ToggleGroup>
         ) : null}
+        {authors.length > 0 ? (
+          <ToggleGroup
+            value={[author]}
+            onValueChange={(next) => setAuthor(next[0] ?? "all")}
+            variant="outline"
+            size="sm"
+          >
+            <ToggleGroupItem value="all" className={ACTIVE_FILTER}>
+              {strings.plugins.allAuthors}
+            </ToggleGroupItem>
+            {authors.map((value) => (
+              <ToggleGroupItem
+                key={value}
+                value={value}
+                className={ACTIVE_FILTER}
+              >
+                {authorLabels[value] ?? value}
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
+        ) : null}
       </div>
       {filtered.length === 0 ? (
         <Empty className="border">
@@ -124,7 +168,11 @@ export function PluginGrid({ plugins }: { plugins: PluginRecord[] }) {
       ) : (
         <div className="grid gap-4 md:grid-cols-2">
           {filtered.map((plugin) => (
-            <PluginCard key={plugin.slug} plugin={plugin} />
+            <PluginCard
+              key={plugin.slug}
+              plugin={plugin}
+              authorLabel={authorLabels[plugin.author]}
+            />
           ))}
         </div>
       )}

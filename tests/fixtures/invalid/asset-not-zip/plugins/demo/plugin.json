@@ -8,5 +8,6 @@
 		"repo": "demo",
 		"visibility": "public",
 		"assetPattern": "{slug}-{version}.tar"
-	}
+	},
+	"author": "benjamin"
 }

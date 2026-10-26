@@ -7,5 +7,6 @@
 		"owner": "ORG",
 		"repo": "library",
 		"visibility": "public"
-	}
+	},
+	"author": "benjamin"
 }

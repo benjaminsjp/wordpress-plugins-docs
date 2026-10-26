@@ -21,7 +21,13 @@ import {
   EmptyHeader,
   EmptyTitle,
 } from "@/components/ui/empty"
-import { getPlugin, getPluginGraph, getPlugins, getSnippets } from "@/lib/content"
+import {
+  getPlugin,
+  getPluginGraph,
+  getPlugins,
+  getSnippets,
+  getTaxonomy,
+} from "@/lib/content"
 import { repositoryUrl } from "@/lib/content/github"
 import { latestZipPath } from "@/lib/content/latest-zip"
 import { extractMdxHeadings } from "@/lib/content/mdx-headings"
@@ -57,12 +63,13 @@ export default async function PluginPage({
   params,
 }: PluginPageProps) {
   const { slug } = await params
-  const [plugin, plugins, snippets, graph, overviewSource, usageSource] =
+  const [plugin, plugins, snippets, graph, taxonomy, overviewSource, usageSource] =
     await Promise.all([
       getPlugin(slug),
       getPlugins(),
       getSnippets(),
       getPluginGraph(),
+      getTaxonomy(),
       readPluginDocSource(slug, "overview"),
       readPluginDocSource(slug, "usage"),
     ])
@@ -72,6 +79,9 @@ export default async function PluginPage({
   }
 
   const latest = selectLatestRelease(plugin.releases, plugin.versionScheme)
+  const authorLabel = taxonomy?.authors.find(
+    (author) => author.slug === plugin.author
+  )?.label
   const replacedBy = plugin.replacedBy
     ? plugins.find((item) => item.slug === plugin.replacedBy)
     : undefined
@@ -119,6 +129,11 @@ export default async function PluginPage({
             <ExternalLinkIcon data-icon="inline-start" />
             {strings.plugins.viewOnGitHub}
           </Button>
+          {authorLabel ? (
+            <p className="text-center text-sm text-muted-foreground">
+              {strings.plugins.authorLabel}: {authorLabel}
+            </p>
+          ) : null}
           {latest ? (
             <p className="text-center text-sm text-muted-foreground">
               {strings.plugins.updatedOn(formatDate(latest.releaseDate))}

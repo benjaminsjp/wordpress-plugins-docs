@@ -28,6 +28,7 @@ export const ISSUE_CODES = {
   SUBCATEGORY_UNKNOWN: "subcategory-unknown",
   TAG_UNKNOWN: "tag-unknown",
   TAG_UNUSED: "tag-unused",
+  PLUGIN_AUTHOR_UNKNOWN: "plugin-author-unknown",
   OVERVIEW_MISSING: "overview-missing",
   SNIPPET_CSS_EMPTY: "snippet-css-empty",
   SNIPPET_TOKEN_MISSING: "snippet-token-missing",

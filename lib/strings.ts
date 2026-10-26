@@ -58,10 +58,13 @@ export const strings = {
     emptyTitle: "Ingen plugins ennå",
     emptyDescription: "Legg til en plugin under content/plugins for å vise den her.",
     emptyFilterTitle: "Ingen treff",
-    emptyFilterDescription: "Ingen plugins matcher filteret. Prøv et annet søk eller en annen status.",
+    emptyFilterDescription:
+      "Ingen plugins matcher filteret. Prøv et annet søk, status, tag eller forfatter.",
     filterPlaceholder: "Søk i navn og sammendrag",
     allStatuses: "Alle",
     allTags: "Alle tagger",
+    allAuthors: "Alle forfattere",
+    authorLabel: "Forfatter",
     visibility: {
       public: "Offentlig repo",
       private: "Privat repo",

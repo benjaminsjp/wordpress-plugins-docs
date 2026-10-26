@@ -42,10 +42,18 @@ export function extractCssSelectors(css: string): string[] {
   return uniqueSorted([...selectors])
 }
 
+function pluginAuthorLabel(
+  plugin: PluginRecord,
+  taxonomy: TaxonomyRecord | undefined
+): string | undefined {
+  return taxonomy?.authors.find((author) => author.slug === plugin.author)?.label
+}
+
 export function buildSearchIndex(content: SearchIndexContent): SearchRecord[] {
   const records: SearchRecord[] = []
 
   for (const plugin of content.plugins) {
+    const authorLabel = pluginAuthorLabel(plugin, content.taxonomy)
     records.push({
       type: "plugin",
       slug: plugin.slug,
@@ -53,7 +61,11 @@ export function buildSearchIndex(content: SearchIndexContent): SearchRecord[] {
       summary: plugin.summary,
       url: `/plugins/${plugin.slug}`,
       tags: plugin.tags ?? [],
-      keywords: pluginKeywords(plugin),
+      keywords: uniqueSorted([
+        ...pluginKeywords(plugin),
+        authorLabel,
+        plugin.author,
+      ]),
     })
   }
 

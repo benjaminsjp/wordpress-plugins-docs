@@ -10,6 +10,7 @@
 		"visibility": "public"
 	},
 	"tags": ["kafra"],
+	"author": "benjamin",
 	"maintainer": "Bli Synlig",
 	"related": {
 		"plugins": ["kafra-auto-skjema", "kafra-produktkatalog"]

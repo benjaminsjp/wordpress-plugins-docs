@@ -23,6 +23,7 @@ Follow [README.md](../../../README.md) section **Slik legger du til innhold**. D
 2. Create `content/plugins/<slug>/plugin.json`, `docs/overview.mdx`, and `releases/<version>.json`.
 3. Default ZIP `{slug}-{version}.zip` and tag `v{version}`. Set `assetPattern` only if the real asset name differs.
 4. Plugin `tags` are free text. `related.*` slugs must already exist.
+5. Set required `author` to a slug from `content/taxonomy/authors.json`. Add a new author there before first use. Do not confuse with optional `maintainer` (org/team).
 
 ## Snippet
 

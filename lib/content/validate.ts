@@ -72,6 +72,7 @@ export function crossValidate(
   if (taxonomy) {
     issues.push(...collectTaxonomyIssues(taxonomy))
     issues.push(...collectSnippetTaxonomyIssues(snippets, taxonomy))
+    issues.push(...collectPluginAuthorIssues(plugins, taxonomy))
   }
 
   issues.push(...collectSnippetTokenIssues(snippets))
@@ -161,6 +162,47 @@ function collectTaxonomyIssues(taxonomy: TaxonomyRecord): Issue[] {
   for (const tag of taxonomy.tags) {
     pushUnique(issues, tagSlugs, tag.slug, taxonomy.files.tags, "tag slug")
     pushUnique(issues, tagLabels, tag.label, taxonomy.files.tags, "tag label")
+  }
+
+  const authorSlugs = new Map<string, string>()
+  const authorLabels = new Map<string, string>()
+  for (const author of taxonomy.authors) {
+    pushUnique(
+      issues,
+      authorSlugs,
+      author.slug,
+      taxonomy.files.authors,
+      "author slug"
+    )
+    pushUnique(
+      issues,
+      authorLabels,
+      author.label,
+      taxonomy.files.authors,
+      "author label"
+    )
+  }
+
+  return issues
+}
+
+function collectPluginAuthorIssues(
+  plugins: PluginRecord[],
+  taxonomy: TaxonomyRecord
+): Issue[] {
+  const issues: Issue[] = []
+  const authors = new Set(taxonomy.authors.map((author) => author.slug))
+
+  for (const plugin of plugins) {
+    if (!authors.has(plugin.author)) {
+      issues.push({
+        code: ISSUE_CODES.PLUGIN_AUTHOR_UNKNOWN,
+        severity: "error",
+        file: plugin.file,
+        path: "author",
+        message: `Unknown author "${plugin.author}".`,
+      })
+    }
   }
 
   return issues

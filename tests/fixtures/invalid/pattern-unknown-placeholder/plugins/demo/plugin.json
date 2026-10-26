@@ -8,5 +8,6 @@
 		"repo": "demo",
 		"visibility": "public",
 		"tagPattern": "v{version}-{hash}"
-	}
+	},
+	"author": "benjamin"
 }

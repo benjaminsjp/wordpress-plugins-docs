@@ -7,5 +7,6 @@
 		"owner": "-bad",
 		"repo": "demo",
 		"visibility": "public"
-	}
+	},
+	"author": "benjamin"
 }

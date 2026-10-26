@@ -11,5 +11,6 @@
 		"assetPattern": "{slug}-v{version}.zip"
 	},
 	"tags": ["blog", "polylang", "testify"],
+	"author": "benjamin",
 	"maintainer": "Bli Synlig"
 }

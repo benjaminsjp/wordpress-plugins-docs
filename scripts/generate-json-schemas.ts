@@ -2,6 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { z, type ZodType } from "zod"
 import {
+  authorsFileSchema,
   pluginJsonSchema,
   releaseJsonSchema,
   snippetCategoriesFileSchema,
@@ -17,6 +18,7 @@ const schemas: Array<[string, ZodType]> = [
   ["snippet.schema.json", snippetJsonSchema],
   ["snippet-categories.schema.json", snippetCategoriesFileSchema],
   ["tags.schema.json", tagsFileSchema],
+  ["authors.schema.json", authorsFileSchema],
 ]
 
 async function main() {
