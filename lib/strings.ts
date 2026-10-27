@@ -2,6 +2,7 @@ export const strings = {
   site: {
     name: "Plugin- og CSS-dokumentasjon",
     shortName: "Dokumentasjon",
+    logoAlt: "Kodekassa",
     mark: "D",
     description:
       "Intern dokumentasjon for byråets WordPress-plugins og Flatsome CSS-snippets.",

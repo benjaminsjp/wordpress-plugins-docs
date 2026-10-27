@@ -25,6 +25,7 @@ import {
   SidebarMenuSubItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { SiteLogo } from "@/components/layout/site-logo"
 import { strings } from "@/lib/strings"
 import type { NavData } from "@/lib/nav"
 
@@ -49,14 +50,9 @@ export function AppSidebar({ nav }: { nav: NavData }) {
             <SidebarMenuButton
               render={<Link href="/" />}
               isActive={pathname === "/"}
-              className="h-auto py-2"
+              className="h-auto py-3"
             >
-              <span className="flex size-8 items-center justify-center bg-sidebar-primary font-heading font-semibold text-sidebar-primary-foreground">
-                {strings.site.mark}
-              </span>
-              <span className="font-heading font-semibold">
-                {strings.site.shortName}
-              </span>
+              <SiteLogo />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

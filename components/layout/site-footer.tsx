@@ -1,5 +1,6 @@
 import { ArrowUpRightIcon } from "lucide-react"
 import { FooterRain } from "@/components/layout/footer-rain"
+import { SiteLogo } from "@/components/layout/site-logo"
 import { ScrollToTop } from "@/components/layout/scroll-to-top"
 import { ModeToggle } from "@/components/theme/mode-toggle"
 import { getPlugins, getSnippets } from "@/lib/content"
@@ -36,14 +37,10 @@ export async function SiteFooter() {
       <div className="mx-auto flex w-full max-w-[1100px] min-w-0 flex-col gap-8 px-6 py-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="flex max-w-xl flex-col gap-3">
-            <div className="flex items-center gap-3">
-              <span className="flex size-8 items-center justify-center bg-primary font-heading font-semibold text-primary-foreground">
-                {strings.site.mark}
-              </span>
-              <span className="font-heading text-lg font-semibold">
-                {strings.site.shortName}
-              </span>
-            </div>
+            <SiteLogo
+              className="self-start"
+              heightClass="h-12 w-auto max-w-full md:h-14"
+            />
             {firstMaintainer && secondMaintainer ? (
               <p className="text-sm text-muted-foreground">
                 {strings.footer.developedBy}{" "}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 20 200 200"><title>Kodekassa</title><circle cx="120" cy="120" r="100" fill="#3df0c6"/><g transform="translate(120 120) scale(1.1) translate(-120 -120)"><g fill="none" stroke="#0a0f0e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+<path d="M104 134 C100 150 92 156 84 164"/><path d="M136 134 C140 148 150 150 158 156"/>
+<path d="M78 100 C58 98 50 80 54 64"/><path d="M162 100 C182 104 190 118 186 132"/>
+<g transform="rotate(-6 120 105)"><rect x="78" y="76" width="84" height="58" fill="#00b894"/><rect x="74" y="56" width="92" height="20" fill="#00b894"/>
+<rect x="108" y="62" width="24" height="6" rx="3" fill="#0a0f0e" stroke="none"/>
+<polyline points="102,90 94,98 102,106"/><polyline points="138,90 146,98 138,106"/><path d="M106 116 Q120 128 134 116"/></g>
+<circle cx="54" cy="58" r="8" fill="#f2f4f3"/><circle cx="186" cy="138" r="8" fill="#f2f4f3"/></g>
+<ellipse cx="76" cy="169" rx="12" ry="6" transform="rotate(-18 76 169)" fill="#0a0f0e"/><ellipse cx="168" cy="158" rx="12" ry="6" transform="rotate(22 168 158)" fill="#0a0f0e"/></g></svg>

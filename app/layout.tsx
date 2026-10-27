@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { AppSidebar } from "@/components/layout/app-sidebar"
 import { SiteFooter } from "@/components/layout/site-footer"
@@ -27,6 +27,18 @@ export const metadata: Metadata = {
     template: `%s · ${strings.site.name}`,
   },
   description: strings.site.description,
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: "#3df0c6",
 }
 
 export default async function RootLayout({
