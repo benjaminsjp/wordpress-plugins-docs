@@ -26,14 +26,12 @@ export async function SiteFooter() {
   const [firstMaintainer, secondMaintainer] = strings.footer.maintainers
 
   return (
-    <footer className="mt-auto bg-background pt-16 md:pt-24">
-      <div className="relative">
-        <FooterRain words={words} />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-background from-5% via-background/70 to-transparent"
-        />
-      </div>
+    <footer className="relative mt-auto bg-muted pt-16 md:pt-24">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-56 bg-gradient-to-b from-background from-5% via-background/70 to-transparent md:h-80"
+      />
+      <FooterRain words={words} />
       <div className="mx-auto flex w-full max-w-[1100px] min-w-0 flex-col gap-8 px-6 py-8">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           <div className="flex max-w-xl flex-col gap-3">

@@ -9,11 +9,19 @@ const GLITCH_RADIUS = 90
 const GLITCH_CHARS = "{}[]<>/;:=+*#%&$01"
 const HIGHLIGHT_MAX_ROW = 0.7
 const GREEN_CHANCE = 0.05
+const TOP_FADE = 0.68
+const BOTTOM_FADE = 0.22
+
+function edgeFade(yNorm: number): number {
+  const top = yNorm < TOP_FADE ? yNorm / TOP_FADE : 1
+  const bottom = yNorm > 1 - BOTTOM_FADE ? (1 - yNorm) / BOTTOM_FADE : 1
+  return Math.max(0, Math.min(1, top, bottom))
+}
 
 type Colors = {
   muted: string
   primary: string
-  background: string
+  surface: string
   foreground: string
 }
 
@@ -36,7 +44,7 @@ function readColors(element: HTMLElement): Colors {
   return {
     muted: styles.getPropertyValue("--muted-foreground").trim() || "#888",
     primary: styles.getPropertyValue("--primary").trim() || "#0f766e",
-    background: styles.getPropertyValue("--background").trim() || "#111",
+    surface: styles.getPropertyValue("--muted").trim() || "#f4f4f5",
     foreground: styles.getPropertyValue("--foreground").trim() || "#111",
   }
 }
@@ -126,7 +134,7 @@ export function FooterRain({ words }: { words: string[] }) {
       const { cols, rows, chars, green, highlight, highlightWidth } = grid
       const width = wrap.clientWidth
       const height = wrap.clientHeight
-      context.fillStyle = colors.background
+      context.fillStyle = colors.surface
       context.fillRect(0, 0, width, height)
       context.font = `${FONT_SIZE}px var(--font-geist-mono), ui-monospace, monospace`
       context.textBaseline = "top"
@@ -135,8 +143,10 @@ export function FooterRain({ words }: { words: string[] }) {
 
       for (let y = 0; y < rows; y += 1) {
         const yNorm = rows === 1 ? 0 : y / (rows - 1)
-        const fade = 1 - yNorm ** 1.55
-        const opacity = 0.3 + 0.7 * (1 - yNorm)
+        const edge = edgeFade(yNorm)
+        if (edge === 0) continue
+        const fade = (1 - yNorm ** 1.55) * edge
+        const opacity = (0.15 + 0.85 * (1 - yNorm)) * edge
 
         for (let x = 0; x < cols; x += 1) {
           const index = y * cols + x
@@ -159,10 +169,10 @@ export function FooterRain({ words }: { words: string[] }) {
           const highlightLen = highlight[index]
           if (highlightLen && !inGlitch && yNorm < HIGHLIGHT_MAX_ROW) {
             const blockWidth = highlightWidth[index] * CELL_WIDTH
-            context.globalAlpha = Math.min(1, opacity + 0.15)
+            context.globalAlpha = Math.min(1, opacity + 0.15 * edge)
             context.fillStyle = colors.primary
             context.fillRect(cellX, cellY, blockWidth, CELL_HEIGHT)
-            context.fillStyle = colors.background
+            context.fillStyle = colors.surface
             let text = ""
             for (let offset = 0; offset < highlightWidth[index]; offset += 1) {
               text += chars[index + offset] ?? " "
@@ -271,7 +281,7 @@ export function FooterRain({ words }: { words: string[] }) {
   return (
     <div
       ref={wrapRef}
-      className="h-[280px] w-full overflow-hidden bg-background md:h-[420px]"
+      className="h-[280px] w-full overflow-hidden bg-muted md:h-[420px]"
       aria-hidden="true"
     >
       <canvas ref={canvasRef} className="block size-full" />
