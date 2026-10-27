@@ -1,15 +1,35 @@
-Gå til **Utseende → Ekstra farger** (krever `edit_theme_options`).
+Gå til **Utseende → Ekstra farger** i WordPress-administrasjonen for å opprette og administrere egne farger og knappvarianter.
 
 ### Farger
 
-Legg til rader med **navn** og **farge** (hex, for eksempel `#1a2b3c`). Navnet brukes som etikett i UX Builder og Customizer. Ved lagring får fargen en unik ID og CSS-variabelen `var(--fs-color-{id})`.
+Under **Farger** kan du opprette egne farger som kan brukes på samme måte som Flatsomes standardfarger.
 
-Verdier kan finjusteres i Customizer; de lagres som theme mod.
+For å opprette en farge angir du et navn og en tilhørende fargekode, for eksempel `#1a2b3c`. Navnet brukes som etikett når du velger farger i UX Builder og Customizer.
+
+Når du lagrer, blir fargen tilgjengelig som en egen fargevariabel. Dette gjør at du kan bruke den på tvers av nettstedet uten å måtte angi fargekoden hver gang.
+
+Etter at fargen er opprettet, kan du også justere fargeverdien under **Theme Options → Style → Colors**.
+
+De nye fargene kan velges direkte i UX Builder ved hjelp av farge-helpers. Dette er fargene som vises når du holder musepekeren over et fargefelt.
 
 ### Knappestiler
 
-Hver stil har **navn**, **bakgrunn** og **tekstfarge**. Klassen blir `fef-btn-{id}` (for eksempel `fef-btn-merke`). Stilene dukker opp i **Color**-listen for knapper i UX Builder, sammen med Flatsome sine standardvalg.
+Under **Knappestiler** kan du opprette egne fargevarianter for knapper.
 
-Outline-, link- og underline-varianter støttes.
+For hver variant angir du et navn, en bakgrunnsfarge og en tekstfarge. De nye variantene blir tilgjengelige i **Color**-listen for knapper i UX Builder, sammen med Flatsomes standardvalg.
 
-ID-ene `primary`, `secondary`, `success`, `alert` og `white` er reservert og kan ikke brukes som egne farger eller knapper.
+Pluginet støtter også Outline-, link- og underline-varianter. I enkelte tilfeller kan det være nødvendig med litt ekstra CSS for at Outline-knapper skal vises riktig.
+
+### Reserverte ID-er
+
+Flatsome bruker allerede enkelte navn til sine standardfarger. Disse navnene er derfor reservert og kan ikke brukes til egne farger eller knappestiler.
+
+Følgende navn er reservert:
+
+- `primary`
+- `secondary`
+- `success`
+- `alert`
+- `white`
+
+Bruk et annet navn når du oppretter egne farger og knappestiler for å unngå konflikter med Flatsomes standardvalg.
