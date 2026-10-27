@@ -49,7 +49,7 @@ export default async function HomePage() {
           </Link>
         </section>
         <section className="flex flex-col gap-4">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">
+          <h2 className="font-heading text-3xl font-semibold tracking-tight">
             {strings.home.latestReleases}
           </h2>
           <div className="flex flex-col gap-3">
@@ -76,7 +76,7 @@ export default async function HomePage() {
           </div>
         </section>
         <section className="flex flex-col gap-4">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight">
+          <h2 className="font-heading text-3xl font-semibold tracking-tight">
             {strings.home.recentSnippets}
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
@@ -104,7 +104,7 @@ export default async function HomePage() {
         </section>
         <section className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <h2 className="font-heading text-2xl font-semibold tracking-tight">
+            <h2 className="font-heading text-3xl font-semibold tracking-tight">
               {strings.home.categories}
             </h2>
             <p className="text-sm text-muted-foreground">

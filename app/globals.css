@@ -132,12 +132,28 @@
   }
 }
 
+.mdx-content h1 {
+  @apply font-heading scroll-mt-24 text-4xl font-semibold tracking-tight;
+}
+
 .mdx-content h2 {
-  @apply font-heading scroll-mt-24 text-2xl font-semibold tracking-tight;
+  @apply font-heading scroll-mt-24 text-3xl font-semibold tracking-tight;
 }
 
 .mdx-content h3 {
-  @apply font-heading scroll-mt-24 text-base font-medium;
+  @apply font-heading scroll-mt-24 text-xl font-semibold tracking-tight;
+}
+
+.mdx-content h4 {
+  @apply font-heading scroll-mt-24 text-lg font-semibold tracking-tight;
+}
+
+.mdx-content h5 {
+  @apply font-heading scroll-mt-24 text-base font-semibold tracking-tight;
+}
+
+.mdx-content h6 {
+  @apply font-heading scroll-mt-24 text-sm font-semibold tracking-tight uppercase;
 }
 
 .mdx-content ul {

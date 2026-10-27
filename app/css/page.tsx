@@ -53,7 +53,7 @@ export default async function CssPage() {
           <>
             <section className="flex flex-col gap-4">
               <div className="flex flex-col gap-1">
-                <h2 className="font-heading text-2xl font-semibold tracking-tight">
+                <h2 className="font-heading text-3xl font-semibold tracking-tight">
                   {strings.home.categories}
                 </h2>
                 <p className="text-sm text-muted-foreground">
@@ -78,7 +78,7 @@ export default async function CssPage() {
             </section>
             <section className="flex flex-col gap-3">
               <div className="flex flex-col gap-1">
-                <h2 className="font-heading text-2xl font-semibold tracking-tight">
+                <h2 className="font-heading text-3xl font-semibold tracking-tight">
                   {strings.snippets.tags}
                 </h2>
                 <p className="text-sm text-muted-foreground">
@@ -98,7 +98,7 @@ export default async function CssPage() {
               </div>
             </section>
             <section className="flex flex-col gap-4">
-              <h2 className="font-heading text-2xl font-semibold tracking-tight">
+              <h2 className="font-heading text-3xl font-semibold tracking-tight">
                 {strings.home.recentSnippets}
               </h2>
               <div className="grid gap-4 md:grid-cols-2">

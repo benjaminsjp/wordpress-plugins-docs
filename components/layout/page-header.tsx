@@ -17,7 +17,7 @@ export function PageHeader({
         {eyebrow ? (
           <div className="flex flex-wrap items-center gap-2">{eyebrow}</div>
         ) : null}
-        <h1 className="font-heading text-3xl font-semibold tracking-tight">
+        <h1 className="font-heading text-4xl font-semibold tracking-tight">
           {title}
         </h1>
         {description ? (
