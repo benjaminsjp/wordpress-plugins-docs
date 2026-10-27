@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, type ReactNode } from "react"
 import { BlocksIcon, SearchIcon } from "lucide-react"
 import { PluginCard } from "@/components/plugins/plugin-card"
 import { Input } from "@/components/ui/input"
@@ -108,6 +108,7 @@ export function PluginGrid({
           </ToggleGroup>
         </div>
         {tags.length > 0 ? (
+          <FilterScroller>
           <ToggleGroup
             value={[tag]}
             onValueChange={(next) => setTag(next[0] ?? "all")}
@@ -130,8 +131,10 @@ export function PluginGrid({
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
+          </FilterScroller>
         ) : null}
         {authors.length > 0 ? (
+          <FilterScroller>
           <ToggleGroup
             value={[author]}
             onValueChange={(next) => setAuthor(next[0] ?? "all")}
@@ -151,6 +154,7 @@ export function PluginGrid({
               </ToggleGroupItem>
             ))}
           </ToggleGroup>
+          </FilterScroller>
         ) : null}
       </div>
       {filtered.length === 0 ? (
@@ -176,6 +180,14 @@ export function PluginGrid({
           ))}
         </div>
       )}
+    </div>
+  )
+}
+
+function FilterScroller({ children }: { children: ReactNode }) {
+  return (
+    <div className="no-scrollbar -mx-6 w-auto min-w-0 overflow-x-auto overscroll-x-contain px-6">
+      {children}
     </div>
   )
 }

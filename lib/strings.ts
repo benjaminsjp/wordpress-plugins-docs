@@ -11,6 +11,38 @@ export const strings = {
     light: "Lys modus",
     toggle: "Bytt mellom lys og mørk modus",
   },
+  footer: {
+    githubHeading: "GitHub",
+    backToTop: "Til toppen",
+    developedBy: "Utviklet og vedlikeholdt av",
+    and: "og",
+    copyright: (year: number, date: string) =>
+      `© ${year} Dokumentasjon. Sist oppdatert ${date}.`,
+    maintainers: [
+      {
+        name: "Benjamin Pedersen",
+        href: "https://github.com/benjaminsjp",
+      },
+      {
+        name: "Kim Lukas Myrvold",
+        href: "https://github.com/kimlukasmyrvold",
+      },
+    ],
+    github: [
+      {
+        label: "Bli Synlig",
+        href: "https://github.com/bli-synlig-plugins",
+      },
+      {
+        label: "Benjamin Pedersen",
+        href: "https://github.com/benjaminsjp",
+      },
+      {
+        label: "Kim Lukas Myrvold",
+        href: "https://github.com/kimlukasmyrvold",
+      },
+    ],
+  },
   nav: {
     home: "Hjem",
     plugins: "Plugins",

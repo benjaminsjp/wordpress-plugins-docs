@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { AppSidebar } from "@/components/layout/app-sidebar"
+import { SiteFooter } from "@/components/layout/site-footer"
 import { SiteHeader } from "@/components/layout/site-header"
 import { ThemeProvider } from "@/components/theme/theme-provider"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
@@ -61,6 +62,7 @@ export default async function RootLayout({
                 <main id="innhold" className="min-w-0 flex-1">
                   {children}
                 </main>
+                <SiteFooter />
               </SidebarInset>
             </SidebarProvider>
           </TooltipProvider>
