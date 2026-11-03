@@ -1,0 +1,21 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-03",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.6" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"download": {
+		"sha256": "278c81a6926de97e10d5c68a4f3d65f3a52a0bef13aea6552d14b097f675f08c"
+	},
+	"changelog": {
+		"added": [
+			"UX Builder-elementer for input og resultat (månedslønn og timelønn).",
+			"Skattefradrag med konfigurerbar sats og årsgrense.",
+			"Forsikringer som trekkes fra reell månedlig kostnad.",
+			"Tabbasert admin med live forhåndsvisning."
+		]
+	}
+}

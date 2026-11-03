@@ -1,0 +1,20 @@
+### Admin
+
+Gå til **Kontingentkalkulator** i wp-admin. Satser, tekster og forsikringer gjelder alle kalkulatorer. Farger og standardverdier settes på elementet i UX Builder.
+
+- **Satser:** kontingentsats, skattefradragssats og maks fradragsgrunnlag per år.
+- **Forsikringer:** legg til, rediger, vis/skjul og slett. Aktive forsikringer vises som én rad i resultatet og trekkes fra reell månedlig kostnad. De gir ikke skattefradrag. (i)-teksten lister prisen for hver aktive forsikring. Raden skjules hvis ingen er aktive.
+- **Tekster:** overskrifter, feltetiketter og suffikser, gruppert som venstre og høyre side på nettsiden. La et felt stå tomt for å bruke standardteksten.
+- **Forklaringer:** tekst bak (i)-knappene. `{sats}`, `{fradrag}` og `{arsgrense}` erstattes med verdiene under Satser.
+
+Forhåndsvisningen til høyre viser lønn over resultatet. Den oppdateres mens du skriver, og feltet du står i lyses opp. Resultatet vises først når lønnen er større enn 0.
+
+### UX Builder
+
+Elementene ligger under kategorien **Kontingentkalkulator** (krever Flatsome UX Builder). Bruk forhåndsvalget **Standard** for å sette inn alle tre.
+
+| Element | Beskrivelse |
+|---------|-------------|
+| **Kontingentkalkulator** | Container. Legg inn input og resultat som barn. |
+| **Kalkulator: input** | Lønn (måned eller time) og timer per uke. |
+| **Kalkulator: resultat** | Reell kostnad, rader og forklaringer. |

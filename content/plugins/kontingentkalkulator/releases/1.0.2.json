@@ -1,0 +1,18 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-03",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.6" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"download": {
+		"sha256": "806388bf501acc2a4b04b6968dedb57038db6e0a7777be6ac6f0a991a55aefcf"
+	},
+	"changelog": {
+		"added": [
+			"Plugin URI peker til dokumentasjonssiden."
+		]
+	}
+}
