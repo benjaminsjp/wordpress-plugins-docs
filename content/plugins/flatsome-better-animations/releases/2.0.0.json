@@ -1,0 +1,35 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-03",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.4"
+		},
+		"php": {
+			"min": "8.1"
+		},
+		"flatsome": {
+			"min": "3.18.0"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"sha256": "0236875de52169d887484ffc9167104004e650a2dc273bec270e8855c3c7850c"
+	},
+	"changelog": {
+		"added": [
+			"Motion-gruppe i UX Builder på rad, kolonne, seksjon, tekst og flere elementer.",
+			"Stagger på rad/seksjon uten egen animasjon — barna velger effekt fritt.",
+			"Valgfri animasjon på raden arves av kolonner som mangler egen.",
+			"Nye reveal-varianter: maske opp/side, uskarp, snu og zoom inn."
+		],
+		"changed": [
+			"Admin heter Flatsome Motion, med live forhåndsvisning av standardanimasjon.",
+			"Wipe/maske kjører via keyframes slik at IntersectionObserver treffer boksen."
+		],
+		"fixed": [
+			"Kolonner blir synlige hvis observatøren ikke fyrer (fail-visible CSS og timeout)."
+		]
+	}
+}

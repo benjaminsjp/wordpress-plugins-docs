@@ -1,7 +1,7 @@
 {
 	"$schema": "../../../schemas/plugin.schema.json",
-	"name": "Flatsome Better Animations",
-	"summary": "Raskere Flatsome-animasjoner og et eget scroll-basert .reveal-system.",
+	"name": "Flatsome Motion",
+	"summary": "Raskere Flatsome-animasjoner, scroll-reveal og Motion-felt direkte på UX-elementer.",
 	"versionScheme": "semver",
 	"status": "active",
 	"repository": {

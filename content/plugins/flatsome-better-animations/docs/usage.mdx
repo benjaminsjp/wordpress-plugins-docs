@@ -1,4 +1,12 @@
-Gå til **Innstillinger → Better Animations**.
+Gå til **Innstillinger → Flatsome Motion**.
+
+### UX Builder
+
+På kolonne, rad, seksjon, tittel, tekst, knapp, bilde og flere andre elementer ligger gruppen **Motion**.
+
+- **Rad / seksjon:** stagger-beholder. Sett **Stagger barn** til På og velg animasjon fritt på kolonne, tekst eller andre barn — de kommer inn etter hverandre. Valgfri animasjon på raden arves av kolonner som ikke har sin egen. Raden animeres ikke selv.
+- **Kolonne / tekst / …:** velg animasjonen der den skal skje. Egen Delay-slider overstyrer auto-stagger.
+- Tittel og tekst kan deles opp (tegn, ord eller linje) med egen tekststil.
 
 ### Flatsome data-animate
 
@@ -6,19 +14,26 @@ Overstyrer Flatsomes trege standard-tider og waypoint-offset for `[data-animate]
 
 ### Reveal-klasser
 
-Aktiverer CSS og JS for egne scroll-animasjoner. Stagger mellom barn i `.reveal-stagger` og synlighetsterskel (%) kan justeres.
+Manuelle klasser under **Avansert → Klasse** virker fortsatt. Standardanimasjon, timing, easing og stagger justeres i innstillingene.
 
 | Klasse | Effekt |
 |--------|--------|
-| `.reveal` | Fade + opp (standard) |
-| `.reveal.reveal--down` | Fade + ned |
-| `.reveal.reveal--left` | Fra venstre |
-| `.reveal.reveal--right` | Fra høyre |
+| `.reveal` | Standard fra innstillingene (fade + opp som utgangspunkt) |
+| `.reveal.reveal--fade-up` | Fade + opp |
+| `.reveal.reveal--down` / `--fade-down` | Fade + ned |
+| `.reveal.reveal--left` / `--fade-left` | Fra venstre |
+| `.reveal.reveal--right` / `--fade-right` | Fra høyre |
 | `.reveal.reveal--fade` | Kun fade |
-| `.reveal.reveal--zoom` | Zoom inn |
+| `.reveal.reveal--zoom` / `--zoom-in` | Zoom inn |
 | `.reveal.reveal--zoom-out` | Zoom ut |
+| `.reveal.reveal--blur` | Uskarp |
+| `.reveal.reveal--wipe` | Maske opp |
+| `.reveal.reveal--wipe-l` | Maske fra venstre |
 | `.reveal.reveal--tilt` | 3D-tilt |
+| `.reveal.reveal--flip` | Snu |
 
-Pakk elementer i `.reveal-stagger` for stagger. Bruk `data-reveal-delay="300"` (ms) for forsinkelse.
+**Stagger:** pakk elementer i `.reveal-stagger`.  
+**Delay:** `data-reveal-delay="300"` (ms).  
+**Tekst:** `.reveal-text` med `--rise`, `--fade`, `--blur` eller `--rot`, og `--tegn` / `--ord` / `--linje`.
 
-Respekterer `prefers-reduced-motion`. Uten JavaScript vises innhold umiddelbart.
+Respekterer `prefers-reduced-motion` når innstillingen er på. Uten JavaScript vises innhold umiddelbart.
