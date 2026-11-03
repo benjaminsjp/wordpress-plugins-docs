@@ -1,0 +1,20 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-03",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.6" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"download": {
+		"sha256": "a05e36e564ea91e9347a16aaf424f74a805c4846c71f1cc78a1b6dbdac051e69"
+	},
+	"changelog": {
+		"changed": [
+			"Forhåndsvisningen i admin viser lønn over resultatet.",
+			"Kalkulatoren venter med utregning til lønn er fylt inn (0 viser –).",
+			"Standard måneds- og timelønn i forhåndsvisningen er 0."
+		]
+	}
+}

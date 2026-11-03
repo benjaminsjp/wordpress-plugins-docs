@@ -133,7 +133,7 @@ describe("getLatestZipRedirects", () => {
     expect(bySource.get("/plugins/kontingentkalkulator/latest.zip")).toEqual({
       source: "/plugins/kontingentkalkulator/latest.zip",
       destination:
-        "https://github.com/bli-synlig-plugins/kontingentkalkulator/releases/download/v1.0.0/kontingentkalkulator-1.0.0.zip",
+        "https://github.com/bli-synlig-plugins/kontingentkalkulator/releases/download/v1.0.1/kontingentkalkulator-1.0.1.zip",
       permanent: false,
     })
     expect(bySource.get("/plugins/videogalleri/latest.zip")).toEqual({
