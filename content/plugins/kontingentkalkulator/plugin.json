@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "Kontingentkalkulator",
+	"summary": "Flatsome UX Builder-element som regner ut reell fagforeningskontingent med skattefradrag og forsikringer.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "kontingentkalkulator",
+		"visibility": "public"
+	},
+	"tags": ["flatsome"],
+	"author": "benjamin",
+	"maintainer": "Bli Synlig"
+}

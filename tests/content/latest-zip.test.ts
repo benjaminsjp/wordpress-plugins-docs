@@ -130,6 +130,12 @@ describe("getLatestZipRedirects", () => {
         "https://github.com/bli-synlig-plugins/kafra-produktkatalog/releases/download/v1.4.1/kafra-produktkatalog-1.4.1.zip",
       permanent: false,
     })
+    expect(bySource.get("/plugins/kontingentkalkulator/latest.zip")).toEqual({
+      source: "/plugins/kontingentkalkulator/latest.zip",
+      destination:
+        "https://github.com/bli-synlig-plugins/kontingentkalkulator/releases/download/v1.0.0/kontingentkalkulator-1.0.0.zip",
+      permanent: false,
+    })
     expect(bySource.get("/plugins/videogalleri/latest.zip")).toEqual({
       source: "/plugins/videogalleri/latest.zip",
       destination:
