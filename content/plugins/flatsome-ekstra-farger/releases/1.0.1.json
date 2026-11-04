@@ -1,0 +1,25 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-04",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.4"
+		},
+		"php": {
+			"min": "8.1"
+		},
+		"flatsome": {
+			"min": "3.18.0"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"sha256": "079074853be90c71e04885af785ca0b63059d4c100a8cba0c89dbfcb975e370e"
+	},
+	"changelog": {
+		"fixed": [
+			"UX Builder: z-index på fargeprøver og hover-rader slik at wrappede prøver ikke overlapper feltet over"
+		]
+	}
+}
