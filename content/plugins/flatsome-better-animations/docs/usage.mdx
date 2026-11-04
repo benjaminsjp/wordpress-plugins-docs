@@ -1,24 +1,148 @@
-Gå til **Innstillinger → Flatsome Motion**.
+### Kom i gang
 
-### UX Builder
+1. Installer og aktiver pluginet.
+2. Åpne **Innstillinger → Flatsome Motion**. Her setter du standardanimasjon, timing og tekststil for hele nettstedet.
+3. Åpne en side i **UX Builder**, velg et element og finn gruppen **Motion**.
+4. Velg en animasjon. Ferdig.
 
-På kolonne, rad, seksjon, tittel, tekst, knapp, bilde og flere andre elementer ligger gruppen **Motion**.
+Elementer uten valgt animasjon i UX Builder bruker **standardanimasjonen** du har satt i admin-panelet, så lenge de har klassen `.reveal` (se [CSS-klasser](#css-klasser)).
 
-- **Rad / seksjon:** stagger-beholder. Sett **Stagger barn** til På og velg animasjon fritt på kolonne, tekst eller andre barn — de kommer inn etter hverandre. Valgfri animasjon på raden arves av kolonner som ikke har sin egen. Raden animeres ikke selv.
-- **Kolonne / tekst / …:** velg animasjonen der den skal skje. Egen Delay-slider overstyrer auto-stagger.
-- Tittel og tekst kan deles opp (tegn, ord eller linje) med egen tekststil.
+### Bruk i UX Builder
 
-### Flatsome data-animate
+Alle støttede elementer får gruppen **Motion** i innstillingspanelet.
 
-Overstyrer Flatsomes trege standard-tider og waypoint-offset for `[data-animate]`. Du kan justere transform-varighet, opacity-varighet, forflytningsdistanse og waypoint-offset (%).
+| Valg | Hva det gjør |
+| --- | --- |
+| **Animasjon** | Velg en av de 12 animasjonene, eller **Ingen**. På rad og seksjon er dette valgfritt: kolonner uten egen animasjon arver den. Raden animeres ikke selv. |
+| **Delay** | Forsinkelse i millisekunder før animasjonen starter. |
+| **Stagger barn** | **Av/På.** Når den er på, kommer animerte barn inn etter hverandre. Fungerer også uten at selve raden har en animasjon. |
+| **Tekst** | Kun på tittel og tekst: **Av, Løft, Fade, Uskarp, Roter**. Animerer teksten bit for bit. |
+| **Del opp** | Kun på tittel og tekst: **Tegn, Ord, Linje**. Bestemmer hvor små bitene er. Oppdeling per tegn holder bokstaver i samme ord på én linje. |
 
-### Reveal-klasser
+#### Stagger barn: eksempel
 
-Manuelle klasser under **Avansert → Klasse** virker fortsatt. Standardanimasjon, timing, easing og stagger justeres i innstillingene.
+Sett **Stagger barn** til **På** på en rad med tre kolonner. Velg animasjon på kolonnene (eller én gang på raden, så arver de den). Kolonne 1 kommer inn med en gang, kolonne 2 etter ett stagger-steg, kolonne 3 etter to. Størrelsen på steget settes under **Timing** i admin-panelet (80 ms som utgangspunkt).
 
-| Klasse | Effekt |
-|--------|--------|
-| `.reveal` | Standard fra innstillingene (fade + opp som utgangspunkt) |
+Du kan også animere tekst inni første kolonne og selve kolonnene ved siden av — stagger teller øverste animerte ledd i rekkefølge.
+
+### Animasjonene
+
+Disse 12 finnes både som standardanimasjon i admin-panelet og i Motion-gruppen i UX Builder.
+
+| Animasjon | Effekt |
+| --- | --- |
+| **Opp** | Fader og glir opp |
+| **Ned** | Fader og glir ned |
+| **Fra venstre** | Glir inn fra venstre |
+| **Fra høyre** | Glir inn fra høyre |
+| **Fade** | Kun opasitet |
+| **Zoom inn** | Vokser fra 88 % |
+| **Zoom ut** | Krymper fra 112 % |
+| **Uskarp** | Fokuserer og løfter |
+| **Maske opp** | Avsløres nedenfra |
+| **Maske side** | Avsløres fra venstre |
+| **3D-tilt** | Vipper fram i dybden |
+| **Snu** | Roterer rundt Y-aksen |
+
+### Støttede UX-elementer
+
+Animasjonsvalgene er innebygd i disse elementene:
+
+| Element | Navn i UX Builder | Animasjon | Tekstanimasjon |
+| --- | --- | --- | --- |
+| `section` | Seksjon | Ja |  |
+| `row` | Rad | Ja |  |
+| `col` | Kolonne | Ja |  |
+| `col_grid` | Kolonne (grid) | Ja |  |
+| `title` | Tittel | Ja | Ja |
+| `text` | Tekst | Ja | Ja |
+| `button` | Knapp | Ja |  |
+| `ux_image` | Bilde | Ja |  |
+| `ux_image_box` | Bildeboks | Ja |  |
+| `featured_box` | Fremhevet boks | Ja |  |
+| `text_box` | Tekstboks | Ja |  |
+| `ux_banner` | Banner | Ja |  |
+| `team_member` | Teammedlem | Ja |  |
+| `testimonial` | Omtale | Ja |  |
+
+### Innstillinger i admin-panelet
+
+Gå til **Innstillinger → Flatsome Motion**. Panelet har fem faner. Forhåndsvisningen til høyre oppdateres mens du endrer, og **Spill av** kjører animasjonen på nytt.
+
+#### Animasjoner
+
+Her velger du **standardanimasjonen**, altså hva `.reveal`-elementer gjør når ingenting annet er angitt. Hold musen over en animasjon for å se den.
+
+Under **Utløser** styrer du når og hvor ofte animasjonen spilles:
+
+| Valg | Beskrivelse |
+| --- | --- |
+| **Bevegelseskurve** | Hvordan farten endrer seg: **Myk, Jevn, Spenst, Lett**. |
+| **Spill kun én gang** | På: animasjonen spilles første gang elementet vises. Av: den spilles hver gang elementet kommer til syne. |
+| **Aktiver på mobil** | Slå av for å vise alt umiddelbart på små skjermer. |
+
+#### Tekst
+
+Standard for overskrifter og tekst som avsløres bit for bit. Kan overstyres per element i UX Builder under Motion.
+
+| Valg | Beskrivelse | Eksempelverdi |
+| --- | --- | --- |
+| **Stil** | Hvordan hver bit kommer inn: Løft, Fade, Uskarp, Roter | Løft |
+| **Del opp i** | Hvor små bitene er: Tegn, Ord, Linje | Tegn |
+| **Stagger per bit** | Tid mellom hver bit | 20 ms |
+| **Varighet per bit** | Hvor lenge hver bit animerer | 650 ms |
+
+#### Timing
+
+Gjelder alle `.reveal`-elementer. Forhåndsvisningen oppdateres mens du drar i glidebryterne.
+
+| Valg | Beskrivelse | Eksempelverdi |
+| --- | --- | --- |
+| **Bevegelse** | Hvor lenge elementet flytter seg | 650 ms |
+| **Opasitet** | Fade-tid. Kortere enn bevegelsen føles skarpere | 420 ms |
+| **Avstand** | Hvor langt elementet reiser | 24 px |
+| **Stagger-steg** | Forsinkelse mellom barn i `.reveal-stagger` | 80 ms |
+| **Synlighetsterskel** | Hvor mye av elementet som må være synlig før animasjonen starter | 12 % |
+
+Hold opasitet kortere enn bevegelse. Elementet blir synlig raskt og lander deretter mykt.
+
+#### Flatsome
+
+Flatsome har egne animasjoner via `data-animate`. Her kan du erstatte dem med raskere og mer presise varianter, slik at hele nettstedet får samme følelse.
+
+Slå på **Overstyr innebygde animasjoner** for å bruke innstillingene under på alle `[data-animate]`-elementer.
+
+| Valg | Flatsome standard | Eksempelverdi |
+| --- | --- | --- |
+| **Transform-varighet** | 1600 ms | 550 ms |
+| **Opacity-varighet** | 700 ms | 400 ms |
+| **Forflytningsdistanse** | 70 px | 24 px |
+| **Waypoint-offset** | 101 % (utenfor skjermen) | 88 % |
+
+Panelet **Slik slår det ut** viser din varighet mot Flatsomes standard.
+
+#### Tilgjengelighet
+
+| Valg | Beskrivelse |
+| --- | --- |
+| **Respekter «reduser bevegelse»** | Viser alt statisk for besøkende som har bedt om det i systemet sitt. Anbefales å ha på. |
+| **Last skript forsinket** | Laster animasjons-JS etter første visning. Uten JS vises alt umiddelbart, så ingenting forblir skjult. |
+
+### Vanlige spørsmål
+
+**Hvorfor animeres ikke elementet mitt?** Sjekk at animasjon ikke er satt til *Ingen*, at «Aktiver på mobil» er på hvis du tester på mobil, og at «reduser bevegelse» ikke er slått på i operativsystemet.
+
+**Kan jeg bruke stagger uten animasjon på selve blokken?** Ja. Sett **Stagger barn** til **På** på raden, og velg animasjon på kolonner eller tekst inni. Barna kommer inn etter hverandre.
+
+**Hva er forskjellen på Timing og Flatsome-fanen?** Timing gjelder pluginets egne `.reveal`-animasjoner. Flatsome-fanen gjelder Flatsomes innebygde `data-animate`.
+
+### CSS-klasser
+
+Utenom UX Builder kan du bruke animasjonene direkte med klasser, for eksempel under **Avansert → Klasse** eller i egne maler.
+
+| Klasse | Beskrivelse |
+| --- | --- |
+| `.reveal` | Standardanimasjon fra innstillingene (fade + opp som utgangspunkt) |
 | `.reveal.reveal--fade-up` | Fade + opp |
 | `.reveal.reveal--down` / `--fade-down` | Fade + ned |
 | `.reveal.reveal--left` / `--fade-left` | Fra venstre |
@@ -31,9 +155,9 @@ Manuelle klasser under **Avansert → Klasse** virker fortsatt. Standardanimasjo
 | `.reveal.reveal--wipe-l` | Maske fra venstre |
 | `.reveal.reveal--tilt` | 3D-tilt |
 | `.reveal.reveal--flip` | Snu |
+| `.reveal-stagger` | Gir animerte barn økende forsinkelse. Steget settes under Timing. |
 
-**Stagger:** pakk elementer i `.reveal-stagger`.  
 **Delay:** `data-reveal-delay="300"` (ms).  
-**Tekst:** `.reveal-text` med `--rise`, `--fade`, `--blur` eller `--rot`, og `--tegn` / `--ord` / `--linje`. Oppdeling per tegn holder bokstaver i samme ord på én linje.
+**Tekst:** `.reveal-text` med `--rise`, `--fade`, `--blur` eller `--rot`, og `--tegn` / `--ord` / `--linje`.
 
 Respekterer `prefers-reduced-motion` når innstillingen er på. Uten JavaScript vises innhold umiddelbart.

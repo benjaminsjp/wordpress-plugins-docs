@@ -1,7 +1,7 @@
 {
 	"$schema": "../../../schemas/plugin.schema.json",
 	"name": "Flatsome Motion",
-	"summary": "Raskere Flatsome-animasjoner, scroll-reveal og Motion-felt direkte på UX-elementer.",
+	"summary": "Flere og bedre inngangsanimasjoner for Flatsome. Styr animasjon, stagger og tekst fra UX Builder og ett admin-panel.",
 	"versionScheme": "semver",
 	"status": "active",
 	"repository": {
