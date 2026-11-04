@@ -103,7 +103,7 @@ describe("getLatestZipRedirects", () => {
     expect(bySource.get("/plugins/flatsome-better-animations/latest.zip")).toEqual({
       source: "/plugins/flatsome-better-animations/latest.zip",
       destination:
-        "https://github.com/bli-synlig-plugins/flatsome-better-animations/releases/download/v2.0.0/flatsome-better-animations-2.0.0.zip",
+        "https://github.com/bli-synlig-plugins/flatsome-better-animations/releases/download/v2.0.1/flatsome-better-animations-2.0.1.zip",
       permanent: false,
     })
     expect(bySource.get("/plugins/flatsome-ekstra-farger/latest.zip")).toEqual({

@@ -1,0 +1,27 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-04",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.4"
+		},
+		"php": {
+			"min": "8.1"
+		},
+		"flatsome": {
+			"min": "3.18.0"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"sha256": "2a3bbdebc7c8fd3e0cb0dc18d5c2fa3d028eaca2c0e50272b80802dbc4e0cadb"
+	},
+	"changelog": {
+		"fixed": [
+			"Innhold blinker ikke lenger ferdig et øyeblikk før reveal starter.",
+			"Bokstaver i samme ord holder seg på én linje ved tekstoppdeling per tegn.",
+			"Løft-animasjonen klipper ikke lenger toppen av Å og tykk display-tekst."
+		]
+	}
+}
