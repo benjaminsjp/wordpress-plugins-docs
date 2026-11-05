@@ -11,5 +11,8 @@
 	},
 	"tags": ["flatsome", "ux-builder"],
 	"author": "benjamin",
-	"maintainer": "Bli Synlig"
+	"maintainer": "Bli Synlig",
+	"related": {
+		"plugins": ["wp-lucide-icons"]
+	}
 }

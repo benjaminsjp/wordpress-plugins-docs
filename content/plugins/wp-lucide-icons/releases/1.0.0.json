@@ -1,0 +1,25 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2025-01-03",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.0"
+		},
+		"php": {
+			"min": "7.4"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"asset": "wp-lucide-icons.zip"
+	},
+	"changelog": {
+		"added": [
+			"Første versjon som Lucide Icons.",
+			"Shortcode [lucide_icon] med name, size, color og width.",
+			"Knapp for å sette inn Lucide-ikon i teksteditoren.",
+			"Ikoner hentes fra unpkg.com/lucide@latest."
+		]
+	}
+}

@@ -9,12 +9,10 @@
 	},
 	"dependencies": [
 		{
-			"external": {
-				"name": "WP Icons",
-				"slug": "wp-lucide-icons"
-			},
+			"plugin": "wp-lucide-icons",
 			"type": "required",
-			"reason": "Ikonbiblioteket som velges i UX Builder."
+			"reason": "Ikonbiblioteket som velges i UX Builder.",
+            "minVersion": "2.0.0"
 		}
 	],
 	"download": {

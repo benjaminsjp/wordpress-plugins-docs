@@ -1,0 +1,25 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2025-02-04",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.0"
+		},
+		"php": {
+			"min": "7.4"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"asset": "wp-lucide-icons.zip"
+	},
+	"changelog": {
+		"added": [
+			"Ikonvalg og mer pålitelig innsetting fra teksteditoren."
+		],
+		"changed": [
+			"Cache-busting av stil og script bruker filens endringstid."
+		]
+	}
+}

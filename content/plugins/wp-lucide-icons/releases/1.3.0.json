@@ -1,0 +1,22 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2025-05-07",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.0"
+		},
+		"php": {
+			"min": "7.4"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"asset": "wp-lucide-icons.zip"
+	},
+	"changelog": {
+		"changed": [
+			"Medfølgende Lucide-ikoner er oppdatert fra 0.487.0 til 0.507.0."
+		]
+	}
+}

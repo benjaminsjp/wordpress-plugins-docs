@@ -1,0 +1,19 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "WP Icons",
+	"summary": "Inline SVG fra Lucide, Material Symbols, Phosphor og de andre medfølgende ikonbibliotekene.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "kimlukasmyrvold",
+		"repo": "wp-lucide-icons",
+		"visibility": "public"
+	},
+	"tags": ["icons"],
+	"author": "kim",
+	"maintainer": "Kim",
+	"changelogUrl": "https://github.com/kimlukasmyrvold/wp-lucide-icons/blob/main/CHANGELOG.md",
+	"related": {
+		"plugins": ["wp-icons-flatsome"]
+	}
+}
