@@ -1,0 +1,38 @@
+### Blokkredigering
+
+Sett inn blokken **Icon** fra kategorien Media. Velg bibliotek, ikon, størrelse og farge. Biblioteker med stil viser vekt eller stil, og strekbaserte stiler viser strektykkelse.
+
+På avsnitt, overskrift og annen riktekst bruker du **Sett inn ikon** på verktøylinjen. Inline-ikoner følger tekstens størrelse og farge.
+
+### Klassisk editor
+
+**Sett inn ikon** ligger på TinyMCE-verktøylinjen, også i Classic-blokken.
+
+### Elementor
+
+Teksteditoren og andre visuelle tekstfelt har samme **Sett inn ikon**-knapp. Widgeten **WP Icons** viser ett ikon, med de samme innstillingene som blokken, pluss justering.
+
+### Flatsome UX Builder
+
+Elementet **WP Icons** ligger under Content. **Velg ikon** åpner den samme velgeren. Justering er venstre, midtstilt eller høyre.
+
+Icon Box og Button dekkes av pluginen **WP Icons for Flatsome**.
+
+### Shortcode
+
+```
+[wp_icon library="lucide" name="heart" size="24" color="currentColor" stroke="2"]
+```
+
+Utelatte attributter faller tilbake til **Utseende → WP Icons → Innstillinger**. `[lucide_icon]` virker fortsatt, men bare for Lucide.
+
+### Admin
+
+**Utseende → WP Icons** har fanene Bibliotek og Innstillinger (krever `edit_theme_options`).
+
+- **Bibliotek** — bla i ikoner, forhåndsvis og kopier en shortcode.
+- **Innstillinger** — standardverdier, hvilke biblioteker som er på, og kilde per bibliotek.
+
+Besøkende får ikonene som inline SVG. Siden henter ikke ikoner fra npm eller en CDN. Kilde **cdn** laster ned en nyere katalog i bakgrunnen og mellomlagrer den. Er cachen tom, brukes katalogen som følger med pluginen.
+
+I PHP skriver `wpicons_icon()` ut et ikon, og `wpicons_get_icon()` returnerer SVG-en.

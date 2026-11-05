@@ -1,0 +1,35 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-05",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.6",
+			"tested": "7.1"
+		},
+		"php": {
+			"min": "8.1"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"sha256": "86e8e0f9979381db8667d8f473d1f87e742c17cf7678c951fc6bd49d1f768dca"
+	},
+	"changelog": {
+		"added": [
+			"Icon-blokk i Media, med bibliotek, ikon, størrelse, farge, stil eller vekt, og strektykkelse.",
+			"Åtte medfølgende biblioteker: Lucide, Material Symbols, Simple Icons, Phosphor, Tabler Icons, Heroicons, Ionicons og Octicons.",
+			"Bibliotek og innstillinger under Utseende → WP Icons.",
+			"Shortcode [wp_icon], Elementor-widget og Flatsome-element.",
+			"Inline-ikoner i riktekst, klassisk editor og Elementor.",
+			"PHP-hjelpere wpicons_get_icon(), wpicons_icon(), wpicons_icon_exists() og wpicons_get_libraries()."
+		],
+		"changed": [
+			"Omdøpt fra Lucide Icons til WP Icons.",
+			"Ikoner kommer som inline SVG fra kataloger i pluginen.",
+			"Krever WordPress 6.6 og PHP 8.1.",
+			"Benjamin Pedersen samarbeidet om redesignet.",
+			"[lucide_icon] er beholdt som alias for Lucide."
+		]
+	}
+}

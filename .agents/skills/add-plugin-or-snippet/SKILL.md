@@ -9,13 +9,13 @@ Follow [README.md](../../../README.md) section **Slik legger du til innhold**. D
 
 ## Hard rules
 
-- Write files under `content/` only. Do not change `app/`, `lib/`, components, or tests unless a test hard-codes the plugin/snippet list (then update that assertion).
+- Write files under `content/` only. Do not change `app/`, `lib/`, components, or tests. The only test a content add should touch is the slug arrays in `tests/content/validate.test.ts`, and only when a plugin or snippet is added or removed. A new release must not require a test edit.
 - Visible copy (`name`, `summary`, MDX) in Norwegian (`nb`). Slugs, filenames, and IDs in English kebab-case.
 - Copy an existing plugin or snippet as the template.
 - Never invent `download.sha256`. Copy GitHub's asset `digest` (`sha256:…` → 64 hex chars) or omit the field.
 - Never edit `tag`, `asset`, or `sha256` on an existing release file. Yank instead.
 - Do not put GitHub tokens in files, Vercel, or chat. Optional local `$env:GITHUB_TOKEN` for private repos only.
-- Run `npm run validate` before finishing. Restart `next dev` after a new slug (`dynamicParams = false`).
+- Run `npm run validate` and `npm test` before finishing. Restart `next dev` after a new slug (`dynamicParams = false`).
 
 ## Plugin
 
@@ -35,6 +35,7 @@ Follow [README.md](../../../README.md) section **Slik legger du til innhold**. D
 
 ```bash
 npm run validate
+npm test
 ```
 
 Fix errors. Warnings (`sha256-missing`, unused snippet tags) are allowed. Do not commit unless the user asks.

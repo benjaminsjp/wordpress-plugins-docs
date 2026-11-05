@@ -59,9 +59,9 @@ npm run verify-github
 
 ## Slik legger du til innhold
 
-Kun filer under `content/`. Ikke endre `app/`, `lib/` eller komponenter. Tekniske ID-er (slug, tag, filnavn) er engelsk kebab-case. Synlig tekst (`name`, `summary`, MDX) er norsk (`nb`).
+Kun filer under `content/`. Ikke endre `app/`, `lib/`, komponenter eller tester. Unntaket er slug-listene i `tests/content/validate.test.ts`, som oppdateres når en plugin eller snippet legges til eller fjernes. En ny release krever ingen testendring. Tekniske ID-er (slug, tag, filnavn) er engelsk kebab-case. Synlig tekst (`name`, `summary`, MDX) er norsk (`nb`).
 
-Kopier en eksisterende plugin eller snippet som mal. Kjør `npm run validate` før PR. Sidene bruker `dynamicParams = false` — start `next dev` på nytt etter en ny slug, ellers blir det 404.
+Kopier en eksisterende plugin eller snippet som mal. Kjør `npm run validate` og `npm test` før PR. Sidene bruker `dynamicParams = false` — start `next dev` på nytt etter en ny slug, ellers blir det 404.
 
 ### Ny plugin
 

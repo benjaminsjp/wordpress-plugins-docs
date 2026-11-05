@@ -64,6 +64,7 @@ describe("seed content", () => {
       "kontingentkalkulator",
       "videogalleri",
       "wp-icons-flatsome",
+      "wp-lucide-icons",
     ])
     expect(result.snippets.map((snippet) => snippet.slug)).toEqual([
       "button-improvements",
