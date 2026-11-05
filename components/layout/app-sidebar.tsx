@@ -52,7 +52,7 @@ export function AppSidebar({ nav }: { nav: NavData }) {
               isActive={pathname === "/"}
               className="h-auto py-3"
             >
-              <SiteLogo />
+              <SiteLogo priority />
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

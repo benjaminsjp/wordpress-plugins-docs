@@ -4,6 +4,9 @@ import {
   latestZipPath,
   latestZipRedirectsFromPlugins,
 } from "@/lib/content/latest-zip"
+import { loadPlugins } from "@/lib/content/load-plugins"
+import { getContentPaths } from "@/lib/content/paths"
+import { selectLatestRelease } from "@/lib/content/versions"
 
 describe("latestZipPath", () => {
   it("builds the stable portal path", () => {
@@ -88,65 +91,34 @@ describe("latestZipRedirectsFromPlugins", () => {
 })
 
 describe("getLatestZipRedirects", () => {
-  it("builds GitHub asset redirects from the real plugin content", async () => {
+  it("redirects each plugin to its latest release asset", async () => {
+    const { plugins } = await loadPlugins(getContentPaths())
     const redirects = await getLatestZipRedirects()
     const bySource = new Map(
       redirects.map((redirect) => [redirect.source, redirect])
     )
+    const withLatest = plugins.filter(
+      (plugin) =>
+        selectLatestRelease(plugin.releases, plugin.versionScheme) !== undefined
+    )
 
-    expect(bySource.get("/plugins/blogg-post-plugin-for-flatsome/latest.zip")).toEqual({
-      source: "/plugins/blogg-post-plugin-for-flatsome/latest.zip",
-      destination:
-        "https://github.com/bli-synlig-plugins/Blogg-post-plugin-for-flatsome/releases/download/v1.0.5/blogg-post-plugin-for-flatsome-v1.0.5.zip",
-      permanent: false,
-    })
-    expect(bySource.get("/plugins/flatsome-better-animations/latest.zip")).toEqual({
-      source: "/plugins/flatsome-better-animations/latest.zip",
-      destination:
-        "https://github.com/bli-synlig-plugins/flatsome-better-animations/releases/download/v2.0.1/flatsome-better-animations-2.0.1.zip",
-      permanent: false,
-    })
-    expect(bySource.get("/plugins/flatsome-ekstra-farger/latest.zip")).toEqual({
-      source: "/plugins/flatsome-ekstra-farger/latest.zip",
-      destination:
-        "https://github.com/bli-synlig-plugins/flatsome-ekstra-farger/releases/download/v1.0.0/flatsome-ekstra-farger-1.0.0.zip",
-      permanent: false,
-    })
-    expect(bySource.get("/plugins/kafra-auto-skjema/latest.zip")).toEqual({
-      source: "/plugins/kafra-auto-skjema/latest.zip",
-      destination:
-        "https://github.com/bli-synlig-plugins/kafra-auto-skjema/releases/download/v1.1.8/kafra-auto-skjema-1.1.8.zip",
-      permanent: false,
-    })
-    expect(bySource.get("/plugins/kafra-datablad/latest.zip")).toEqual({
-      source: "/plugins/kafra-datablad/latest.zip",
-      destination:
-        "https://github.com/bli-synlig-plugins/kafra-datablad/releases/download/v1.2.2/kafra-datablad-1.2.2.zip",
-      permanent: false,
-    })
-    expect(bySource.get("/plugins/kafra-produktkatalog/latest.zip")).toEqual({
-      source: "/plugins/kafra-produktkatalog/latest.zip",
-      destination:
-        "https://github.com/bli-synlig-plugins/kafra-produktkatalog/releases/download/v1.4.1/kafra-produktkatalog-1.4.1.zip",
-      permanent: false,
-    })
-    expect(bySource.get("/plugins/kontingentkalkulator/latest.zip")).toEqual({
-      source: "/plugins/kontingentkalkulator/latest.zip",
-      destination:
-        "https://github.com/bli-synlig-plugins/kontingentkalkulator/releases/download/v1.0.2/kontingentkalkulator-1.0.2.zip",
-      permanent: false,
-    })
-    expect(bySource.get("/plugins/videogalleri/latest.zip")).toEqual({
-      source: "/plugins/videogalleri/latest.zip",
-      destination:
-        "https://github.com/bli-synlig-plugins/videogalleri/releases/download/v1.1.1/videogalleri-1.1.1.zip",
-      permanent: false,
-    })
-    expect(bySource.get("/plugins/wp-icons-flatsome/latest.zip")).toEqual({
-      source: "/plugins/wp-icons-flatsome/latest.zip",
-      destination:
-        "https://github.com/bli-synlig-plugins/wp-icons-flatsome/releases/download/v1.0.0/wp-icons-flatsome-1.0.0.zip",
-      permanent: false,
-    })
+    expect(redirects).toHaveLength(withLatest.length)
+    expect(bySource.size).toBe(redirects.length)
+
+    for (const plugin of plugins) {
+      const latest = selectLatestRelease(plugin.releases, plugin.versionScheme)
+      const source = latestZipPath(plugin.slug)
+
+      if (!latest) {
+        expect(bySource.has(source)).toBe(false)
+        continue
+      }
+
+      expect(bySource.get(source)).toEqual({
+        source,
+        destination: latest.resolved.downloadUrl,
+        permanent: false,
+      })
+    }
   })
 })
