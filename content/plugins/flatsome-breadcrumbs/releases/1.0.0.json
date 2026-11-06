@@ -1,0 +1,49 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-06",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"dependencies": [
+		{
+			"plugin": "wp-lucide-icons",
+			"type": "optional",
+			"minVersion": "2.0.0",
+			"reason": "Ikonbiblioteket som brukes av WP Icons for Flatsome."
+		},
+		{
+			"plugin": "wp-icons-flatsome",
+			"type": "optional",
+			"reason": "Gir wpicons-feltet for egendefinert separator-ikon i UX Builder."
+		},
+		{
+			"plugin": "flatsome-ekstra-farger",
+			"type": "optional",
+			"reason": "Ekstra fargeprøver i colorpicker via helper-titlene Primary, Secondary, Success og Alert."
+		},
+		{
+			"external": {
+				"name": "WooCommerce",
+				"slug": "woocommerce",
+				"url": "https://wordpress.org/plugins/woocommerce/"
+			},
+			"type": "optional",
+			"reason": "Butikk, produktkategorier, produkt og andre WooCommerce-sider i stien."
+		}
+	],
+	"download": {
+		"sha256": "03e228763299533a597541bd4866828c43d12926efb43ae5ae7f453b0f1a3f8b"
+	},
+	"changelog": {
+		"added": [
+			"UX Builder-elementet Breadcrumbs under Layout, shortcode [ux_breadcrumbs].",
+			"Egen brødsmulesti for sider, innlegg, blogg, kategori, merkelapp, søk, 404 og WooCommerce.",
+			"Ellipsis-meny som skjuler midtre smuler når sporet er for bredt, med tastaturnavigasjon.",
+			"Forhåndsvisning i UX Builder: Home › Docs › Components › Breadcrumb.",
+			"Valgfri JSON-LD BreadcrumbList og filtrene fbc_breadcrumb_items og fbc_breadcrumb_item."
+		]
+	}
+}

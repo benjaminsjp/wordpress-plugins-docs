@@ -1,0 +1,30 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-05",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.6" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"dependencies": [
+		{
+			"plugin": "wp-lucide-icons",
+			"type": "required",
+			"minVersion": "2.0.0",
+			"reason": "Ikonbiblioteket som velges i UX Builder."
+		}
+	],
+	"download": {
+		"sha256": "343ad04c37139692277bd6ef4434c8910d2cadfcdb72c4e94b499d8403a289fe"
+	},
+	"changelog": {
+		"added": [
+			"Støtte for WP Icons 2.0-pickeren med flere bibliotek og ikonvarianter."
+		],
+		"changed": [
+			"Ikon-referanser lagres som library:name[:variant]. Eldre library/name-verdier vises fortsatt.",
+			"Krever WP Icons 2.0+."
+		]
+	}
+}

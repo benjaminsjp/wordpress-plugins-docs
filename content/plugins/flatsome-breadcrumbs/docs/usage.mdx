@@ -1,0 +1,117 @@
+I UX Builder ligger elementet **Breadcrumbs** under **Layout**. Alternativt i innhold:
+
+```
+[ux_breadcrumbs separator="chevron" align="left" show_home="true" home_label="Home"]
+```
+
+I UX Builder-iframe vises en prøvesti — Home, Docs, Components, Breadcrumb — med valgt separator og stil.
+
+### Hva stien inneholder
+
+- Hjem, deretter side- eller innleggs-forfedre, deretter gjeldende element
+- Blogg-indeks, kategori, merkelapp, forfatter, dato, søk og 404
+- Egendefinerte innholdstyper: arkivlenke når typen har arkiv, deretter forfedre eller primær term
+- Med WooCommerce: butikk, produktkategorier, produkt og andre produkt-taksonomier. Handlekurv, kasse og Min konto følger sidestien, med gjeldende endepunkt når det er åpent
+
+Yoast og Rank Math primærterm brukes når de er satt. Ellers brukes den dypeste tildelte termen.
+
+### Innhold
+
+| Valg | Attributt | Standard | Merknad |
+| --- | --- | --- | --- |
+| Vis hjem | `show_home` | `true` | |
+| Hjem-etikett | `home_label` | Home | |
+| Hjem som ikon | `home_icon` | `false` | Hus-ikon, etikett beholdes for skjermlesere |
+| Skjul gjeldende | `hide_current` | `false` | Fjerner gjeldende side fra synlig sti |
+| Maks elementer før ellipsis | `max_items` | `0` | Hvor mange **midtre** smuler som blir synlige. `0` folder bare når raden flyter over |
+| Skjema-markup | `schema` | `false` | JSON-LD `BreadcrumbList` |
+
+### Separator
+
+| Valg | Attributt | Standard |
+| --- | --- | --- |
+| Forhåndsvalg | `separator` | `chevron` |
+
+Forhåndsvalg: `chevron`, `slash`, `arrow`, `dot`. De er innebygde Lucide-SVG-er og trenger ikke WP Icons.
+
+Når **WP Icons** og **WP Icons for Flatsome** er aktive, vises **Egendefinert ikon** (`separator_icon`, option type `wpicons`). Et valgt ikon erstatter forhåndsvalget. Verdien lagres som `library:name` eller `library:name:variant` (for eksempel `lucide:chevron-right`).
+
+### Stil
+
+| Valg | Attributt | Standard |
+| --- | --- | --- |
+| Justering | `align` | `left` (`left`, `center`, `right`) |
+| Skriftstørrelse | `font_size` | `14` (px) |
+| Mellomrom | `gap` | `8` (px) |
+| Ikonstørrelse | `icon_size` | `14` (px) |
+
+Ikonstørrelse gjelder separator og hjem-ikon.
+
+### Farger
+
+Lenke, hover, gjeldende og separator er Flatsome `colorpicker`-felt. Helper-listen har **Dark**, **White**, **Primary**, **Secondary**, **Success** og **Alert**. Titlene er de engelske navnene Flatsome ekstra farger ser etter, så ekstra prøver fra den pluginen flettes inn via `ux_builder_shortcode_data`.
+
+Renderede farger godtar hex (`#rgb`, `#rrggbb`, `#rrggbbaa`), `rgb()` / `rgba()`, `hsl()` / `hsla()`, `var(--token)` og `rgb(var(--token))`. Andre verdier droppes.
+
+### Avansert
+
+| Valg | Attributt |
+| --- | --- |
+| Klasse | `class` |
+| ID | `id` |
+
+### Ellipsis-meny
+
+Hvis stien er bredere enn brødsmulen, eller `max_items` holder færre midtre smuler enn stien har, foldes de tidligere midtre smulene inn:
+
+`Home › … › Components › Breadcrumb`
+
+Ellipsis er en `<button type="button">`. Nedtrekket lister de skjulte sidene. Hjem (når vist) og gjeldende side blir synlige. Bredde måles med `ResizeObserver`. Gjeldende etikett avkortes bare når hjem, ellipsis og gjeldende side fortsatt ikke får plass.
+
+Tastatur: Pil ned på knappen åpner menyen, pil opp/ned samt Home/End flytter inne i den, Escape lukker og setter fokus tilbake på knappen, Tab lukker den, og klikk utenfor lukker den.
+
+Uten JavaScript skjules ellipsis, og stien brytes over flere linjer.
+
+### Markup
+
+```html
+<nav aria-label="Breadcrumb">
+  <ol class="fbc-list">
+    …
+    <li><span aria-current="page">Current</span></li>
+  </ol>
+</nav>
+```
+
+Separatorer er `aria-hidden`. Skjema, når det er slått på, er en `BreadcrumbList` JSON-LD-blokk. **Skjul gjeldende** fjerner siste smule bare fra HTML; skjema-listen inkluderer den fortsatt.
+
+### Filtre
+
+```php
+add_filter('fbc_breadcrumb_items', function ($items, $args) {
+    // $args: show_home (bool), home_label (string), home_icon (bool).
+    $items[] = array(
+        'label' => 'Extra',
+        'url' => home_url('/extra/'),
+    );
+    return $items;
+}, 10, 2);
+
+add_filter('fbc_breadcrumb_item', function ($item, $index, $items) {
+    if ($index === 0) {
+        $item['label'] = 'Start';
+    }
+    return $item;
+}, 10, 3);
+```
+
+Hvert element er et array:
+
+| Nøkkel | Betydning |
+| --- | --- |
+| `label` | Ren tekst. Tagger strippes. |
+| `url` | Absolutt eller relativ URL. Tom betyr ikke lenke. |
+| `current` | Siste element behandles som gjeldende side etter filtrering. |
+| `icon` | `home` viser hus-ikonet. Alt annet ignoreres. |
+
+`FBC_Trail::get($args)` returnerer samme liste fra PHP. Forhåndsvisningen i builder kjører ikke filtrene; den viser alltid prøvestien.
