@@ -1,7 +1,7 @@
 {
 	"$schema": "../../../schemas/plugin.schema.json",
 	"name": "WP Icons",
-	"summary": "Inline SVG fra Lucide, Material Symbols, Phosphor og de andre medfølgende ikonbibliotekene.",
+	"summary": "Ikoner i teksten du skriver, i Flatsome, WPBakery, Woodmart, Elementor og Gutenberg.",
 	"versionScheme": "semver",
 	"status": "active",
 	"repository": {
@@ -9,7 +9,7 @@
 		"repo": "wp-lucide-icons",
 		"visibility": "public"
 	},
-	"tags": ["icons"],
+	"tags": ["icons", "flatsome", "ux-builder", "elementor", "wpbakery", "gutenberg", "woodmart", "lucide"],
 	"author": "kim",
 	"maintainer": "Kim",
 	"changelogUrl": "https://github.com/kimlukasmyrvold/wp-lucide-icons/blob/main/CHANGELOG.md",
