@@ -1,0 +1,7 @@
+Pluginen legger til **Breadcrumbs** i Flatsome UX Builder (kategori **Layout**). Shortcoden er `[ux_breadcrumbs]`. Stien bygges fra gjeldende side — den wrapper ikke `woocommerce_breadcrumb`.
+
+Når sporet er bredere enn beholderen, foldes midtre smuler inn i en ellipsis-knapp med nedtrekksmeny (`Home › … › Parent › Current`). Hjem og gjeldende side blir stående. Bredden måles med `ResizeObserver`, ikke bare et fast skjermbrudd.
+
+Krever Flatsome for UX Builder-elementet. Uten Flatsome vises en admin-advarsel; shortcoden renderer likevel. **WP Icons** og **WP Icons for Flatsome** gir et `wpicons`-felt for egendefinert separator. **WooCommerce** utvider stien med butikk, kategorier og produkt. **Flatsome ekstra farger** kan legge inn egne fargeprøver fordi colorpicker-feltene bruker Flatsomes helper-titler.
+
+GitHub-repositoriet er offentlig: [`flatsome-breadcrumbs`](https://github.com/bli-synlig-plugins/flatsome-breadcrumbs). Last ned ZIP-en fra GitHub Release `v1.0.0`.
