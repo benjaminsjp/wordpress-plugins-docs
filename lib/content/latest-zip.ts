@@ -10,7 +10,10 @@ export type LatestZipPlugin = {
     version: string
     channel: ReleaseChannel
     yanked?: { reason: string } | null
-    resolved: { downloadUrl: string }
+    resolved: {
+      downloadUrl: string
+      extras?: Array<{ id: string; downloadUrl: string }>
+    }
   }>
 }
 
@@ -22,6 +25,10 @@ export type LatestZipRedirect = {
 
 export function latestZipPath(slug: string): string {
   return `/plugins/${slug}/latest.zip`
+}
+
+export function latestExtraZipPath(slug: string, id: string): string {
+  return `/plugins/${slug}/latest-${id}.zip`
 }
 
 export function latestZipRedirectsFromPlugins(
@@ -38,6 +45,14 @@ export function latestZipRedirectsFromPlugins(
       destination: latest.resolved.downloadUrl,
       permanent: false,
     })
+
+    for (const extra of latest.resolved.extras ?? []) {
+      redirects.push({
+        source: latestExtraZipPath(plugin.slug, extra.id),
+        destination: extra.downloadUrl,
+        permanent: false,
+      })
+    }
   }
 
   return redirects

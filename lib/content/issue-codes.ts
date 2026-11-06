@@ -15,6 +15,7 @@ export const ISSUE_CODES = {
   SHA256_INVALID: "sha256-invalid",
   SHA256_MISSING: "sha256-missing",
   DOWNLOAD_DUPLICATE: "download-duplicate",
+  EXTRA_ID_DUPLICATE: "extra-id-duplicate",
   REF_MISSING: "ref-missing",
   SELF_DEPENDENCY: "self-dependency",
   MIN_VERSION_INVALID: "min-version-invalid",

@@ -43,6 +43,55 @@ export function normalizeSha256(value: string): string {
   return value.replace(/^sha256:/i, "").trim().toLowerCase()
 }
 
+function verifyRecordedAsset(options: {
+  remote: GitHubReleasePayload
+  file: string
+  tag: string
+  assetName: string
+  sha256?: string
+  shaPath: string
+}): Issue[] {
+  const asset = options.remote.assets.find((item) => item.name === options.assetName)
+  if (!asset) {
+    return [
+      {
+        code: ISSUE_CODES.GITHUB_ASSET_MISSING,
+        severity: "error",
+        file: options.file,
+        message: `Asset "${options.assetName}" was not found on GitHub release "${options.tag}".`,
+      },
+    ]
+  }
+
+  if (!options.sha256) return []
+
+  if (!asset.digest) {
+    return [
+      {
+        code: ISSUE_CODES.GITHUB_DIGEST_MISSING,
+        severity: "warning",
+        file: options.file,
+        path: options.shaPath,
+        message: `GitHub did not report a digest for "${options.assetName}".`,
+      },
+    ]
+  }
+
+  if (normalizeSha256(asset.digest) !== normalizeSha256(options.sha256)) {
+    return [
+      {
+        code: ISSUE_CODES.GITHUB_DIGEST_MISMATCH,
+        severity: "error",
+        file: options.file,
+        path: options.shaPath,
+        message: `Recorded SHA-256 does not match the digest GitHub reports for "${options.assetName}".`,
+      },
+    ]
+  }
+
+  return []
+}
+
 export function createGitHubClient(options: {
   token?: string
   fetchImpl?: typeof fetch
@@ -182,41 +231,28 @@ export async function verifyGitHubReleases(
         })
       }
 
-      const asset = remote.assets.find(
-        (item) => item.name === release.resolved.asset
+      issues.push(
+        ...verifyRecordedAsset({
+          remote,
+          file: release.file,
+          tag: release.resolved.tag,
+          assetName: release.resolved.asset,
+          sha256: release.download?.sha256,
+          shaPath: "download.sha256",
+        })
       )
-      if (!asset) {
-        issues.push({
-          code: ISSUE_CODES.GITHUB_ASSET_MISSING,
-          severity: "error",
-          file: release.file,
-          message: `Asset "${release.resolved.asset}" was not found on GitHub release "${release.resolved.tag}".`,
-        })
-        continue
-      }
 
-      const recorded = release.download?.sha256
-      if (!recorded) continue
-
-      if (!asset.digest) {
-        issues.push({
-          code: ISSUE_CODES.GITHUB_DIGEST_MISSING,
-          severity: "warning",
-          file: release.file,
-          path: "download.sha256",
-          message: `GitHub did not report a digest for "${release.resolved.asset}".`,
-        })
-        continue
-      }
-
-      if (normalizeSha256(asset.digest) !== normalizeSha256(recorded)) {
-        issues.push({
-          code: ISSUE_CODES.GITHUB_DIGEST_MISMATCH,
-          severity: "error",
-          file: release.file,
-          path: "download.sha256",
-          message: `Recorded SHA-256 does not match the digest GitHub reports for "${release.resolved.asset}".`,
-        })
+      for (const [index, extra] of release.resolved.extras.entries()) {
+        issues.push(
+          ...verifyRecordedAsset({
+            remote,
+            file: release.file,
+            tag: release.resolved.tag,
+            assetName: extra.asset,
+            sha256: extra.sha256,
+            shaPath: `download.extras.${index}.sha256`,
+          })
+        )
       }
     }
   }

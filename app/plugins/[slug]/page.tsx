@@ -29,7 +29,7 @@ import {
   getTaxonomy,
 } from "@/lib/content"
 import { repositoryUrl } from "@/lib/content/github"
-import { latestZipPath } from "@/lib/content/latest-zip"
+import { latestExtraZipPath, latestZipPath } from "@/lib/content/latest-zip"
 import { extractMdxHeadings } from "@/lib/content/mdx-headings"
 import { readPluginDocSource } from "@/lib/content/load-mdx"
 import { buildPluginToc } from "@/lib/toc"
@@ -110,6 +110,15 @@ export default async function PluginPage({
               className="w-full"
             />
           ) : null}
+          {latest?.resolved.extras.map((extra) => (
+            <DownloadButton
+              key={extra.id}
+              href={latestExtraZipPath(plugin.slug, extra.id)}
+              label={strings.plugins.downloadExtra(extra.label)}
+              variant="outline"
+              className="w-full"
+            />
+          ))}
           <Button
             variant="outline"
             size="lg"
