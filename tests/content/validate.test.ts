@@ -57,6 +57,7 @@ describe("seed content", () => {
     expect(result.plugins.map((plugin) => plugin.slug)).toEqual([
       "blogg-post-plugin-for-flatsome",
       "flatsome-better-animations",
+      "flatsome-breadcrumbs",
       "flatsome-ekstra-farger",
       "kafra-auto-skjema",
       "kafra-datablad",

@@ -1,0 +1,18 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "Flatsome Breadcrumbs",
+	"summary": "UX Builder-breadcrumbs med ellipsis-meny for Flatsome. Egen sti for sider, arkiv og WooCommerce.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "flatsome-breadcrumbs",
+		"visibility": "public"
+	},
+	"tags": ["flatsome", "ux-builder"],
+	"author": "benjamin",
+	"maintainer": "Bli Synlig",
+	"related": {
+		"plugins": ["wp-icons-flatsome", "flatsome-ekstra-farger"]
+	}
+}
