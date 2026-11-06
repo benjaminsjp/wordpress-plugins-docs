@@ -156,7 +156,6 @@ export function OnThisPage({ items }: { items: TocItem[] }) {
   const highlightRef = useRef<SVGPathElement>(null)
   const positionsRef = useRef<ItemPosition[]>([])
   const activeIdsRef = useRef(activeIds)
-  activeIdsRef.current = activeIds
 
   useLayoutEffect(() => {
     if (items.length < 2) return
