@@ -5,11 +5,18 @@ import {
 import { ISSUE_CODES, type Issue } from "./issue-codes"
 import { pluginJsonSchema, releaseJsonSchema } from "./schemas"
 
+export type ReleaseExtraIdentity = {
+  id: string
+  asset: string
+  sha256: string | null
+}
+
 export type ReleaseIdentity = {
   file: string
   tag: string
   asset: string
   sha256: string | null
+  extras: ReleaseExtraIdentity[]
 }
 
 export type ReleaseIdentityInput = {
@@ -54,6 +61,11 @@ export function toReleaseIdentity(input: ReleaseIdentityInput): ReleaseIdentity 
     tag: resolved.tag,
     asset: resolved.asset,
     sha256: input.download?.sha256 ?? null,
+    extras: resolved.extras.map((extra) => ({
+      id: extra.id,
+      asset: extra.asset,
+      sha256: extra.sha256 ?? null,
+    })),
   }
 }
 
@@ -102,6 +114,37 @@ function parseJson(raw: string): unknown {
   } catch {
     return null
   }
+}
+
+function extraIdentityChanges(
+  base: ReleaseExtraIdentity[],
+  head: ReleaseExtraIdentity[]
+): string[] {
+  const changes: string[] = []
+  const baseById = new Map(base.map((extra) => [extra.id, extra]))
+  const headById = new Map(head.map((extra) => [extra.id, extra]))
+
+  for (const [id, item] of baseById) {
+    const next = headById.get(id)
+    if (!next) {
+      changes.push(`extra "${id}" removed`)
+      continue
+    }
+    if (item.asset !== next.asset) {
+      changes.push(`extra "${id}" asset "${item.asset}" → "${next.asset}"`)
+    }
+    if ((item.sha256 ?? null) !== (next.sha256 ?? null)) {
+      changes.push(`extra "${id}" sha256`)
+    }
+  }
+
+  for (const id of headById.keys()) {
+    if (!baseById.has(id)) {
+      changes.push(`extra "${id}" added`)
+    }
+  }
+
+  return changes
 }
 
 export function compareReleaseIdentities(options: {
@@ -157,6 +200,7 @@ export function compareReleaseIdentities(options: {
     if ((base.sha256 ?? null) !== (head.sha256 ?? null)) {
       changes.push("sha256")
     }
+    changes.push(...extraIdentityChanges(base.extras, head.extras))
 
     if (changes.length > 0) {
       issues.push({

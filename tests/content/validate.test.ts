@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest"
 import { assertNoContentErrors, ISSUE_CODES } from "@/lib/content/issue-codes"
 import type { PluginRecord } from "@/lib/content/load-plugins"
 import { CONTENT_ROOT } from "@/lib/content/paths"
+import { releaseJsonSchema } from "@/lib/content/schemas"
 import { crossValidate, loadAndValidate } from "@/lib/content/validate"
 
 const fixturesRoot = path.join(
@@ -116,6 +117,62 @@ describe("in-memory uniqueness", () => {
       ISSUE_CODES.VERSION_DUPLICATE
     )
   })
+
+  it("checks extra ids, zip names, hashes, and shared assets", () => {
+    const plugin = makePlugin("demo")
+    const release = plugin.releases[0]
+    if (!release) return
+    release.download = {
+      sha256: "a".repeat(64),
+      extras: [
+        {
+          id: "lite",
+          label: "Lite",
+          asset: "demo-1.0.0.zip",
+          sha256: "not-a-hash",
+        },
+        { id: "lite", label: "Lite", asset: "demo-lite.tar" },
+      ],
+    }
+    release.resolved.extras = [
+      {
+        id: "lite",
+        label: "Lite",
+        asset: "demo-1.0.0.zip",
+        sha256: "not-a-hash",
+        downloadUrl: "https://example.com/lite.zip",
+      },
+      {
+        id: "lite",
+        label: "Lite",
+        asset: "demo-lite.tar",
+        downloadUrl: "https://example.com/lite.tar",
+      },
+    ]
+
+    const issues = crossValidate([plugin], [], undefined)
+    expect(issues.map((issue) => issue.code)).toEqual(
+      expect.arrayContaining([
+        ISSUE_CODES.EXTRA_ID_DUPLICATE,
+        ISSUE_CODES.DOWNLOAD_DUPLICATE,
+        ISSUE_CODES.ASSET_NOT_ZIP,
+        ISSUE_CODES.SHA256_INVALID,
+        ISSUE_CODES.SHA256_MISSING,
+      ])
+    )
+  })
+
+  it("rejects an extra id that is not kebab-case", () => {
+    const parsed = releaseJsonSchema.safeParse({
+      releaseDate: "2026-01-01",
+      channel: "stable",
+      requirements: { wordpress: { min: "6.4" }, php: { min: "8.1" } },
+      download: {
+        extras: [{ id: "Lite", label: "Lite", asset: "demo-lite.zip" }],
+      },
+    })
+    expect(parsed.success).toBe(false)
+  })
 })
 
 function makePlugin(slug: string): PluginRecord {
@@ -156,6 +213,7 @@ function makeReleaseBase(
       downloadUrl: "https://example.com",
       releasePageUrl: "https://example.com",
       repositoryUrl: "https://example.com",
+      extras: [],
     },
   }
 }

@@ -187,6 +187,69 @@ describe("verifyGitHubReleases", () => {
     ])
   })
 
+  it("checks an extra asset and its digest on the same release", async () => {
+    const record = plugin({
+      slug: "public-plugin",
+      visibility: "public",
+      sha256: SHA,
+    })
+    const extraSha = "c".repeat(64)
+    const release = record.releases[0]
+    if (!release) return
+    release.resolved.extras = [
+      {
+        id: "lite",
+        label: "Lite",
+        asset: "public-plugin-lite-1.0.0.zip",
+        sha256: extraSha,
+        downloadUrl: "https://example.com/lite.zip",
+      },
+    ]
+
+    const missing = await verifyGitHubReleases(
+      [record],
+      mockClient({
+        repos: { "bli-synlig-plugins/public-plugin": { private: false } },
+        releases: {
+          "bli-synlig-plugins/public-plugin@v1.0.0": {
+            draft: false,
+            prerelease: false,
+            tag_name: "v1.0.0",
+            assets: [{ name: release.resolved.asset, digest: `sha256:${SHA}` }],
+          },
+        },
+      })
+    )
+    expect(missing.map((issue) => issue.code)).toEqual([
+      ISSUE_CODES.GITHUB_ASSET_MISSING,
+    ])
+
+    const mismatch = await verifyGitHubReleases(
+      [record],
+      mockClient({
+        repos: { "bli-synlig-plugins/public-plugin": { private: false } },
+        releases: {
+          "bli-synlig-plugins/public-plugin@v1.0.0": {
+            draft: false,
+            prerelease: false,
+            tag_name: "v1.0.0",
+            assets: [
+              { name: release.resolved.asset, digest: `sha256:${SHA}` },
+              {
+                name: "public-plugin-lite-1.0.0.zip",
+                digest: `sha256:${"d".repeat(64)}`,
+              },
+            ],
+          },
+        },
+      })
+    )
+    expect(mismatch.map((issue) => issue.code)).toEqual([
+      ISSUE_CODES.GITHUB_DIGEST_MISMATCH,
+    ])
+    expect(mismatch[0]?.path).toBe("download.extras.0.sha256")
+  })
+
   it("errors when a private repository is 404 without access", async () => {
     const issues = await verifyGitHubReleases(
       [plugin({ slug: "kafra-datablad", visibility: "private" })],

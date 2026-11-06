@@ -1,0 +1,31 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-06",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.6",
+			"tested": "7.1"
+		},
+		"php": {
+			"min": "8.1"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"sha256": "f82c31983d8c6aa01f4205e5e1b9b85d3effede14585d7883d6fb253975f9df6",
+		"extras": [
+			{
+				"id": "lite",
+				"label": "Lite",
+				"asset": "wp-lucide-icons-lite-2.1.0.zip",
+				"sha256": "faf0fbcab9900d4f046db98ebb58e823ca3075b47ab009bc86a0c555d46f282f"
+			}
+		]
+	},
+	"changelog": {
+		"added": [
+			"Lite-ZIP for nettsteder som ikke kan laste opp hele pluginen. Det er samme plugin, vist som WP Icons Lite, og henter bibliotekene fra den bufrede npm-CDN-en i stedet for å sende med ikonfilene."
+		]
+	}
+}

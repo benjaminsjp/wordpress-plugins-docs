@@ -179,6 +179,34 @@
 				},
 				"sha256": {
 					"type": "string"
+				},
+				"extras": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string",
+								"pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+							},
+							"label": {
+								"type": "string",
+								"minLength": 1
+							},
+							"asset": {
+								"type": "string",
+								"minLength": 1
+							},
+							"sha256": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"id",
+							"label",
+							"asset"
+						]
+					}
 				}
 			}
 		},

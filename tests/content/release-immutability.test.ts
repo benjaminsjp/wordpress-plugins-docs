@@ -96,6 +96,25 @@ describe("compareReleaseIdentities", () => {
     expect(issues).toEqual([])
   })
 
+  it("errors when an extra is added to a published release", () => {
+    const head = toReleaseIdentity({
+      file: base.file,
+      slug: "demo",
+      version: "1.0.0",
+      owner: "bli-synlig-plugins",
+      repo: "demo",
+      download: {
+        extras: [
+          { id: "lite", label: "Lite", asset: "demo-lite-1.0.0.zip" },
+        ],
+      },
+    })
+    const issues = compareReleaseIdentities({ base: [base], head: [head] })
+    expect(issues).toHaveLength(1)
+    expect(issues[0]?.code).toBe(ISSUE_CODES.RELEASE_IMMUTABLE_FIELD)
+    expect(issues[0]?.message).toMatch(/extra "lite" added/)
+  })
+
   it("allows a plugin assetPattern correction when the release file is unchanged", () => {
     const issues = compareReleaseIdentities({
       base: [base],
@@ -118,7 +137,69 @@ describe("identitiesFromContentFiles", () => {
         tag: "v1.0.0",
         asset: "demo-1.0.0.zip",
         sha256: null,
+        extras: [],
       },
     ])
+  })
+
+  it("locks an extra asset and hash, and ignores its label", () => {
+    const withLite = JSON.stringify({
+      releaseDate: "2026-01-01",
+      channel: "stable",
+      requirements: {
+        wordpress: { min: "6.4" },
+        php: { min: "8.1" },
+      },
+      download: {
+        sha256: "a".repeat(64),
+        extras: [
+          {
+            id: "lite",
+            label: "Lite",
+            asset: "demo-lite-1.0.0.zip",
+            sha256: "b".repeat(64),
+          },
+        ],
+      },
+    })
+    const relabeled = withLite.replace('"label":"Lite"', '"label":"Lett"')
+    const [identity] = identitiesFromContentFiles({
+      "content/plugins/demo/plugin.json": pluginJson,
+      "content/plugins/demo/releases/1.0.0.json": withLite,
+    })
+    const [relabeledIdentity] = identitiesFromContentFiles({
+      "content/plugins/demo/plugin.json": pluginJson,
+      "content/plugins/demo/releases/1.0.0.json": relabeled,
+    })
+
+    expect(identity?.extras).toEqual([
+      {
+        id: "lite",
+        asset: "demo-lite-1.0.0.zip",
+        sha256: "b".repeat(64),
+      },
+    ])
+    expect(relabeledIdentity).toEqual(identity)
+
+    const changed = identity
+      ? {
+          ...identity,
+          extras: [
+            {
+              id: "lite",
+              asset: "other-lite.zip",
+              sha256: "c".repeat(64),
+            },
+          ],
+        }
+      : identity
+    const issues = compareReleaseIdentities({
+      base: identity ? [identity] : [],
+      head: changed ? [changed] : [],
+    })
+    expect(issues).toHaveLength(1)
+    expect(issues[0]?.code).toBe(ISSUE_CODES.RELEASE_IMMUTABLE_FIELD)
+    expect(issues[0]?.message).toMatch(/extra "lite" asset/)
+    expect(issues[0]?.message).toMatch(/extra "lite" sha256/)
   })
 })

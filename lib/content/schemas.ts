@@ -85,6 +85,13 @@ export const changelogSchema = z.object({
   security: z.array(nonEmptyString).optional(),
 })
 
+export const downloadExtraSchema = z.object({
+  id: z.string().regex(SLUG_PATTERN),
+  label: nonEmptyString,
+  asset: nonEmptyString,
+  sha256: z.string().optional(),
+})
+
 export const releaseJsonSchema = z.object({
   $schema: z.string().optional(),
   releaseDate: isoDateSchema,
@@ -101,6 +108,7 @@ export const releaseJsonSchema = z.object({
       tag: nonEmptyString.optional(),
       asset: nonEmptyString.optional(),
       sha256: z.string().optional(),
+      extras: z.array(downloadExtraSchema).optional(),
     })
     .optional(),
   changelog: changelogSchema.optional(),

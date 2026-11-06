@@ -43,6 +43,7 @@ function plugin(options: {
           downloadUrl: "https://example.com",
           releasePageUrl: "https://example.com",
           repositoryUrl: "https://example.com",
+          extras: [],
         },
       },
     ],

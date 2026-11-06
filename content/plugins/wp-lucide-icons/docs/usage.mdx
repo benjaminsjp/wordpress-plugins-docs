@@ -51,4 +51,6 @@ Utelatte attributter faller tilbake til **Utseende → WP Icons → Innstillinge
 
 Besøkende får ikonene som inline SVG. Siden henter ikke ikoner fra npm eller en CDN. Kilde **cdn** laster ned en nyere katalog i bakgrunnen og mellomlagrer den. Er cachen tom, brukes katalogen som følger med pluginen.
 
+Lite-ZIP-en sender ikke med ikonfilene. Den heter WP Icons Lite og henter hvert bibliotek fra den bufrede npm-CDN-en.
+
 I PHP skriver `wpicons_icon()` ut et ikon, og `wpicons_get_icon()` returnerer SVG-en.

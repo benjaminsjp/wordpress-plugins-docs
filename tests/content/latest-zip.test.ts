@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 import {
   getLatestZipRedirects,
+  latestExtraZipPath,
   latestZipPath,
   latestZipRedirectsFromPlugins,
 } from "@/lib/content/latest-zip"
@@ -12,6 +13,9 @@ describe("latestZipPath", () => {
   it("builds the stable portal path", () => {
     expect(latestZipPath("kafra-datablad")).toBe(
       "/plugins/kafra-datablad/latest.zip"
+    )
+    expect(latestExtraZipPath("wp-lucide-icons", "lite")).toBe(
+      "/plugins/wp-lucide-icons/latest-lite.zip"
     )
   })
 })
@@ -81,6 +85,40 @@ describe("latestZipRedirectsFromPlugins", () => {
     expect(redirects[0]?.permanent).toBe(false)
   })
 
+  it("adds a stable path for each extra on the latest release", () => {
+    const redirects = latestZipRedirectsFromPlugins([
+      {
+        slug: "demo",
+        versionScheme: "semver",
+        releases: [
+          {
+            version: "2.1.0",
+            channel: "stable",
+            resolved: {
+              downloadUrl: "https://example.com/full.zip",
+              extras: [
+                { id: "lite", downloadUrl: "https://example.com/lite.zip" },
+              ],
+            },
+          },
+        ],
+      },
+    ])
+
+    expect(redirects).toEqual([
+      {
+        source: "/plugins/demo/latest.zip",
+        destination: "https://example.com/full.zip",
+        permanent: false,
+      },
+      {
+        source: "/plugins/demo/latest-lite.zip",
+        destination: "https://example.com/lite.zip",
+        permanent: false,
+      },
+    ])
+  })
+
   it("omits plugins with no downloadable release", () => {
     expect(
       latestZipRedirectsFromPlugins([
@@ -102,7 +140,12 @@ describe("getLatestZipRedirects", () => {
         selectLatestRelease(plugin.releases, plugin.versionScheme) !== undefined
     )
 
-    expect(redirects).toHaveLength(withLatest.length)
+    const expectedCount = withLatest.reduce((count, plugin) => {
+      const latest = selectLatestRelease(plugin.releases, plugin.versionScheme)
+      return count + 1 + (latest?.resolved.extras.length ?? 0)
+    }, 0)
+
+    expect(redirects).toHaveLength(expectedCount)
     expect(bySource.size).toBe(redirects.length)
 
     for (const plugin of plugins) {
@@ -119,6 +162,15 @@ describe("getLatestZipRedirects", () => {
         destination: latest.resolved.downloadUrl,
         permanent: false,
       })
+
+      for (const extra of latest.resolved.extras) {
+        const extraSource = latestExtraZipPath(plugin.slug, extra.id)
+        expect(bySource.get(extraSource)).toEqual({
+          source: extraSource,
+          destination: extra.downloadUrl,
+          permanent: false,
+        })
+      }
     }
   })
 })
