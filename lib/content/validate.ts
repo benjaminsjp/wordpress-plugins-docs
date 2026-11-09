@@ -530,22 +530,85 @@ function collectReleaseIssues(plugins: PluginRecord[]): Issue[] {
         })
       }
 
-      const downloadKey = `${release.resolved.tag}::${release.resolved.asset}`
-      const existingDownload = downloadKeys.get(downloadKey)
-      if (existingDownload) {
-        issues.push({
-          code: ISSUE_CODES.DOWNLOAD_DUPLICATE,
-          severity: "error",
-          file: release.file,
-          message: `Release ${release.version} resolves to the same tag and asset as ${existingDownload}.`,
+      recordDownload(downloadKeys, issues, release, {
+        tag: release.resolved.tag,
+        asset: release.resolved.asset,
+        label: release.version,
+      })
+
+      const seenExtraIds = new Set<string>()
+      for (const [index, extra] of release.resolved.extras.entries()) {
+        if (seenExtraIds.has(extra.id)) {
+          issues.push({
+            code: ISSUE_CODES.EXTRA_ID_DUPLICATE,
+            severity: "error",
+            file: release.file,
+            path: `download.extras.${index}.id`,
+            message: `Release ${release.version} repeats extra id "${extra.id}".`,
+          })
+        } else {
+          seenExtraIds.add(extra.id)
+        }
+
+        if (!extra.asset.toLowerCase().endsWith(".zip")) {
+          issues.push({
+            code: ISSUE_CODES.ASSET_NOT_ZIP,
+            severity: "error",
+            file: release.file,
+            path: `download.extras.${index}.asset`,
+            message: `Extra asset "${extra.asset}" must end with .zip.`,
+          })
+        }
+
+        if (!extra.sha256) {
+          issues.push({
+            code: ISSUE_CODES.SHA256_MISSING,
+            severity: "warning",
+            file: release.file,
+            path: `download.extras.${index}.sha256`,
+            message: `Release ${release.version} extra "${extra.id}" is missing a sha256 digest.`,
+          })
+        } else if (!SHA256_PATTERN.test(extra.sha256)) {
+          issues.push({
+            code: ISSUE_CODES.SHA256_INVALID,
+            severity: "error",
+            file: release.file,
+            path: `download.extras.${index}.sha256`,
+            message: `sha256 must be 64 hexadecimal characters.`,
+          })
+        }
+
+        recordDownload(downloadKeys, issues, release, {
+          tag: release.resolved.tag,
+          asset: extra.asset,
+          label: `${release.version} extra "${extra.id}"`,
         })
-      } else {
-        downloadKeys.set(downloadKey, release.version)
       }
     }
   }
 
   return issues
+}
+
+function recordDownload(
+  downloadKeys: Map<string, string>,
+  issues: Issue[],
+  release: PluginRecord["releases"][number],
+  download: { tag: string; asset: string; label: string }
+): void {
+  const downloadKey = `${download.tag}::${download.asset}`
+  const existingDownload = downloadKeys.get(downloadKey)
+  if (existingDownload) {
+    issues.push({
+      code: ISSUE_CODES.DOWNLOAD_DUPLICATE,
+      severity: "error",
+      file: release.file,
+      message: `Release ${download.label} resolves to the same tag and asset as ${existingDownload}.`,
+    })
+    return
+  }
+
+  downloadKeys.set(downloadKey, download.label)
 }
 
 function collectPatternIssues(

@@ -14,9 +14,25 @@ export type PatternVars = {
   version: string
 }
 
+export type ReleaseExtra = {
+  id: string
+  label: string
+  asset: string
+  sha256?: string
+}
+
 export type ReleaseRef = {
   tag?: string
   asset?: string
+  extras?: ReleaseExtra[]
+}
+
+export type ResolvedExtraDownload = {
+  id: string
+  label: string
+  asset: string
+  sha256?: string
+  downloadUrl: string
 }
 
 export type ResolvedDownload = {
@@ -25,6 +41,7 @@ export type ResolvedDownload = {
   downloadUrl: string
   releasePageUrl: string
   repositoryUrl: string
+  extras: ResolvedExtraDownload[]
 }
 
 export function isValidGitHubOwner(owner: string): boolean {
@@ -91,6 +108,13 @@ export function resolveReleaseDownload(options: {
   const vars = { slug: options.slug, version: options.version }
   const tag = options.download?.tag ?? applyPattern(tagPattern, vars)
   const asset = options.download?.asset ?? applyPattern(assetPattern, vars)
+  const extras = (options.download?.extras ?? []).map((extra) => ({
+    id: extra.id,
+    label: extra.label,
+    asset: extra.asset,
+    sha256: extra.sha256,
+    downloadUrl: assetDownloadUrl(options.owner, options.repo, tag, extra.asset),
+  }))
 
   return {
     tag,
@@ -98,5 +122,6 @@ export function resolveReleaseDownload(options: {
     downloadUrl: assetDownloadUrl(options.owner, options.repo, tag, asset),
     releasePageUrl: releasePageUrl(options.owner, options.repo, tag),
     repositoryUrl: repositoryUrl(options.owner, options.repo),
+    extras,
   }
 }

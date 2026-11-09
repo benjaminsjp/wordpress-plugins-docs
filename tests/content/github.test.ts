@@ -105,6 +105,37 @@ describe("resolveReleaseDownload", () => {
     )
   })
 
+  it("resolves extra assets on the same tag", () => {
+    const resolved = resolveReleaseDownload({
+      owner: "kimlukasmyrvold",
+      repo: "wp-lucide-icons",
+      slug: "wp-lucide-icons",
+      version: "2.1.0",
+      download: {
+        extras: [
+          {
+            id: "lite",
+            label: "Lite",
+            asset: "wp-lucide-icons-lite-2.1.0.zip",
+            sha256: "b".repeat(64),
+          },
+        ],
+      },
+    })
+
+    expect(resolved.asset).toBe("wp-lucide-icons-2.1.0.zip")
+    expect(resolved.extras).toEqual([
+      {
+        id: "lite",
+        label: "Lite",
+        asset: "wp-lucide-icons-lite-2.1.0.zip",
+        sha256: "b".repeat(64),
+        downloadUrl:
+          "https://github.com/kimlukasmyrvold/wp-lucide-icons/releases/download/v2.1.0/wp-lucide-icons-lite-2.1.0.zip",
+      },
+    ])
+  })
+
   it("lets a release override only the asset name", () => {
     const resolved = resolveReleaseDownload({
       owner: "ORG",

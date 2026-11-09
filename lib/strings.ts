@@ -103,6 +103,7 @@ export const strings = {
       private: "Privat repo",
     },
     downloadLatest: "Last ned nyeste",
+    downloadExtra: (label: string) => `Last ned ${label}`,
     viewOnGitHub: "Se på GitHub",
     privateDownloadNote:
       "Nedlasting krever at du er logget inn på GitHub med tilgang til organisasjonen. Uten tilgang viser GitHub 404.",

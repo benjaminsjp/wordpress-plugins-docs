@@ -79,6 +79,15 @@ export function ReleaseTable({ plugin }: { plugin: PluginRecord }) {
                     >
                       {strings.plugins.downloadAsset}
                     </a>
+                    {release.resolved.extras.map((extra) => (
+                      <a
+                        key={extra.id}
+                        href={extra.downloadUrl}
+                        className="underline-offset-3 hover:underline"
+                      >
+                        {extra.label}
+                      </a>
+                    ))}
                     <a
                       href={release.resolved.releasePageUrl}
                       className="text-muted-foreground underline-offset-3 hover:underline"
@@ -88,19 +97,23 @@ export function ReleaseTable({ plugin }: { plugin: PluginRecord }) {
                   </div>
                 </TableCell>
                 <TableCell>
-                  {release.download?.sha256 ? (
-                    <div className="flex items-center gap-2">
-                      <code className="max-w-28 truncate font-mono text-xs">
-                        {release.download.sha256}
-                      </code>
-                      <CopyButton
-                        text={release.download.sha256}
-                        label={strings.plugins.copySha}
+                  <div className="flex flex-col gap-2">
+                    <ShaDigest
+                      hash={release.download?.sha256}
+                      label={
+                        release.resolved.extras.length > 0
+                          ? strings.plugins.downloadAsset
+                          : undefined
+                      }
+                    />
+                    {release.resolved.extras.map((extra) => (
+                      <ShaDigest
+                        key={extra.id}
+                        hash={extra.sha256}
+                        label={extra.label}
                       />
-                    </div>
-                  ) : (
-                    "—"
-                  )}
+                    ))}
+                  </div>
                 </TableCell>
               </TableRow>
               {hasChangelogContent(release, fileUrl) ? (
@@ -122,5 +135,23 @@ export function ReleaseTable({ plugin }: { plugin: PluginRecord }) {
         })}
       </TableBody>
     </Table>
+  )
+}
+
+function ShaDigest({ hash, label }: { hash?: string; label?: string }) {
+  return (
+    <div className="flex flex-col gap-1">
+      {label ? (
+        <span className="text-xs text-muted-foreground">{label}</span>
+      ) : null}
+      {hash ? (
+        <div className="flex items-center gap-2">
+          <code className="max-w-28 truncate font-mono text-xs">{hash}</code>
+          <CopyButton text={hash} label={strings.plugins.copySha} />
+        </div>
+      ) : (
+        <span>—</span>
+      )}
+    </div>
   )
 }
