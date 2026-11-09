@@ -1,7 +1,7 @@
 {
 	"$schema": "../../../schemas/plugin.schema.json",
 	"name": "WP Icons for Flatsome",
-	"summary": "Velg WP Icons (Lucide m.m.) i Flatsome UX Builder for Icon Box og Button.",
+	"summary": "Velg WP Icons (Lucide m.m.) i Flatsome UX Builder for Icon Box, Button og Menu.",
 	"versionScheme": "semver",
 	"status": "active",
 	"repository": {

@@ -1,0 +1,30 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-09",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.6" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"dependencies": [
+		{
+			"plugin": "wp-lucide-icons",
+			"type": "required",
+			"minVersion": "2.0.0",
+			"reason": "Ikonbiblioteket som velges i UX Builder."
+		}
+	],
+	"download": {
+		"sha256": "ae9be873a9e4acd897194b30cdb6969602a706c855f07c609c40a8384f336e94"
+	},
+	"changelog": {
+		"added": [
+			"WP Icons-velger på Flatsome Menu link i UX Builder.",
+			"Align, gap, posisjon, størrelse, farge og stroke for menyikoner."
+		],
+		"changed": [
+			"Plugin URI peker til kodekassa.no."
+		]
+	}
+}
