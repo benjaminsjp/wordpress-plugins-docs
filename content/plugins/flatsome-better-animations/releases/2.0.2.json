@@ -1,0 +1,28 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-09",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.4"
+		},
+		"php": {
+			"min": "8.1"
+		},
+		"flatsome": {
+			"min": "3.18.0"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"sha256": "8cd2daeafc9d6a20b609c5a4255ac251eb2ed5753efe7a6abef93c773b979a9f"
+	},
+	"changelog": {
+		"fixed": [
+			"Seksjoner under folden animeres ikke lenger inn etter noen sekunder — scroll-reveal venter til de er i viewport."
+		],
+		"changed": [
+			"Plugin URI peker til kodekassa.no."
+		]
+	}
+}
