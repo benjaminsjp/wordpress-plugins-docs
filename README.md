@@ -75,6 +75,8 @@ content/plugins/mitt-plugin/
   docs/installation.mdx      (valgfri — uten den vises standardsteg)
   docs/usage.mdx             (valgfri)
   releases/1.0.0.json
+  media/                     (valgfri skjermbilder og video)
+    admin.jpg
 ```
 
 3. Standard GitHub-tag er `v{version}`, standard ZIP `{slug}-{version}.zip`. Overstyr `assetPattern` i `plugin.json` bare hvis fila heter noe annet (f.eks. `{slug}-v{version}.zip`).
@@ -82,6 +84,7 @@ content/plugins/mitt-plugin/
 5. Plugin-`tags` er fritekst. `related.plugins` / `related.snippets` må peke på slugs som finnes.
 6. `author` (påkrevd) er slug til personen som la inn dokumentasjonen. Sluggen må finnes i [`content/taxonomy/authors.json`](content/taxonomy/authors.json). Ny medarbeider: legg til `{ "slug": "…", "label": "…" }` der først, deretter `"author": "…"` i `plugin.json`. Valgfri `maintainer` er org/team (f.eks. «Bli Synlig») — ikke samme som forfatter.
 7. Valgfri `changelogUrl` vises som «Se hele endringsloggen». En versjon kan overstyre med `changelog.url`.
+8. Valgfri `media` viser skjermbilder i 16/9-ramme, med lightbox. Filene ligger i `media/` og refereres bare med filnavn (kebab-case). Bilder: `jpg` / `jpeg` / `png` / `webp`. Ett bilde kan ha `"featured": true` og vises i hero. Valgfri `video` (`mp4` / `webm`) spilles av i hero med featured-bildet som poster. Alle bildene vises ett og ett i en karusell under **Skjermbilder**.
 
 ```json
 {
@@ -96,7 +99,16 @@ content/plugins/mitt-plugin/
     "visibility": "public"
   },
   "author": "benjamin",
-  "maintainer": "Bli Synlig"
+  "maintainer": "Bli Synlig",
+  "media": {
+    "images": [
+      {
+        "src": "admin.jpg",
+        "alt": "Kort norsk beskrivelse av skjermbildet",
+        "featured": true
+      }
+    ]
+  }
 }
 ```
 

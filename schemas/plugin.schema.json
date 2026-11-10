@@ -103,6 +103,38 @@
 		"changelogUrl": {
 			"type": "string",
 			"format": "uri"
+		},
+		"media": {
+			"type": "object",
+			"properties": {
+				"images": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"src": {
+								"type": "string",
+								"pattern": "^[a-z0-9]+(-[a-z0-9]+)*\\.(jpe?g|png|webp)$"
+							},
+							"alt": {
+								"type": "string",
+								"minLength": 1
+							},
+							"featured": {
+								"type": "boolean"
+							}
+						},
+						"required": [
+							"src",
+							"alt"
+						]
+					}
+				},
+				"video": {
+					"type": "string",
+					"pattern": "^[a-z0-9]+(-[a-z0-9]+)*\\.(mp4|webm)$"
+				}
+			}
 		}
 	},
 	"required": [

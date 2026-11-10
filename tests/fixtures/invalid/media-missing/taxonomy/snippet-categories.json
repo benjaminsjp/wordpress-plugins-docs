@@ -1,0 +1,24 @@
+{
+	"categories": [
+		{
+			"slug": "misc",
+			"label": "Div",
+			"subcategories": [
+				{
+					"slug": "general",
+					"label": "Generelt"
+				}
+			]
+		},
+		{
+			"slug": "header",
+			"label": "Header",
+			"subcategories": [
+				{
+					"slug": "navbar",
+					"label": "Navigasjon"
+				}
+			]
+		}
+	]
+}

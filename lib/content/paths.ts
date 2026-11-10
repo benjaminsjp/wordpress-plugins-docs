@@ -3,6 +3,9 @@ import path from "node:path"
 export const CONTENT_ROOT = path.join(process.cwd(), "content")
 
 export const SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/
+export const IMAGE_FILENAME_PATTERN =
+  /^[a-z0-9]+(-[a-z0-9]+)*\.(jpe?g|png|webp)$/
+export const VIDEO_FILENAME_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*\.(mp4|webm)$/
 export const RESERVED_SNIPPET_SLUGS = new Set(["category", "tag"])
 
 export const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/

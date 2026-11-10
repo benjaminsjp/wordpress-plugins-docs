@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url"
 import { describe, expect, it } from "vitest"
 import { assertNoContentErrors, ISSUE_CODES } from "@/lib/content/issue-codes"
 import type { PluginRecord } from "@/lib/content/load-plugins"
+import { EMPTY_PLUGIN_MEDIA } from "@/lib/content/media"
 import { CONTENT_ROOT } from "@/lib/content/paths"
 import { releaseJsonSchema } from "@/lib/content/schemas"
 import { crossValidate, loadAndValidate } from "@/lib/content/validate"
@@ -47,6 +48,9 @@ const fixtureCases: Array<{ dir: string; code: string }> = [
   { dir: "snippet-css-empty", code: ISSUE_CODES.SNIPPET_CSS_EMPTY },
   { dir: "plugin-no-releases", code: ISSUE_CODES.PLUGIN_NO_RELEASES },
   { dir: "plugin-author-unknown", code: ISSUE_CODES.PLUGIN_AUTHOR_UNKNOWN },
+  { dir: "media-missing", code: ISSUE_CODES.MEDIA_MISSING },
+  { dir: "media-featured-duplicate", code: ISSUE_CODES.MEDIA_FEATURED_DUPLICATE },
+  { dir: "video-missing", code: ISSUE_CODES.VIDEO_MISSING },
 ]
 
 describe("seed content", () => {
@@ -187,6 +191,7 @@ function makePlugin(slug: string): PluginRecord {
     file: `plugins/${slug}/plugin.json`,
     docs: { overview: "overview.mdx", installation: null, usage: null },
     releases: [makeReleaseBase(slug, "1.0.0")],
+    resolvedMedia: EMPTY_PLUGIN_MEDIA,
   }
 }
 

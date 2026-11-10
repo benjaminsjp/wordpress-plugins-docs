@@ -10,6 +10,8 @@ import { PluginDocs } from "@/components/plugins/plugin-docs"
 import { DependencyTable } from "@/components/plugins/dependency-table"
 import { DependentsList } from "@/components/plugins/dependents-list"
 import { DownloadButton } from "@/components/plugins/download-button"
+import { PluginGallery } from "@/components/plugins/plugin-gallery"
+import { PluginHeroMedia } from "@/components/plugins/plugin-hero-media"
 import { RelatedItems } from "@/components/plugins/related-items"
 import { ReleaseTable } from "@/components/plugins/release-table"
 import { RequirementsList } from "@/components/plugins/requirements-list"
@@ -86,6 +88,9 @@ export default async function PluginPage({
     ? plugins.find((item) => item.slug === plugin.replacedBy)
     : undefined
   const dependents = graph.dependents.get(plugin.slug) ?? []
+  const { images, featured, video } = plugin.resolvedMedia
+  const hasScreenshots = images.length > 0
+  const hasHeroMedia = Boolean(featured || video)
   const toc = buildPluginToc({
     hasLatest: Boolean(latest),
     hasOverview: overviewSource !== null,
@@ -93,6 +98,7 @@ export default async function PluginPage({
     hasRelated:
       (plugin.related?.plugins?.length ?? 0) > 0 ||
       (plugin.related?.snippets?.length ?? 0) > 0,
+    hasScreenshots,
     usageHeadings: usageSource ? extractMdxHeadings(usageSource) : [],
   })
 
@@ -102,6 +108,15 @@ export default async function PluginPage({
         title={plugin.name}
         description={plugin.summary}
         eyebrow={<PluginBadges plugin={plugin} version={latest?.version} />}
+        media={
+          hasHeroMedia ? (
+            <PluginHeroMedia
+              images={images}
+              featured={featured}
+              video={video}
+            />
+          ) : undefined
+        }
       >
         <div className="flex w-full flex-col gap-2 md:w-56">
           {latest ? (
@@ -156,6 +171,12 @@ export default async function PluginPage({
             latest={latest}
             replacedByName={replacedBy?.name}
           />
+          {hasScreenshots ? (
+            <section className="flex flex-col gap-4">
+              <SectionHeading>{strings.plugins.screenshots}</SectionHeading>
+              <PluginGallery images={images} />
+            </section>
+          ) : null}
           {latest ? (
             <>
               <section className="flex flex-col gap-4">

@@ -9,6 +9,9 @@ const noindexHeader = {
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  outputFileTracingIncludes: {
+    "/plugins/[slug]/media/[file]": ["./content/plugins/**/media/**"],
+  },
   async headers() {
     return [
       {

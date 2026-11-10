@@ -78,6 +78,22 @@ describe("buildPluginToc", () => {
       strings.plugins.related,
     ])
   })
+
+  it("puts screenshots first when media exists", () => {
+    const toc = buildPluginToc({
+      hasLatest: false,
+      hasOverview: false,
+      hasUsage: false,
+      hasRelated: false,
+      hasScreenshots: true,
+    })
+    expect(toc.map((item) => item.title)).toEqual([
+      strings.plugins.screenshots,
+      strings.plugins.usedBy,
+      strings.plugins.installation,
+      strings.plugins.versions,
+    ])
+  })
 })
 
 describe("buildSnippetToc", () => {

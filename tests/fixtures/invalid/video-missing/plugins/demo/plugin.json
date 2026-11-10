@@ -1,0 +1,15 @@
+{
+	"name": "demo",
+	"summary": "Test plugin",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "ORG",
+		"repo": "demo",
+		"visibility": "public"
+	},
+	"author": "benjamin",
+	"media": {
+		"video": "demo.mp4"
+	}
+}

@@ -14,5 +14,14 @@
 	"maintainer": "Bli Synlig",
 	"related": {
 		"snippets": ["button-improvements"]
+	},
+	"media": {
+		"images": [
+			{
+				"src": "admin-ekstra-farger.jpg",
+				"alt": "WordPress-admin med ekstra farger og knappestiler",
+				"featured": true
+			}
+		]
 	}
 }

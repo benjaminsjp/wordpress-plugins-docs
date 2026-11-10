@@ -16,9 +16,14 @@ export function buildPluginToc(options: {
   hasOverview: boolean
   hasUsage: boolean
   hasRelated: boolean
+  hasScreenshots?: boolean
   usageHeadings?: TocItem[]
 }): TocItem[] {
   const items: TocItem[] = []
+
+  if (options.hasScreenshots) {
+    items.push(tocItem(strings.plugins.screenshots))
+  }
 
   if (options.hasLatest) {
     items.push(tocItem(strings.plugins.requirements))

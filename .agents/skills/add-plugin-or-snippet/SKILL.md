@@ -24,6 +24,7 @@ Follow [README.md](../../../README.md) section **Slik legger du til innhold**. D
 3. Default ZIP `{slug}-{version}.zip` and tag `v{version}`. Set `assetPattern` only if the real asset name differs.
 4. Plugin `tags` are free text. `related.*` slugs must already exist.
 5. Set required `author` to a slug from `content/taxonomy/authors.json`. Add a new author there before first use. Do not confuse with optional `maintainer` (org/team).
+6. Optional screenshots and hero video live in `media/` and are listed in `plugin.json` `media`. Filenames are kebab-case basenames only (`jpg`/`jpeg`/`png`/`webp`, video `mp4`/`webm`). At most one image may set `"featured": true`. Provide Norwegian `alt` text.
 
 ## Snippet
 

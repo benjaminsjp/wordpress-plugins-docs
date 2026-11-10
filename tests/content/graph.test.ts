@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 import { buildPluginGraph, collectGraphIssues } from "@/lib/content/graph"
 import { ISSUE_CODES } from "@/lib/content/issue-codes"
 import type { PluginRecord } from "@/lib/content/load-plugins"
+import { EMPTY_PLUGIN_MEDIA } from "@/lib/content/media"
 
 const HASH = "a".repeat(64)
 
@@ -28,6 +29,7 @@ function plugin(options: {
     slug: options.slug,
     file: `plugins/${options.slug}/plugin.json`,
     docs: { overview: "overview.mdx", installation: null, usage: null },
+    resolvedMedia: EMPTY_PLUGIN_MEDIA,
     releases: options.releases.map((release) => ({
       releaseDate: "2026-01-01",
       channel: release.channel ?? "stable",

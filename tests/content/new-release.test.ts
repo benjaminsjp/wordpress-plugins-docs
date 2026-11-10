@@ -5,6 +5,7 @@ import type {
   GitHubReleasePayload,
 } from "@/lib/content/github-verify"
 import type { PluginRecord } from "@/lib/content/load-plugins"
+import { EMPTY_PLUGIN_MEDIA } from "@/lib/content/media"
 import {
   NewReleaseError,
   buildDraftRelease,
@@ -46,6 +47,7 @@ function plugin(options?: {
     slug,
     file: `plugins/${slug}/plugin.json`,
     docs: { overview: "overview.mdx", installation: null, usage: null },
+    resolvedMedia: EMPTY_PLUGIN_MEDIA,
     releases: options?.releases ?? [
       {
         releaseDate: "2026-01-01",

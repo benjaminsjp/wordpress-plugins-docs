@@ -11,6 +11,7 @@ import {
   type ContentPaths,
 } from "./paths"
 import { parseWithSchema, readJson } from "./read-json"
+import { loadPluginMedia, type PluginResolvedMedia } from "./media"
 import {
   pluginJsonSchema,
   releaseJsonSchema,
@@ -33,6 +34,7 @@ export type PluginRecord = PluginJson & {
     usage: string | null
   }
   releases: ReleaseRecord[]
+  resolvedMedia: PluginResolvedMedia
 }
 
 export async function loadPlugins(
@@ -133,6 +135,14 @@ async function loadPlugin(
     })
   }
 
+  const media = await loadPluginMedia(
+    dir,
+    slug,
+    relativePluginFile,
+    parsed.value.media
+  )
+  issues.push(...media.issues)
+
   return {
     plugin: {
       ...parsed.value,
@@ -144,6 +154,7 @@ async function loadPlugin(
         usage,
       },
       releases,
+      resolvedMedia: media.resolved,
     },
     issues,
   }

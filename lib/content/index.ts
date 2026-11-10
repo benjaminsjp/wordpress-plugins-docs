@@ -43,6 +43,8 @@ export type {
   PluginRecord,
   ReleaseRecord,
 } from "./load-plugins"
+export type { PluginMediaImage, PluginResolvedMedia } from "./media"
+export { pluginMediaUrl } from "./media"
 export type { SnippetRecord } from "./load-snippets"
 export type { TaxonomyRecord } from "./load-taxonomy"
 export type { ContentData } from "./validate"

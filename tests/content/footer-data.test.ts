@@ -4,6 +4,7 @@ import {
   latestContentDate,
 } from "@/lib/content/footer-data"
 import type { PluginRecord } from "@/lib/content/load-plugins"
+import { EMPTY_PLUGIN_MEDIA } from "@/lib/content/media"
 import type { SnippetRecord } from "@/lib/content/load-snippets"
 
 const HASH = "a".repeat(64)
@@ -28,6 +29,7 @@ function plugin(options: {
     slug: options.slug,
     file: `plugins/${options.slug}/plugin.json`,
     docs: { overview: "overview.mdx", installation: null, usage: null },
+    resolvedMedia: EMPTY_PLUGIN_MEDIA,
     releases: [
       {
         releaseDate: options.date,

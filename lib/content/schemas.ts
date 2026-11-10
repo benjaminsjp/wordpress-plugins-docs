@@ -1,5 +1,9 @@
 import { z } from "zod"
-import { SLUG_PATTERN } from "./paths"
+import {
+  IMAGE_FILENAME_PATTERN,
+  SLUG_PATTERN,
+  VIDEO_FILENAME_PATTERN,
+} from "./paths"
 
 const nonEmptyString = z.string().trim().min(1)
 
@@ -38,6 +42,17 @@ export const relatedSchema = z.object({
   snippets: z.array(nonEmptyString).optional(),
 })
 
+export const pluginMediaImageSchema = z.object({
+  src: z.string().regex(IMAGE_FILENAME_PATTERN),
+  alt: nonEmptyString,
+  featured: z.boolean().optional(),
+})
+
+export const pluginMediaSchema = z.object({
+  images: z.array(pluginMediaImageSchema).optional(),
+  video: z.string().regex(VIDEO_FILENAME_PATTERN).optional(),
+})
+
 export const pluginJsonSchema = z.object({
   $schema: z.string().optional(),
   name: nonEmptyString,
@@ -51,6 +66,7 @@ export const pluginJsonSchema = z.object({
   replacedBy: nonEmptyString.optional(),
   related: relatedSchema.optional(),
   changelogUrl: z.url().optional(),
+  media: pluginMediaSchema.optional(),
 })
 
 export const internalDependencySchema = z.object({

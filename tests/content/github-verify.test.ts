@@ -10,6 +10,7 @@ import {
 import { ISSUE_CODES } from "@/lib/content/issue-codes"
 import { resolveReleaseDownload } from "@/lib/content/github"
 import type { PluginRecord } from "@/lib/content/load-plugins"
+import { EMPTY_PLUGIN_MEDIA } from "@/lib/content/media"
 
 const SHA =
   "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
@@ -47,6 +48,7 @@ function plugin(options: {
     slug: options.slug,
     file: `plugins/${options.slug}/plugin.json`,
     docs: { overview: "overview.mdx", installation: null, usage: null },
+    resolvedMedia: EMPTY_PLUGIN_MEDIA,
     releases: [
       {
         releaseDate: "2026-01-01",
