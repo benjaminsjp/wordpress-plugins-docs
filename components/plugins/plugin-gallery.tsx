@@ -27,10 +27,15 @@ export function PluginGallery({ images }: { images: PluginMediaImage[] }) {
 
   useEffect(() => {
     if (!api) return
-    onSelect(api)
+
     api.on("select", onSelect)
+    api.on("reInit", onSelect)
+    const frame = requestAnimationFrame(() => onSelect(api))
+
     return () => {
+      cancelAnimationFrame(frame)
       api.off("select", onSelect)
+      api.off("reInit", onSelect)
     }
   }, [api, onSelect])
 
