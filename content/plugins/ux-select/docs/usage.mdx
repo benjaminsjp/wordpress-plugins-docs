@@ -1,0 +1,32 @@
+### Admin
+
+Gå til **Innstillinger → UX Select**. Lag **sett** (for eksempel Fylker) med **valg** (Østfold, Akershus, …).
+
+- **Navn** vises i UX Builder og som ledetekst-grunnlag.
+- **Slug** lages fra navnet ved første lagring og endres ikke etterpå.
+- **Placeholder** er en valgfri tom rad øverst i listen.
+- **Standardvalg** er hvilket valg som er aktivt når siden lastes. Tomt standardvalg med placeholder starter tomt.
+
+Flere Select-felt på samme sett følger hverandre. Endrer du ett, oppdateres de andre.
+
+### UX Builder
+
+Begge elementene ligger under **Content**.
+
+| Element | Beskrivelse |
+|---------|-------------|
+| **Select** | Valglisten. Velg settet. Valgfri ledetekst, placeholder og stil (bredde, skrift, farger). |
+| **Select-innhold** | Container. Velg sett og kryss av ett eller flere valg. Dropp tekst, rader og andre UX-elementer inni. |
+
+Samme panel kan vises for flere valg. Flere paneler kan bruke samme valg. I builder vises alle paneler med en merkelapp (for eksempel `Østfold, Akershus`), slik at de kan redigeres.
+
+Select og Select-innhold trenger ikke ligge inni hverandre. Knytt dem bare til samme sett.
+
+### Shortcodes
+
+```
+[uxs_select set="fylker" label="Velg fylke"]
+[uxs_panel set="fylker" v_fylker_ostfold="true" v_fylker_akershus="true"]Innhold for Østfold og Akershus[/uxs_panel]
+```
+
+Eldre `target="fylker:ostfold"` virker fortsatt på forsiden. I builder må sett og avkrysninger velges på nytt før du lagrer slike paneler.

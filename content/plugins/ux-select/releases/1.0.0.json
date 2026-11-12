@@ -1,0 +1,19 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-12",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.4" },
+		"php": { "min": "8.1" },
+		"flatsome": { "min": "3.18.0" }
+	},
+	"download": {
+		"sha256": "9d2dc4829fa354910c7aace3fb6f4efce62dd233326300f1dd0f19d8b9ef5789"
+	},
+	"changelog": {
+		"added": [
+			"Select og Select-innhold i UX Builder, knyttet via sett fra admin.",
+			"Ett innholdspanel kan vises for flere valg i samme sett."
+		]
+	}
+}

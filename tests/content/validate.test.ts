@@ -68,6 +68,7 @@ describe("seed content", () => {
       "kafra-datablad",
       "kafra-produktkatalog",
       "kontingentkalkulator",
+      "ux-select",
       "videogalleri",
       "wp-icons-flatsome",
       "wp-lucide-icons",

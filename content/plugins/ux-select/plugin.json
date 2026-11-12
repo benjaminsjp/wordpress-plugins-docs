@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "UX Select",
+	"summary": "Valglister i UX Builder. Knytt en select til innholdspaneler som kan ligge hvor som helst på siden.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "ux-select",
+		"visibility": "public"
+	},
+	"tags": ["flatsome", "ux-builder"],
+	"author": "benjamin",
+	"maintainer": "Bli Synlig"
+}
