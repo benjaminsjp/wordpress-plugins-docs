@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-17",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" }
+	},
+	"download": {
+		"sha256": "bbabece05c6f95dd4eaef1dba6904edd7e0c14839e61688418166082488b1aa8"
+	},
+	"changelog": {
+		"fixed": [
+			"Sammenklappede FAQ-svar vises på én linje. Hele svaret vises når kortet åpnes."
+		]
+	}
+}
