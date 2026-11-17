@@ -1,0 +1,25 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-17",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" }
+	},
+	"download": {
+		"sha256": "efa1a1ac072b74af8a0e24ea5253ada343e31a7bf4a131c43940a77ab0a9ee72"
+	},
+	"changelog": {
+		"added": [
+			"Tjeneste kan opprettes fra fylkets tjenestefane.",
+			"Slug lages fra navnet til den redigeres for hånd."
+		],
+		"changed": [
+			"Nye innlegg starter som publisert, og knappen sier Publiser til innlegget er publisert.",
+			"Postnumre krever fire siffer, og ugyldige linjer stoppes før lagring."
+		],
+		"fixed": [
+			"Lagring viser en spinner som får plass i knappen, og navigasjon varsler ikke om endringer som allerede er lagret."
+		]
+	}
+}
