@@ -1,0 +1,19 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-17",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" }
+	},
+	"download": {
+		"sha256": "4c60b7a77b35cc4a9278c41dd941d54a6370f839e3e4867eba1c77cbcf9afa65"
+	},
+	"changelog": {
+		"added": [
+			"Lokale sider for tjeneste og kommune, med overordnet sti og 301 fra gamle adresser.",
+			"SEO-tittel, metabeskrivelse, canonical og sidekart. Yoast bruker de samme verdiene når det er aktivt.",
+			"JSON-import med forhåndsvisning, og dokumentasjonslenke i admin."
+		]
+	}
+}

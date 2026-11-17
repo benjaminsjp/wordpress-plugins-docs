@@ -1,0 +1,15 @@
+{
+	"$schema": "../../../schemas/plugin.schema.json",
+	"name": "Lokale tjenestesider",
+	"summary": "Lokale landingssider for tjenester og kommuner, med egne adresser, SEO og JSON-import.",
+	"versionScheme": "semver",
+	"status": "active",
+	"repository": {
+		"owner": "bli-synlig-plugins",
+		"repo": "lokale-tjenestesider",
+		"visibility": "public"
+	},
+	"tags": ["seo", "import"],
+	"author": "benjamin",
+	"maintainer": "Bli Synlig"
+}
