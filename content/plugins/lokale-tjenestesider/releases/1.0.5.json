@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-17",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" }
+	},
+	"download": {
+		"sha256": "73b74f24cb060280b88274c1b8f9c941f7d44e350b2b3031411c5519c628c7f9"
+	},
+	"changelog": {
+		"changed": [
+			"Siste ledd i brødsmulen på en lokal side er kommunenavnet."
+		]
+	}
+}
