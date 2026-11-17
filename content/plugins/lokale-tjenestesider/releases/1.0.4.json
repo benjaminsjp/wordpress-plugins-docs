@@ -1,0 +1,20 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-17",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" }
+	},
+	"download": {
+		"sha256": "74bd17ef2123f2e1bb11f614f50c97f82d6400ab53c0b55c31782a809eeefa02"
+	},
+	"changelog": {
+		"added": [
+			"Kontaktpersoner kan styre kolonner, profilbilde, radius og bildestørrelse for desktop, nettbrett og mobil."
+		],
+		"fixed": [
+			"Kontaktknappen beholder knappestiler fra Flatsome Ekstra farger i stedet for å falle tilbake til primærfargen."
+		]
+	}
+}
