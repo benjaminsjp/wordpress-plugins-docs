@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-18",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" }
+	},
+	"download": {
+		"sha256": "faa6deefc2e6605e22af2537174c6d7d0e8b77a6feb981d151f0bedf77627bac"
+	},
+	"changelog": {
+		"added": [
+			"Kontaktpersoner kan velge hvilket Store Locator-felt fylket filtreres på."
+		]
+	}
+}
