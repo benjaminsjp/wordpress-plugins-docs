@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-18",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" }
+	},
+	"download": {
+		"sha256": "f2dbbfce89f6533c63539e93f67612b61606c89e0b920cb6aacbf9afd6e948a0"
+	},
+	"changelog": {
+		"added": [
+			"Bryteren for en tjeneste på fylket skrur den av eller på for alle kommuner i fylket."
+		]
+	}
+}
