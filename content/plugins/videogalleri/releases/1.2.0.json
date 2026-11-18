@@ -1,0 +1,27 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-18",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.4"
+		},
+		"php": {
+			"min": "8.1"
+		},
+		"flatsome": {
+			"min": "3.18.0"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"sha256": "a832d947b78f191025593a421231ef6a1ef7601a143b6b46a9a745988d6c8b62"
+	},
+	"changelog": {
+		"added": [
+			"Videoer kan bruke Kontainer, i tillegg til YouTube og Vimeo.",
+			"Kontainer-lenke, eller Kontainer sin iframe- eller video-kode, kan limes inn. Bredde og høyde brukes som sideforhold.",
+			"For Kontainer settes utvalgt bilde selv. Varighet hentes ikke."
+		]
+	}
+}
