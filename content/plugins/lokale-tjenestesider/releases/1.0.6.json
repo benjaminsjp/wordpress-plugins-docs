@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-18",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" }
+	},
+	"download": {
+		"sha256": "73459dfbfc5c740cb364c7ced551a969f613ff6c6841b247882e3b9f799659b7"
+	},
+	"changelog": {
+		"fixed": [
+			"Tjenesteleddet i brødsmulen lenker til en eksisterende side under overordnet sti."
+		]
+	}
+}
