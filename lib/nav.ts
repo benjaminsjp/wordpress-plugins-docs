@@ -164,18 +164,29 @@ export function listLatestReleases(
   plugins: PluginRecord[],
   limit = 5
 ): LatestReleaseItem[] {
-  const items = plugins.flatMap((plugin) =>
-    plugin.releases.map((release) => ({
+  const items: LatestReleaseItem[] = []
+
+  for (const plugin of plugins) {
+    const release = selectLatestRelease(plugin.releases, plugin.versionScheme)
+    if (!release) continue
+
+    items.push({
       pluginSlug: plugin.slug,
       pluginName: plugin.name,
       version: release.version,
       releaseDate: release.releaseDate,
       href: `/plugins/${plugin.slug}`,
-    }))
-  )
+    })
+  }
 
   return items
-    .sort((left, right) => right.releaseDate.localeCompare(left.releaseDate))
+    .sort((left, right) => {
+      const byDate = right.releaseDate.localeCompare(left.releaseDate)
+      if (byDate !== 0) return byDate
+      const byVersion = right.version.localeCompare(left.version)
+      if (byVersion !== 0) return byVersion
+      return left.pluginName.localeCompare(right.pluginName)
+    })
     .slice(0, limit)
 }
 
