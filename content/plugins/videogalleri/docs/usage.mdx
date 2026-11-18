@@ -17,7 +17,10 @@ Videoundersider bruker slug `/video/{navn}/`.
 | `[videogalleri prosjekt_id="123"]` | Samme, filtrert på koblet innhold |
 | `[videogalleri_video]` | Embed for video koblet til gjeldende side eller innlegg |
 | `[videogalleri_video video_id="456" tittel="ja" info="ja" lenke="ja"]` | Embed med valgfrie attributter |
+| `[videogalleri_spiller kilde="https://…"]` | Frittstående spiller. Videofiler får egen kontrollinje. |
 
 ### UX Builder
 
 Elementet **Videogalleri** ligger under **Content** (krever Flatsome UX Builder). Du kan filtrere på prosjekt-ID.
+
+Elementet **Videospiller** ligger samme sted. Lim inn en YouTube-, Vimeo- eller Kontainer-lenke, eller iframe-/video-kode, i **Kilde**. Avrunding og kontrollfarge settes på elementet. Autoplay, dempet avspilling og loop kan slås på. Autoplay demper lyden. Kontrollinjen (avspilling, tid, spoling, lyd og fullskjerm) gjelder videofiler. En iframe bruker leverandørens egne kontroller, men rammen kan fortsatt avrundes.

@@ -1,0 +1,27 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-18",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": {
+			"min": "6.4"
+		},
+		"php": {
+			"min": "8.1"
+		},
+		"flatsome": {
+			"min": "3.18.0"
+		}
+	},
+	"dependencies": [],
+	"download": {
+		"sha256": "aaccd50c91c73faa0c472fb566faacb1672bc67583b4de534c8df4f846c6170e"
+	},
+	"changelog": {
+		"added": [
+			"Frittstående videospiller som UX Builder-elementet Videospiller og shortcoden `[videogalleri_spiller]`.",
+			"Egen kontrollinje for videofiler: avspilling, tid, spoling, volum og fullskjerm. YouTube, Vimeo og Kontainer-iframe beholder egne kontroller. Avrunding og kontrollfarge settes på elementet.",
+			"Innstillingssiden er bygget om, med samme valg som før."
+		]
+	}
+}
