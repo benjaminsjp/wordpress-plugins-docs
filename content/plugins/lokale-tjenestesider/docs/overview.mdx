@@ -2,7 +2,7 @@ Lokale tjenestesider lager en side per tjeneste og kommune. Fylke, kommune og tj
 
 Fylket har kontakt, priser og FAQ, som kommunene arver. En ny tjeneste opprettes fra fylkets tjenestefane. Kommunen kan overstyre kontakt og pris, og har postnumre og nærliggende kommuner. Hvert postnummer er fire siffer. Tjenesten har ingress, brødtekst og layout i UX Builder. Den lokale siden har SEO-tittel, metabeskrivelse og lokal tekst. Layouten ligger på tjenestens mal, så import ikke overskriver den.
 
-Canonical, dokumenttittel og metabeskrivelse følger den pene adressen. Er Yoast aktivt, får Yoast de samme verdiene, og sidene ligger i `/lts-sitemap.xml`. Uten Yoast ligger de i WordPress-kartet `/wp-sitemap-lokale-lts-1.xml`.
+Canonical, dokumenttittel og metabeskrivelse følger den pene adressen. En delt lenke bruker kommunens bilde, eller fylkets bilde når kommunen ikke har et. Er Yoast aktivt, får Yoast de samme verdiene, og sidene ligger i `/lts-sitemap.xml`. Uten Yoast ligger de i WordPress-kartet `/wp-sitemap-lokale-lts-1.xml`.
 
 Importen tar JSON med versjon 1. Nøklene er slugs. `nearby` er andre kommuneslugs, ikke stedsnavn. Ingenting lagres før forhåndsvisningen bekreftes. Oppskriften ligger i `IMPORT.md` i pluginet.
 
@@ -10,4 +10,4 @@ Flatsome trengs for elementene i UX Builder. Kontaktpersoner kan styre kolonner,
 
 Brødsmulen på en lokal side viser overordnet sti, tjeneste og kommunenavn. Tjenesten lenker til en eksisterende side når hub-en ikke er offentlig. Siste ledd er kommunen, ikke SEO-tittelen.
 
-GitHub-repositoriet er offentlig. Last ned ZIP-en fra GitHub Release `v1.0.6`.
+GitHub-repositoriet er offentlig. Last ned ZIP-en fra GitHub Release `v1.0.7`.

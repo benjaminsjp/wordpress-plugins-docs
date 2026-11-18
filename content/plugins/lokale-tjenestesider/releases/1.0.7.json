@@ -1,0 +1,17 @@
+{
+	"$schema": "../../../../schemas/release.schema.json",
+	"releaseDate": "2026-11-18",
+	"channel": "stable",
+	"requirements": {
+		"wordpress": { "min": "6.0" },
+		"php": { "min": "7.4" }
+	},
+	"download": {
+		"sha256": "7248eed541ee67a2898a21f65c18ea98bf477b7594f8841b28c877c0fe3b8791"
+	},
+	"changelog": {
+		"added": [
+			"Delte lenker bruker kommunens bilde, eller fylkets bilde når kommunen ikke har et."
+		]
+	}
+}
